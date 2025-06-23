@@ -1,0 +1,95 @@
+package dao.user;
+
+import db.ConnectionDB;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.*;
+import model.User;
+
+public class UserDAOImpl implements UserDAO {
+
+    @Override
+    public void add(User user) {
+        if (findByNickname(user.getNickName()) != null) {
+            System.out.println("User already exists.");
+            return;
+        }
+
+        String sql = "INSERT INTO users (full_name, nick_name, password_hash, active) VALUES (?, ?, ?, ?)";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getNickName());
+            ps.setString(3, user.getPassword());
+            ps.setBoolean(4, user.isActive());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+        try (Connection conn = ConnectionDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                User u = new User(
+                        rs.getInt("id"),
+                        rs.getString("full_name"),
+                        rs.getString("nick_name"),
+                        rs.getString("password_hash"),
+                        rs.getBoolean("active")
+                );
+                users.add(u);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public User findByNickname(String nickName) {
+        String sql = "SELECT * FROM users WHERE nick_name = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nickName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("full_name"),
+                        nickName,
+                        rs.getString("password_hash"),
+                        rs.getBoolean("active")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deactivate(String nickName) {
+        String sql = "UPDATE users SET active = false WHERE nick_name = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nickName);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean activate(String nickName) {
+        String sql = "UPDATE users SET active = true WHERE nick_name = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nickName);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
