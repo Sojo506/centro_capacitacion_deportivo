@@ -1,0 +1,34 @@
+# === Java compiled files ===
+*.class
+
+# === Log files ===
+*.log
+
+# === JVM crash logs ===
+hs_err_pid*
+replay_pid*
+
+# === NetBeans (Java + Ant) ===
+build/
+dist/
+nbproject/private/
+
+# === System temp files ===
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# === Archive and package files ===
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# === Optional: ignore libs folder if local ===
+lib/
