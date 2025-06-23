@@ -28,6 +28,32 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User login(String nickName, String plainPassword) {
+        String sql = "SELECT * FROM users WHERE nick_name = ? AND active = true";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nickName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String storedHash = rs.getString("password_hash");
+                String inputHash = util.HashUtil.sha256(plainPassword); // 🔐 hasheamos lo que se ingresó
+
+                if (storedHash.equals(inputHash)) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("full_name"),
+                            rs.getString("nick_name"),
+                            storedHash,
+                            true
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";

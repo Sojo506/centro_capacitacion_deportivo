@@ -7,6 +7,8 @@ public interface UserDAO {
 
     void add(User user);
 
+    User login(String nickName, String plainPassword);
+
     List<User> getAll();
 
     User findByNickname(String nickname);
