@@ -3,7 +3,7 @@ package model;
 public class User {
 
     private int id;
-    private String name;
+    private String fullName;
     private String nickName;
     private String password;
     private boolean active;
@@ -11,16 +11,16 @@ public class User {
     public User() {
     }
 
-    public User(String name, String nickName, String password, boolean active) {
-        this.name = name;
+    public User(String fullName, String nickName, String password, boolean active) {
+        this.fullName = fullName;
         this.nickName = nickName;
         this.password = password;
         this.active = active;
     }
 
-    public User(int id, String name, String nickName, String password, boolean active) {
+    public User(int id, String fullName, String nickName, String password, boolean active) {
         this.id = id;
-        this.name = name;
+        this.fullName = fullName;
         this.nickName = nickName;
         this.password = password;
         this.active = active;
@@ -30,12 +30,12 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String name) {
+        this.fullName = name;
     }
 
     public String getNickName() {
