@@ -19,6 +19,19 @@ CREATE TABLE athletes (
     city VARCHAR(100),
     address VARCHAR(100),
     phone VARCHAR(20),
-    email VARCHAR(100),
+    email VARCHAR(100) NOT NULL UNIQUE,
     active TINYINT(1) DEFAULT 1
+);
+
+CREATE TABLE parents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    city VARCHAR(100),
+    address VARCHAR(100),
+    phone VARCHAR(20),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    athlete_id INT NOT NULL,
+    active TINYINT(1) DEFAULT 1,
+    FOREIGN KEY (athlete_id) REFERENCES athletes(id)
 );
