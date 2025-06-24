@@ -25,6 +25,10 @@ public class AthleteController {
         return dao.findById(id);
     }
 
+    public Athlete getAthleteByEmail(String email) {
+        return dao.findByEmail(email);
+    }
+
     public List<Athlete> listAthletes() {
         return dao.getAll();
     }
