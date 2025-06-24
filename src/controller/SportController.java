@@ -1,37 +1,46 @@
 package controller;
 
+import dao.routine.RoutineDAO;
+import dao.routine.RoutineDAOImpl;
 import dao.sport.SportDAO;
 import dao.sport.SportDAOImpl;
 import model.Sport;
 
 import java.util.List;
+import model.Routine;
 
 public class SportController {
 
-    private SportDAO dao = new SportDAOImpl();
+    private SportDAO sportDAO = new SportDAOImpl();
+    private RoutineDAO routineDAO = new RoutineDAOImpl();
 
     public boolean registerSport(Sport s) {
-        if (dao.findByName(s.getName()) != null) {
+        if (sportDAO.findByName(s.getName()) != null) {
             System.out.println("❌ Sport already exists.");
             return false;
         }
-        dao.add(s);
+        sportDAO.add(s);
         return true;
     }
 
     public void updateSport(Sport s) {
-        dao.update(s);
+        sportDAO.update(s);
     }
 
     public boolean deactivateSport(int id) {
-        return dao.deactivate(id);
+        List<Routine> routines = routineDAO.getBySportId(id);
+
+        if (routines.size() > 0) {
+            return false;
+        }
+        return sportDAO.deactivate(id);
     }
 
     public Sport getSportById(int id) {
-        return dao.findById(id);
+        return sportDAO.findById(id);
     }
 
     public List<Sport> listSports() {
-        return dao.getAll();
+        return sportDAO.getAll();
     }
 }
