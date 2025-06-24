@@ -35,6 +35,10 @@ public class Routine {
         return sportId;
     }
 
+    public void setSportId(int sportId) {
+        this.sportId = sportId;
+    }
+
     public int getDurationMinutes() {
         return durationMinutes;
     }
