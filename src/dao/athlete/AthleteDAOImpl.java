@@ -81,6 +81,30 @@ public class AthleteDAOImpl implements AthleteDAO {
     }
 
     @Override
+    public Athlete findByEmail(String email) {
+        String sql = "SELECT * FROM parents WHERE email = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Athlete(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("last_name"),
+                        rs.getString("city"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getBoolean("active")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Athlete> getAll() {
         List<Athlete> list = new ArrayList<>();
         String sql = "SELECT * FROM athletes";

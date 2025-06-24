@@ -12,6 +12,8 @@ public interface AthleteDAO {
     boolean deactivate(int id);
 
     Athlete findById(int id);
+    
+    Athlete findByEmail(String email);
 
     List<Athlete> getAll();
 }
