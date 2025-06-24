@@ -11,7 +11,7 @@ public class UserController {
 
     private UserDAO dao = new UserDAOImpl();
 
-    public User login(String nickName, String password) {
+    public User loginUser(String nickName, String password) {
         return dao.login(nickName, password);
     }
 
