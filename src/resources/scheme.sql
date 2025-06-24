@@ -35,3 +35,10 @@ CREATE TABLE parents (
     active TINYINT(1) DEFAULT 1,
     FOREIGN KEY (athlete_id) REFERENCES athletes(id)
 );
+
+CREATE TABLE sports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    characteristics TEXT,
+    active TINYINT(1) DEFAULT 1
+);
