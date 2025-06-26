@@ -9,8 +9,10 @@ hs_err_pid*
 replay_pid*
 
 # === NetBeans (Java + Ant) ===
+.idea/
 build/
 dist/
+nbproject/
 nbproject/private/
 
 # === System temp files ===
