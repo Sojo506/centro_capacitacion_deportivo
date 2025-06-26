@@ -23,7 +23,6 @@ public class InvoiceController {
         // Validar atleta
         Athlete a = athleteDAO.findById(invoice.getAthleteId());
         if (a == null || !a.isActive()) {
-            System.out.println("Athlete not found or inactive.");
             return false;
         }
 
@@ -31,7 +30,6 @@ public class InvoiceController {
         for (Routine r : invoice.getRoutines()) {
             Routine routineDB = routineDAO.findById(r.getId());
             if (routineDB == null || !routineDB.isActive()) {
-                System.out.println("Routine ID " + r.getId() + " not found or inactive.");
                 return false;
             }
         }

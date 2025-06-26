@@ -18,13 +18,11 @@ public class RoutineController {
         // Validar si el deporte existe
         Sport s = sportDAO.findById(r.getSportId());
         if (s == null) {
-            System.out.println("Sport not found.");
             return false;
         }
 
         // Validar que no exista una rutina con la misma descripción
         if (routineDAO.findByDescription(r.getDescription()) != null) {
-            System.out.println("Routine already exists.");
             return false;
         }
 

@@ -16,7 +16,6 @@ public class SportController {
 
     public boolean registerSport(Sport s) {
         if (sportDAO.findByName(s.getName()) != null) {
-            System.out.println("❌ Sport already exists.");
             return false;
         }
         sportDAO.add(s);

@@ -17,7 +17,6 @@ public class ParentController {
     public boolean registerParent(Parent parent) {
         Athlete a = athleteDAO.findById(parent.getAthleteId());
         if (a == null) {
-            System.out.println("Athlete does not exist.");
             return false;
         }
         parentDAO.add(parent);
