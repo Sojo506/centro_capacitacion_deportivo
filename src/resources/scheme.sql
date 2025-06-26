@@ -51,3 +51,20 @@ CREATE TABLE routines (
     active TINYINT(1) DEFAULT 1,
     FOREIGN KEY (sport_id) REFERENCES sports(id)
 );
+
+CREATE TABLE invoices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    athlete_id INT NOT NULL,
+    total_amount DECIMAL(10,2),
+    active BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (athlete_id) REFERENCES athletes(id)
+);
+
+CREATE TABLE invoice_routine (
+    invoice_id INT NOT NULL,
+    routine_id INT NOT NULL,
+    PRIMARY KEY (invoice_id, routine_id),
+    FOREIGN KEY (invoice_id) REFERENCES invoices(id),
+    FOREIGN KEY (routine_id) REFERENCES routines(id)
+);
