@@ -14,6 +14,4 @@ public interface UserDAO {
     User findByNickname(String nickname);
 
     boolean deactivate(String nickname);
-
-    boolean activate(String nickname);
 }

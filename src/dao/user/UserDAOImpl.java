@@ -106,16 +106,4 @@ public class UserDAOImpl implements UserDAO {
             return false;
         }
     }
-
-    @Override
-    public boolean activate(String nickName) {
-        String sql = "UPDATE users SET active = true WHERE nick_name = ?";
-        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nickName);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
