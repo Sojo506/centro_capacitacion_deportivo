@@ -10,7 +10,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void add(User user) {
-        if (findByNickname(user.getNickName()) != null) {
+        if (findByEmail(user.getEmail()) != null) {
             System.out.println("User already exists.");
             return;
         }
@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
         String sql = "INSERT INTO users (full_name, nick_name, password_hash, active) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, user.getFullName());
-            ps.setString(2, user.getNickName());
+            ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
             ps.setBoolean(4, user.isActive());
             ps.executeUpdate();
@@ -75,16 +75,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findByNickname(String nickName) {
-        String sql = "SELECT * FROM users WHERE nick_name = ?";
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nickName);
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new User(
                         rs.getInt("id"),
                         rs.getString("full_name"),
-                        nickName,
+                        email,
                         rs.getString("password_hash"),
                         rs.getBoolean("active")
                 );

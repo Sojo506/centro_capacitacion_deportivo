@@ -11,7 +11,7 @@ public interface UserDAO {
 
     List<User> getAll();
 
-    User findByNickname(String nickname);
+    User findByEmail(String nickname);
 
     boolean deactivate(String nickname);
 }
