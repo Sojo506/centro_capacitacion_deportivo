@@ -29,7 +29,7 @@ public class UserController {
         return dao.deactivate(nickname);
     }
 
-    public User findUser(String nickname) {
-        return dao.findByNickname(nickname);
+    public User findUser(String email) {
+        return dao.findByEmail(email);
     }
 }
