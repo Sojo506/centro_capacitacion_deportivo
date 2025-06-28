@@ -4,24 +4,24 @@ public class User {
 
     private int id;
     private String fullName;
-    private String nickName;
+    private String email;
     private String password;
     private boolean active;
 
     public User() {
     }
 
-    public User(String fullName, String nickName, String password, boolean active) {
+    public User(String fullName, String email, String password, boolean active) {
         this.fullName = fullName;
-        this.nickName = nickName;
+        this.email = email;
         this.password = password;
         this.active = active;
     }
 
-    public User(int id, String fullName, String nickName, String password, boolean active) {
+    public User(int id, String fullName, String email, String password, boolean active) {
         this.id = id;
         this.fullName = fullName;
-        this.nickName = nickName;
+        this.email = email;
         this.password = password;
         this.active = active;
     }
@@ -38,12 +38,12 @@ public class User {
         this.fullName = name;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
