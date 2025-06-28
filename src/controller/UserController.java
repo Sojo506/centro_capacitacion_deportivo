@@ -11,13 +11,13 @@ public class UserController {
 
     private UserDAO dao = new UserDAOImpl();
 
-    public User loginUser(String nickName, String password) {
-        return dao.login(nickName, password);
+    public User loginUser(String email, String password) {
+        return dao.login(email, password);
     }
 
-    public void registerUser(String fullName, String nickname, String password) {
+    public void registerUser(String fullName, String email, String password) {
         String hash = HashUtil.sha256(password);
-        User u = new User(fullName, nickname, hash, true);
+        User u = new User(fullName, email, hash, true);
         dao.add(u);
     }
 
@@ -25,8 +25,8 @@ public class UserController {
         return dao.getAll();
     }
 
-    public boolean deactivateUser(String nickname) {
-        return dao.deactivate(nickname);
+    public boolean deactivateUser(String email) {
+        return dao.deactivate(email);
     }
 
     public User findUser(String email) {

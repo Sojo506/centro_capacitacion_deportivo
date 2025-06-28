@@ -15,7 +15,7 @@ public class UserDAOImpl implements UserDAO {
             return;
         }
 
-        String sql = "INSERT INTO users (full_name, nick_name, password_hash, active) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (full_name, email, password_hash, active) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getEmail());
@@ -28,20 +28,20 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User login(String nickName, String plainPassword) {
-        String sql = "SELECT * FROM users WHERE nick_name = ? AND active = true";
+    public User login(String email, String plainPassword) {
+        String sql = "SELECT * FROM users WHERE email = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nickName);
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String storedHash = rs.getString("password_hash");
-                String inputHash = util.HashUtil.sha256(plainPassword); // 🔐 hasheamos lo que se ingresó
+                String inputHash = util.HashUtil.sha256(plainPassword); 
 
                 if (storedHash.equals(inputHash)) {
                     return new User(
                             rs.getInt("id"),
                             rs.getString("full_name"),
-                            rs.getString("nick_name"),
+                            rs.getString("email"),
                             storedHash,
                             true
                     );
@@ -62,7 +62,7 @@ public class UserDAOImpl implements UserDAO {
                 User u = new User(
                         rs.getInt("id"),
                         rs.getString("full_name"),
-                        rs.getString("nick_name"),
+                        rs.getString("email"),
                         rs.getString("password_hash"),
                         rs.getBoolean("active")
                 );
@@ -97,7 +97,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean deactivate(String nickName) {
-        String sql = "UPDATE users SET active = false WHERE nick_name = ?";
+        String sql = "UPDATE users SET active = false WHERE email = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nickName);
             return ps.executeUpdate() > 0;
