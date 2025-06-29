@@ -2,6 +2,7 @@ package view.login;
 
 import controller.UserController;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import model.User;
 import util.Colors;
 
@@ -11,10 +12,17 @@ public class SignUp extends javax.swing.JPanel {
     private User user;
     private UserController userController;
 
-    public SignUp(LoginFrame loginFrame) {
+    public SignUp() {
         initComponents();
-        this.loginFrame = loginFrame;
         userController = new UserController();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (loginFrame == null) {
+            loginFrame = (LoginFrame) SwingUtilities.getWindowAncestor(this);
+        }
     }
 
     public boolean validateForm(String fullName, String email, String password) {
@@ -174,7 +182,7 @@ public class SignUp extends javax.swing.JPanel {
             if (user == null) {
                 userController.registerUser(fullName, email, password);
                 JOptionPane.showMessageDialog(this, "User created.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                loginFrame.showPanel(new SignIn(loginFrame));
+                loginFrame.showPanel(new SignIn());
             } else {
                 JOptionPane.showMessageDialog(this, "User already exist.", "404", JOptionPane.ERROR_MESSAGE);
             }

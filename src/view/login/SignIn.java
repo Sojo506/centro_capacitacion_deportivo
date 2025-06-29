@@ -2,6 +2,7 @@ package view.login;
 
 import controller.UserController;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import model.User;
 import util.Colors;
 import view.MainFrame;
@@ -13,10 +14,17 @@ public class SignIn extends javax.swing.JPanel {
     private User user;
     private UserController userController;
 
-    public SignIn(LoginFrame loginFrame) {
+    public SignIn() {
         initComponents();
-        this.loginFrame = loginFrame;
         userController = new UserController();
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        if (loginFrame == null) {
+            loginFrame = (LoginFrame) SwingUtilities.getWindowAncestor(this);
+        }
     }
 
     public boolean validateForm(String email, String password) {
