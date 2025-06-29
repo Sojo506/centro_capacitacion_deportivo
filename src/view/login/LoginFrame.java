@@ -134,6 +134,7 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().add(left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         accountInfo.setBackground(new java.awt.Color(230, 230, 230));
+        accountInfo.setForeground(new java.awt.Color(244, 244, 244));
         accountInfo.setPreferredSize(new java.awt.Dimension(400, 0));
 
         haveAccount.setForeground(new java.awt.Color(102, 102, 102));
