@@ -72,7 +72,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        dragBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/drag.png"))); // NOI18N
+        dragBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dragdrop.png"))); // NOI18N
         dragBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         dragBtn.setBorderPainted(false);
         dragBtn.setContentAreaFilled(false);
