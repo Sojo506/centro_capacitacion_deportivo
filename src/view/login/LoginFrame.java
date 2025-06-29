@@ -30,13 +30,13 @@ public class LoginFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         left = new javax.swing.JPanel();
-        titulo = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
-        copyright = new javax.swing.JLabel();
+        copyrightLabel = new javax.swing.JLabel();
         exitBtn = new javax.swing.JButton();
         dragBtn = new javax.swing.JButton();
         accountInfo = new javax.swing.JPanel();
-        haveAccount = new javax.swing.JLabel();
+        haveAccountLabel = new javax.swing.JLabel();
         signBtn = new javax.swing.JButton();
         panelContentRight = new javax.swing.JPanel();
 
@@ -47,16 +47,16 @@ public class LoginFrame extends javax.swing.JFrame {
         left.setBackground(new java.awt.Color(244, 244, 244));
         left.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        titulo.setFont(new java.awt.Font("Adwaita Mono", 1, 34)); // NOI18N
-        titulo.setForeground(new java.awt.Color(26, 26, 26));
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Depor&T");
+        titleLabel.setFont(new java.awt.Font("Adwaita Mono", 1, 34)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(26, 26, 26));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Depor&T");
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
 
-        copyright.setFont(new java.awt.Font("Adwaita Sans", 0, 14)); // NOI18N
-        copyright.setForeground(new java.awt.Color(102, 102, 102));
-        copyright.setText("copyright © Depor&T all rights reserved");
+        copyrightLabel.setFont(new java.awt.Font("Adwaita Sans", 0, 14)); // NOI18N
+        copyrightLabel.setForeground(new java.awt.Color(102, 102, 102));
+        copyrightLabel.setText("copyright © Depor&T all rights reserved");
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
         exitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
@@ -98,13 +98,13 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(135, 135, 135))
             .addGroup(leftLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(titulo)
+                .addComponent(titleLabel)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(leftLayout.createSequentialGroup()
                 .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(leftLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(copyright)
+                        .addComponent(copyrightLabel)
                         .addGap(0, 63, Short.MAX_VALUE))
                     .addGroup(leftLayout.createSequentialGroup()
                         .addContainerGap()
@@ -123,9 +123,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(logo)
                 .addGap(18, 18, 18)
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(146, 146, 146)
-                .addComponent(copyright)
+                .addComponent(copyrightLabel)
                 .addGap(20, 20, 20))
         );
 
@@ -135,8 +135,8 @@ public class LoginFrame extends javax.swing.JFrame {
         accountInfo.setForeground(new java.awt.Color(244, 244, 244));
         accountInfo.setPreferredSize(new java.awt.Dimension(400, 0));
 
-        haveAccount.setForeground(new java.awt.Color(255, 255, 255));
-        haveAccount.setText("I do not have an account");
+        haveAccountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        haveAccountLabel.setText("I do not have an account");
 
         signBtn.setBackground(new java.awt.Color(230, 230, 230));
         signBtn.setForeground(new java.awt.Color(26, 26, 26));
@@ -158,7 +158,7 @@ public class LoginFrame extends javax.swing.JFrame {
             accountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountInfoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(haveAccount)
+                .addComponent(haveAccountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(signBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -168,7 +168,7 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(accountInfoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(accountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(haveAccount)
+                    .addComponent(haveAccountLabel)
                     .addComponent(signBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13))
         );
@@ -192,12 +192,12 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
-        if (haveAccount.getText().equals("I do not have an account")) {
-            haveAccount.setText("I do have an account");
+        if (haveAccountLabel.getText().equals("I do not have an account")) {
+            haveAccountLabel.setText("I do have an account");
             signBtn.setText("Sign In");
             showPanel(new SignUp(this));
         } else {
-            haveAccount.setText("I do not have an account");
+            haveAccountLabel.setText("I do not have an account");
             signBtn.setText("Sign Up");
             showPanel(new SignIn(this));
         }
@@ -242,14 +242,14 @@ public class LoginFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accountInfo;
-    private javax.swing.JLabel copyright;
+    private javax.swing.JLabel copyrightLabel;
     private javax.swing.JButton dragBtn;
     private javax.swing.JButton exitBtn;
-    private javax.swing.JLabel haveAccount;
+    private javax.swing.JLabel haveAccountLabel;
     private javax.swing.JPanel left;
     private javax.swing.JLabel logo;
     private javax.swing.JPanel panelContentRight;
     private javax.swing.JButton signBtn;
-    private javax.swing.JLabel titulo;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

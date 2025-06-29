@@ -43,22 +43,22 @@ public class SignIn extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        email = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
         inputEmail = new javax.swing.JTextField();
-        password = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
         inputPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(216, 218, 211));
 
-        jLabel1.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(26, 26, 26));
-        jLabel1.setText("Sign In to Depor&T");
+        titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(26, 26, 26));
+        titleLabel.setText("Sign In to Depor&T");
 
-        email.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
-        email.setForeground(new java.awt.Color(26, 26, 26));
-        email.setText("Email");
+        emailLabel.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(26, 26, 26));
+        emailLabel.setText("Email");
 
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,9 +66,9 @@ public class SignIn extends javax.swing.JPanel {
             }
         });
 
-        password.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
-        password.setForeground(new java.awt.Color(26, 26, 26));
-        password.setText("Password");
+        passwordLabel.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(26, 26, 26));
+        passwordLabel.setText("Password");
 
         loginBtn.setBackground(new java.awt.Color(0, 123, 255));
         loginBtn.setFont(new java.awt.Font("Adwaita Sans", 0, 18)); // NOI18N
@@ -101,14 +101,14 @@ public class SignIn extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(88, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
                 .addGap(89, 89, 89))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(email)
+                    .addComponent(emailLabel)
                     .addComponent(inputEmail)
-                    .addComponent(password)
+                    .addComponent(passwordLabel)
                     .addComponent(loginBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -117,13 +117,13 @@ public class SignIn extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
                 .addGap(18, 18, 18)
-                .addComponent(email)
+                .addComponent(emailLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(password)
+                .addComponent(passwordLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
@@ -167,11 +167,11 @@ public class SignIn extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel email;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginBtn;
-    private javax.swing.JLabel password;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
