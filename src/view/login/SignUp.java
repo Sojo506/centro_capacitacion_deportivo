@@ -169,9 +169,8 @@ public class SignUp extends javax.swing.JPanel {
 
         boolean isValidate = validateForm(fullName, email, password);
 
-        user = userController.findUser(email);
-
         if (isValidate) {
+            user = userController.findUser(email);
             if (user == null) {
                 userController.registerUser(fullName, email, password);
                 JOptionPane.showMessageDialog(this, "User created.", "Success", JOptionPane.INFORMATION_MESSAGE);
