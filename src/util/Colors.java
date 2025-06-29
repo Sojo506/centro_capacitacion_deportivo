@@ -7,6 +7,7 @@ public class Colors {
     // Backgrounds
     public static final Color BACKGROUND_PRIMARY = new Color(244, 244, 244);  // #F4F4F4
     public static final Color BACKGROUND_SECONDARY = new Color(230, 230, 230);  // #E6E6E6
+    public static final Color BACKGROUND_TIMBERWOLF = new Color(204, 204, 204);  // #D8DAD3
 
     // Sidebar
     public static final Color SIDEBAR = new Color(30, 42, 56);     // #1E2A38
