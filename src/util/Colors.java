@@ -4,8 +4,12 @@ import java.awt.Color;
 
 public class Colors {
 
+    // Colors
+    public static final Color RED = new Color(191, 26, 47);  // #BF1A2F
+    public static final Color GUNMETAL = new Color(45, 49, 66);  // #2D3142
+
     // Backgrounds
-    public static final Color BACKGROUND_PRIMARY = new Color(244, 244, 244);  // #F4F4F4
+    public static final Color BACKGROUND_PRIMARY = new Color(38, 103, 255);  // #2667FF
     public static final Color BACKGROUND_SECONDARY = new Color(230, 230, 230);  // #E6E6E6
     public static final Color BACKGROUND_TIMBERWOLF = new Color(204, 204, 204);  // #D8DAD3
     public static final Color BACKGROUND_GRAY = new Color(74, 74, 72);  // #4A4A48
