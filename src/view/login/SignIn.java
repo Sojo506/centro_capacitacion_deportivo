@@ -142,15 +142,17 @@ public class SignIn extends javax.swing.JPanel {
 
         boolean isValidate = validateForm(email, password);
 
-        user = userController.loginUser(email, password);
+        if (isValidate) {
+            user = userController.loginUser(email, password);
 
-        if (isValidate && user != null) {
-            mainFrame = new MainFrame(user);
-            JOptionPane.showMessageDialog(this, "Welcome back " + user.getFullName() + "!", "Welcome", JOptionPane.PLAIN_MESSAGE);
-            loginFrame.dispose();
-            mainFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "User not found.", "404", JOptionPane.ERROR_MESSAGE);
+            if (user != null) {
+                mainFrame = new MainFrame(user);
+                JOptionPane.showMessageDialog(this, "Welcome back " + user.getFullName() + "!", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                loginFrame.dispose();
+                mainFrame.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "User not found.", "404", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_loginBtnActionPerformed
