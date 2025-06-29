@@ -12,7 +12,6 @@ replay_pid*
 .idea/
 build/
 dist/
-nbproject/
 nbproject/private/
 
 # === System temp files ===
