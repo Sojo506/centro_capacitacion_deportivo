@@ -60,6 +60,8 @@ public class SignUp extends javax.swing.JPanel {
         password = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
 
+        setBackground(new java.awt.Color(216, 218, 211));
+
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputEmailActionPerformed(evt);
@@ -68,7 +70,7 @@ public class SignUp extends javax.swing.JPanel {
 
         registerBtn.setBackground(new java.awt.Color(0, 123, 255));
         registerBtn.setFont(new java.awt.Font("Adwaita Sans", 0, 18)); // NOI18N
-        registerBtn.setForeground(new java.awt.Color(0, 0, 0));
+        registerBtn.setForeground(new java.awt.Color(26, 26, 26));
         registerBtn.setText("Register");
         registerBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,9 +91,11 @@ public class SignUp extends javax.swing.JPanel {
         });
 
         title.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(26, 26, 26));
         title.setText("Create Account");
 
         fullName.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        fullName.setForeground(new java.awt.Color(26, 26, 26));
         fullName.setText("Full name");
 
         inputFullName.addActionListener(new java.awt.event.ActionListener() {
@@ -100,10 +104,13 @@ public class SignUp extends javax.swing.JPanel {
             }
         });
 
+        email.setBackground(new java.awt.Color(26, 26, 26));
         email.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        email.setForeground(new java.awt.Color(26, 26, 26));
         email.setText("Email");
 
         password.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        password.setForeground(new java.awt.Color(26, 26, 26));
         password.setText("Password");
 
         inputPassword.setPreferredSize(new java.awt.Dimension(150, 40));

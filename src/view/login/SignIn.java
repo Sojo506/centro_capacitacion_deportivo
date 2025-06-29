@@ -50,10 +50,14 @@ public class SignIn extends javax.swing.JPanel {
         loginBtn = new javax.swing.JButton();
         inputPassword = new javax.swing.JPasswordField();
 
+        setBackground(new java.awt.Color(216, 218, 211));
+
         jLabel1.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(26, 26, 26));
         jLabel1.setText("Sign In to Depor&T");
 
         email.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        email.setForeground(new java.awt.Color(26, 26, 26));
         email.setText("Email");
 
         inputEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -63,11 +67,12 @@ public class SignIn extends javax.swing.JPanel {
         });
 
         password.setFont(new java.awt.Font("Adwaita Sans", 0, 16)); // NOI18N
+        password.setForeground(new java.awt.Color(26, 26, 26));
         password.setText("Password");
 
         loginBtn.setBackground(new java.awt.Color(0, 123, 255));
         loginBtn.setFont(new java.awt.Font("Adwaita Sans", 0, 18)); // NOI18N
-        loginBtn.setForeground(new java.awt.Color(0, 0, 0));
+        loginBtn.setForeground(new java.awt.Color(26, 26, 26));
         loginBtn.setText("Login");
         loginBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         loginBtn.setBorderPainted(false);
