@@ -78,7 +78,7 @@ public class SignIn extends javax.swing.JPanel {
         passwordLabel.setForeground(new java.awt.Color(26, 26, 26));
         passwordLabel.setText("Password");
 
-        loginBtn.setBackground(new java.awt.Color(38, 103, 255));
+        loginBtn.setBackground(new java.awt.Color(45, 49, 66));
         loginBtn.setFont(new java.awt.Font("Adwaita Sans", 0, 18)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("Login");
@@ -166,11 +166,11 @@ public class SignIn extends javax.swing.JPanel {
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void loginBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseEntered
-        loginBtn.setBackground(Colors.GUNMETAL);
+        loginBtn.setBackground(Colors.BACKGROUND_PRIMARY);
     }//GEN-LAST:event_loginBtnMouseEntered
 
     private void loginBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseExited
-        loginBtn.setBackground(Colors.BUTTON_PRIMARY);
+        loginBtn.setBackground(Colors.GUNMETAL);
     }//GEN-LAST:event_loginBtnMouseExited
 
 

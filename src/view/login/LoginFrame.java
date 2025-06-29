@@ -2,6 +2,7 @@ package view.login;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import util.Colors;
 
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -138,14 +139,25 @@ public class LoginFrame extends javax.swing.JFrame {
         haveAccountLabel.setForeground(new java.awt.Color(255, 255, 255));
         haveAccountLabel.setText("I do not have an account");
 
-        signBtn.setBackground(new java.awt.Color(230, 230, 230));
-        signBtn.setForeground(new java.awt.Color(26, 26, 26));
+        signBtn.setBackground(new java.awt.Color(38, 103, 255));
+        signBtn.setForeground(new java.awt.Color(255, 255, 255));
         signBtn.setText("Sign Up");
         signBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         signBtn.setBorderPainted(false);
         signBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signBtn.setFocusPainted(false);
         signBtn.setFocusable(false);
+        signBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                signBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                signBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                signBtnMousePressed(evt);
+            }
+        });
         signBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signBtnActionPerformed(evt);
@@ -217,6 +229,18 @@ public class LoginFrame extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_dragBtnMouseMoved
+
+    private void signBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signBtnMouseEntered
+        signBtn.setBackground(Colors.GUNMETAL);
+    }//GEN-LAST:event_signBtnMouseEntered
+
+    private void signBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signBtnMouseExited
+        signBtn.setBackground(Colors.BACKGROUND_PRIMARY);
+    }//GEN-LAST:event_signBtnMouseExited
+
+    private void signBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signBtnMousePressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

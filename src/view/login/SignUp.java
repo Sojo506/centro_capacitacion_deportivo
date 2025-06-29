@@ -76,7 +76,7 @@ public class SignUp extends javax.swing.JPanel {
             }
         });
 
-        registerBtn.setBackground(new java.awt.Color(38, 103, 255));
+        registerBtn.setBackground(new java.awt.Color(45, 49, 66));
         registerBtn.setFont(new java.awt.Font("Adwaita Sans", 0, 18)); // NOI18N
         registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("Register");
@@ -195,11 +195,11 @@ public class SignUp extends javax.swing.JPanel {
     }//GEN-LAST:event_inputFullNameActionPerformed
 
     private void registerBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseEntered
-        registerBtn.setBackground(Colors.GUNMETAL);
+        registerBtn.setBackground(Colors.BACKGROUND_PRIMARY);
     }//GEN-LAST:event_registerBtnMouseEntered
 
     private void registerBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseExited
-        registerBtn.setBackground(Colors.BUTTON_PRIMARY);
+        registerBtn.setBackground(Colors.GUNMETAL);
     }//GEN-LAST:event_registerBtnMouseExited
 
 
