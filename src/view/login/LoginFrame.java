@@ -42,8 +42,6 @@ public class LoginFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         left.setBackground(new java.awt.Color(244, 244, 244));
@@ -133,16 +131,18 @@ public class LoginFrame extends javax.swing.JFrame {
 
         getContentPane().add(left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        accountInfo.setBackground(new java.awt.Color(230, 230, 230));
+        accountInfo.setBackground(new java.awt.Color(74, 74, 72));
         accountInfo.setForeground(new java.awt.Color(244, 244, 244));
         accountInfo.setPreferredSize(new java.awt.Dimension(400, 0));
 
-        haveAccount.setForeground(new java.awt.Color(102, 102, 102));
+        haveAccount.setForeground(new java.awt.Color(255, 255, 255));
         haveAccount.setText("I do not have an account");
 
-        signBtn.setBackground(new java.awt.Color(108, 117, 125));
+        signBtn.setBackground(new java.awt.Color(230, 230, 230));
+        signBtn.setForeground(new java.awt.Color(26, 26, 26));
         signBtn.setText("Sign Up");
         signBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        signBtn.setBorderPainted(false);
         signBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signBtn.setFocusPainted(false);
         signBtn.setFocusable(false);
