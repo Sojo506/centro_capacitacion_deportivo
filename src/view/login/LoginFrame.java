@@ -14,7 +14,7 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        showPanel(new SignIn(this));
+        showPanel(new SignIn());
     }
 
     public void showPanel(JPanel newPanel) {
@@ -195,11 +195,11 @@ public class LoginFrame extends javax.swing.JFrame {
         if (haveAccountLabel.getText().equals("I do not have an account")) {
             haveAccountLabel.setText("I do have an account");
             signBtn.setText("Sign In");
-            showPanel(new SignUp(this));
+            showPanel(new SignUp());
         } else {
             haveAccountLabel.setText("I do not have an account");
             signBtn.setText("Sign Up");
-            showPanel(new SignIn(this));
+            showPanel(new SignIn());
         }
     }//GEN-LAST:event_signBtnActionPerformed
 
