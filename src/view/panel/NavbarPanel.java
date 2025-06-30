@@ -1,18 +1,20 @@
 package view.panel;
 
 import java.time.LocalDate;
-import javax.swing.SwingUtilities;
 import model.User;
 import view.MainFrame;
+import view.user.UserProfileDialog;
+import view.user.UserProfileFrame;
 
 public class NavbarPanel extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
+    private User user;
 
     public NavbarPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
-        User user = mainFrame.getUser();
+        user = mainFrame.getUser();
         userLabel.setText(user.getFullName());
 
         LocalDate now = LocalDate.now();
@@ -33,16 +35,24 @@ public class NavbarPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1000, 40));
 
+        userLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        userLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(368, 368, 368)
+                .addComponent(userLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addGap(367, 367, 367)
                 .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(464, Short.MAX_VALUE))
+                .addGap(464, 464, 464))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -50,6 +60,11 @@ public class NavbarPanel extends javax.swing.JPanel {
             .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
+        UserProfileFrame profile = new UserProfileFrame(mainFrame, user);
+        profile.setVisible(true);
+    }//GEN-LAST:event_userLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
