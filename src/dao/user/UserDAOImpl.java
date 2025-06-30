@@ -29,13 +29,23 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void update(User user) {
-        String sql = "UPDATE users SET full_name = ?, password_hash = ?, active = ? WHERE email = ?";
+        String sql = "UPDATE users SET full_name = ?, email = ?, password_hash = ?, active = ? WHERE id = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            User currentUser = findById(user.getId());
+
             ps.setString(1, user.getFullName());
-            ps.setString(2, user.getPassword());
-            ps.setBoolean(3, user.isActive());
-            ps.setString(4, user.getEmail());
-            int rowsAffected = ps.executeUpdate();
+            ps.setString(2, user.getEmail());
+
+            if (currentUser.getPassword().equals(user.getPassword())) {
+                ps.setString(3, currentUser.getPassword());
+            } else {
+                String hashPassword = util.HashUtil.sha256(user.getPassword());
+                ps.setString(3, hashPassword);
+            }
+
+            ps.setBoolean(4, user.isActive());
+            ps.setInt(5, user.getId());
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,6 +109,27 @@ public class UserDAOImpl implements UserDAO {
                         rs.getInt("id"),
                         rs.getString("full_name"),
                         email,
+                        rs.getString("password_hash"),
+                        rs.getBoolean("active")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public User findById(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        id,
+                        rs.getString("full_name"),
+                        rs.getString("email"),
                         rs.getString("password_hash"),
                         rs.getBoolean("active")
                 );

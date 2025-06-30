@@ -6,7 +6,7 @@ import model.User;
 public interface UserDAO {
 
     void add(User user);
-    
+
     void update(User user);
 
     User login(String nickName, String plainPassword);
@@ -14,6 +14,8 @@ public interface UserDAO {
     List<User> getAll();
 
     User findByEmail(String nickname);
+
+    User findById(int id);
 
     boolean deactivate(String nickname);
 }
