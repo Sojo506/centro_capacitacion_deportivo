@@ -1,8 +1,13 @@
 package view.panel;
 
-import javax.swing.SwingUtilities;
 import view.MainFrame;
+import view.athlete.AthletePanel;
+import view.invoice.InvoicePanel;
 import view.login.LoginFrame;
+import view.parent.ParentPanel;
+import view.routine.RoutinePanel;
+import view.sport.SportPanel;
+import view.user.UserPanel;
 
 public class SidebarPanel extends javax.swing.JPanel {
 
@@ -84,6 +89,11 @@ public class SidebarPanel extends javax.swing.JPanel {
         athletesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         athletesBtn.setFocusPainted(false);
         athletesBtn.setFocusable(false);
+        athletesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                athletesBtnActionPerformed(evt);
+            }
+        });
 
         parentsBtn.setBackground(new java.awt.Color(38, 103, 255));
         parentsBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,6 +102,11 @@ public class SidebarPanel extends javax.swing.JPanel {
         parentsBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         parentsBtn.setFocusPainted(false);
         parentsBtn.setFocusable(false);
+        parentsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parentsBtnActionPerformed(evt);
+            }
+        });
 
         sportsBtn.setBackground(new java.awt.Color(38, 103, 255));
         sportsBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,6 +115,11 @@ public class SidebarPanel extends javax.swing.JPanel {
         sportsBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sportsBtn.setFocusPainted(false);
         sportsBtn.setFocusable(false);
+        sportsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sportsBtnActionPerformed(evt);
+            }
+        });
 
         routinesBtn.setBackground(new java.awt.Color(38, 103, 255));
         routinesBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,6 +128,11 @@ public class SidebarPanel extends javax.swing.JPanel {
         routinesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         routinesBtn.setFocusPainted(false);
         routinesBtn.setFocusable(false);
+        routinesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                routinesBtnActionPerformed(evt);
+            }
+        });
 
         invoicesBtn.setBackground(new java.awt.Color(38, 103, 255));
         invoicesBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,6 +141,11 @@ public class SidebarPanel extends javax.swing.JPanel {
         invoicesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         invoicesBtn.setFocusPainted(false);
         invoicesBtn.setFocusable(false);
+        invoicesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoicesBtnActionPerformed(evt);
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Adwaita Mono", 1, 34)); // NOI18N
         titulo.setForeground(new java.awt.Color(26, 26, 26));
@@ -193,8 +223,28 @@ public class SidebarPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void usersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersBtnActionPerformed
-        // TODO add your handling code here:
+        mainFrame.showPanel(new UserPanel());
     }//GEN-LAST:event_usersBtnActionPerformed
+
+    private void athletesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_athletesBtnActionPerformed
+        mainFrame.showPanel(new AthletePanel());
+    }//GEN-LAST:event_athletesBtnActionPerformed
+
+    private void parentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentsBtnActionPerformed
+        mainFrame.showPanel(new ParentPanel());
+    }//GEN-LAST:event_parentsBtnActionPerformed
+
+    private void sportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sportsBtnActionPerformed
+        mainFrame.showPanel(new SportPanel());
+    }//GEN-LAST:event_sportsBtnActionPerformed
+
+    private void routinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routinesBtnActionPerformed
+        mainFrame.showPanel(new RoutinePanel());
+    }//GEN-LAST:event_routinesBtnActionPerformed
+
+    private void invoicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicesBtnActionPerformed
+        mainFrame.showPanel(new InvoicePanel());
+    }//GEN-LAST:event_invoicesBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
