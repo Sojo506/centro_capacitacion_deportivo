@@ -21,9 +21,7 @@ public class UserController {
         dao.add(user);
     }
 
-    public void updateUser(String fullName, String email, String password) {
-        String hash = HashUtil.sha256(password);
-        User user = new User(fullName, email, hash, true);
+    public void updateUser(User user) {
         dao.update(user);
     }
 
