@@ -36,7 +36,13 @@ public class Validate {
         return true;
     }
 
-    public static boolean validateFormProfile(Component parent, String fullName, String password, String confirmPassword) {
+    public static boolean validateFormProfile(
+            Component parent,
+            String fullName,
+            String email,
+            String password,
+            String confirmPassword
+    ) {
 
         if (fullName.isEmpty()) {
             JOptionPane.showMessageDialog(parent, "Full name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -47,6 +53,12 @@ public class Validate {
             JOptionPane.showMessageDialog(parent, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+
+        if (email.isEmpty() || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(parent, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
