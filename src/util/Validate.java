@@ -34,4 +34,33 @@ public class Validate {
 
         return true;
     }
+
+    public static boolean validateFormProfile(String fullName, String password, String confirmPassword) {
+
+        if (fullName.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Full name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (fullName.length() < 3) {
+            JOptionPane.showMessageDialog(null, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (password.length() < 8 || confirmPassword.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Passwords must be the same.", "Incorrect passwords", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 }
