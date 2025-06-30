@@ -5,49 +5,51 @@ import javax.swing.JPanel;
 import model.User;
 import view.panel.NavbarPanel;
 import view.panel.SidebarPanel;
+import view.user.UserPanel;
 
 public class MainFrame extends javax.swing.JFrame {
-
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private User user;
     private int xMouse, yMouse;
-
+    
     public MainFrame(User user) {
         setUndecorated(true);
         initComponents();
         this.user = user;
         initPanels();
         setLocationRelativeTo(null);
-
+        showPanel(new UserPanel());
+        
     }
-
+    
     public User getUser() {
         return user;
     }
-
-    private void showPanel(JPanel newPanel) {
+    
+    public void showPanel(JPanel newPanel) {
         contentPanel.removeAll();
         contentPanel.setLayout(new BorderLayout());
         contentPanel.add(newPanel, BorderLayout.CENTER);
         contentPanel.revalidate();
         contentPanel.repaint();
     }
-
+    
     public void initPanels() {
         sideBar.removeAll();
         sideBar.setLayout(new BorderLayout());
         sideBar.add(new SidebarPanel(this), BorderLayout.CENTER);
         sideBar.revalidate();
         sideBar.repaint();
-
+        
         navBar.removeAll();
         navBar.setLayout(new BorderLayout());
         navBar.add(new NavbarPanel(this), BorderLayout.CENTER);
         navBar.revalidate();
         navBar.repaint();
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,7 +139,6 @@ public class MainFrame extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_dragBtnMouseMoved
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -157,9 +158,10 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        User user = new User("Invitado", "asdadsd", "adadasad", true);
+        User user = new User("Rick Sánchez", "rick@gmail.com", "rick1234", true);
         java.awt.EventQueue.invokeLater(() -> new MainFrame(user).setVisible(true));
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
