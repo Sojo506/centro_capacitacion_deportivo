@@ -47,13 +47,23 @@ public class Validate {
             JOptionPane.showMessageDialog(parent, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (password.isEmpty() || confirmPassword.isEmpty()) {
+        if (password.isEmpty()) {
             JOptionPane.showMessageDialog(parent, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (password.length() < 8 || confirmPassword.length() < 8) {
+        if (password.length() < 8) {
             JOptionPane.showMessageDialog(parent, "Password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "Confirm password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (confirmPassword.length() < 8) {
+            JOptionPane.showMessageDialog(parent, "Confirm password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
