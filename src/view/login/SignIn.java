@@ -9,7 +9,6 @@ import view.MainFrame;
 
 public class SignIn extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
     private LoginFrame loginFrame;
     private User user;
     private UserController userController;
@@ -154,10 +153,9 @@ public class SignIn extends javax.swing.JPanel {
             user = userController.loginUser(email, password);
 
             if (user != null) {
-                mainFrame = new MainFrame(user);
                 JOptionPane.showMessageDialog(this, "Welcome back " + user.getFullName() + "!", "Welcome", JOptionPane.PLAIN_MESSAGE);
                 loginFrame.dispose();
-                mainFrame.setVisible(true);
+                java.awt.EventQueue.invokeLater(() -> new MainFrame(user).setVisible(true));
             } else {
                 JOptionPane.showMessageDialog(this, "User not found.", "404", JOptionPane.ERROR_MESSAGE);
             }
