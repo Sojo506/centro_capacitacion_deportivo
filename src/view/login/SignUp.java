@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import model.User;
 import util.Colors;
+import util.Validate;
 
 public class SignUp extends javax.swing.JPanel {
 
@@ -23,36 +24,6 @@ public class SignUp extends javax.swing.JPanel {
         if (loginFrame == null) {
             loginFrame = (LoginFrame) SwingUtilities.getWindowAncestor(this);
         }
-    }
-
-    public boolean validateForm(String fullName, String email, String password) {
-
-        if (fullName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Full name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (fullName.length() < 3) {
-            JOptionPane.showMessageDialog(this, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (email.isEmpty() || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -175,7 +146,7 @@ public class SignUp extends javax.swing.JPanel {
         String email = inputEmail.getText().trim();
         String password = new String(inputPassword.getText()).trim();
 
-        boolean isValidate = validateForm(fullName, email, password);
+        boolean isValidate = Validate.validateForm(fullName, email, password);
 
         if (isValidate) {
             user = userController.findUser(email);
