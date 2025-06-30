@@ -6,6 +6,8 @@ import model.User;
 public interface UserDAO {
 
     void add(User user);
+    
+    void update(User user);
 
     User login(String nickName, String plainPassword);
 

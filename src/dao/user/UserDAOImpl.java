@@ -28,6 +28,23 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public void update(User user) {
+        String sql = "UPDATE users SET full_name = ?, password_hash = ?, active = ? WHERE email = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getPassword());
+            ps.setBoolean(3, user.isActive());
+            ps.setString(4, user.getEmail());
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("No se encontró un usuario con ese correo.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public User login(String email, String plainPassword) {
         String sql = "SELECT * FROM users WHERE email = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -35,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String storedHash = rs.getString("password_hash");
-                String inputHash = util.HashUtil.sha256(plainPassword); 
+                String inputHash = util.HashUtil.sha256(plainPassword);
 
                 if (storedHash.equals(inputHash)) {
                     return new User(

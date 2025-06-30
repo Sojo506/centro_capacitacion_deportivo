@@ -20,6 +20,10 @@ public class UserController {
         User u = new User(fullName, email, hash, true);
         dao.add(u);
     }
+    
+    public void updateUser(User user) {
+        dao.update(user);
+    }
 
     public List<User> listUsers() {
         return dao.getAll();
