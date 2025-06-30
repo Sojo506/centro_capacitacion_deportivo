@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import model.User;
 import view.MainFrame;
 import view.user.UserProfileDialog;
-import view.user.UserProfileFrame;
 
 public class NavbarPanel extends javax.swing.JPanel {
 
@@ -62,7 +61,7 @@ public class NavbarPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
-        UserProfileFrame profile = new UserProfileFrame(mainFrame, user);
+        UserProfileDialog profile = new UserProfileDialog(mainFrame, true, user);
         profile.setVisible(true);
     }//GEN-LAST:event_userLabelMouseClicked
 
