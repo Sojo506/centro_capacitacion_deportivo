@@ -207,10 +207,10 @@ public class UserProfileDialog extends javax.swing.JDialog {
             inputPassword.setEnabled(true);
             editBtn.setText("Save");
         } else if (editBtn.getText().equalsIgnoreCase("save")) {
-            String name = inputName.getText();
-            String email = inputEmail.getText();
-            String password = new String(inputPassword.getText()).trim();
-            String cPassword = new String(inputConfirmPassword.getText()).trim();
+            String name = inputName.getText().trim();
+            String email = inputEmail.getText().trim();
+            String password = new String(inputPassword.getPassword()).trim();
+            String cPassword = new String(inputConfirmPassword.getPassword()).trim();
 
             boolean isValid = Validate.validateFormProfile(
                     this,
@@ -221,22 +221,34 @@ public class UserProfileDialog extends javax.swing.JDialog {
             );
 
             if (isValid) {
-                user.setFullName(name);
-                user.setEmail(email);
-                user.setPassword(password);
-                try {
-                    userController.updateUser(user);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "There was an error, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                boolean canUpdate = true;
+
+                if (!user.getEmail().equalsIgnoreCase(email)) {
+                    if (userController.findUser(email) != null) {
+                        JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                        canUpdate = false;
+                    }
                 }
 
-                inputName.setEnabled(false);
-                inputEmail.setEnabled(false);
-                inputConfirmPassword.setEnabled(false);
-                inputPassword.setEnabled(false);
-                editBtn.setText("Edit");
+                if (canUpdate) {
+                    try {
+                        user.setFullName(name);
+                        user.setEmail(email);
+                        user.setPassword(password);
+                        userController.updateUser(user);
 
-                JOptionPane.showMessageDialog(this, "User updated", "Updated", JOptionPane.INFORMATION_MESSAGE);
+                        inputName.setEnabled(false);
+                        inputEmail.setEnabled(false);
+                        inputConfirmPassword.setEnabled(false);
+                        inputPassword.setEnabled(false);
+                        editBtn.setText("Edit");
+
+                        JOptionPane.showMessageDialog(this, "User updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(this, "There was an error, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_editBtnActionPerformed
