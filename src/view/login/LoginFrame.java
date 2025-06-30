@@ -32,7 +32,6 @@ public class LoginFrame extends javax.swing.JFrame {
 
         left = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
-        logo = new javax.swing.JLabel();
         copyrightLabel = new javax.swing.JLabel();
         exitBtn = new javax.swing.JButton();
         dragBtn = new javax.swing.JButton();
@@ -51,9 +50,11 @@ public class LoginFrame extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Adwaita Mono", 1, 34)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(26, 26, 26));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
         titleLabel.setText("Depor&T");
-
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+        titleLabel.setFocusable(false);
+        titleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        titleLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         copyrightLabel.setFont(new java.awt.Font("Adwaita Sans", 0, 14)); // NOI18N
         copyrightLabel.setForeground(new java.awt.Color(102, 102, 102));
@@ -94,14 +95,6 @@ public class LoginFrame extends javax.swing.JFrame {
         leftLayout.setHorizontalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logo)
-                .addGap(135, 135, 135))
-            .addGroup(leftLayout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(titleLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(leftLayout.createSequentialGroup()
                 .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(leftLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
@@ -113,6 +106,10 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exitBtn)))
                 .addContainerGap())
+            .addGroup(leftLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(titleLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,11 +118,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(exitBtn)
                     .addComponent(dragBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(logo)
-                .addGap(18, 18, 18)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146)
+                .addGap(120, 120, 120)
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(copyrightLabel)
                 .addGap(20, 20, 20))
         );
@@ -271,7 +266,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel haveAccountLabel;
     private javax.swing.JPanel left;
-    private javax.swing.JLabel logo;
     private javax.swing.JPanel panelContentRight;
     private javax.swing.JButton signBtn;
     private javax.swing.JLabel titleLabel;
