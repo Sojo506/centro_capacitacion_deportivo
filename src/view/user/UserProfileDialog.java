@@ -19,16 +19,18 @@ public class UserProfileDialog extends javax.swing.JDialog {
         initComponents();
         fillInputs();
 
-        setSize(300, 270);
+        setSize(300, 300);
         setLocationRelativeTo(null);
     }
 
     private void fillInputs() {
         inputName.setText(user.getFullName());
+        inputEmail.setText(user.getEmail());
         inputConfirmPassword.setText(user.getPassword());
         inputPassword.setText(user.getPassword());
 
         inputName.setEnabled(false);
+        inputEmail.setEnabled(false);
         inputConfirmPassword.setEnabled(false);
         inputPassword.setEnabled(false);
     }
@@ -48,9 +50,10 @@ public class UserProfileDialog extends javax.swing.JDialog {
         inputConfirmPassword = new javax.swing.JPasswordField();
         editBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        emailLabel = new javax.swing.JLabel();
+        inputEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(300, 270));
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
         titleLabel.setText("User Profile");
@@ -110,6 +113,8 @@ public class UserProfileDialog extends javax.swing.JDialog {
             }
         });
 
+        emailLabel.setText("Email");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +125,7 @@ public class UserProfileDialog extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(confirmPasswordLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(inputConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                        .addComponent(inputConfirmPassword))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(passwordLabel)
                         .addGap(18, 18, 18)
@@ -130,14 +135,20 @@ public class UserProfileDialog extends javax.swing.JDialog {
                         .addGap(12, 12, 12)
                         .addComponent(inputName))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(titleLabel)
-                        .addGap(41, 41, 41)
-                        .addComponent(closeBtn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(cancelBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(editBtn)))
+                        .addComponent(editBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(titleLabel)
+                                .addGap(41, 41, 41)
+                                .addComponent(closeBtn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(emailLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,10 +158,14 @@ public class UserProfileDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(closeBtn)
                     .addComponent(titleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel)
+                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel)
@@ -159,7 +174,7 @@ public class UserProfileDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmPasswordLabel)
                     .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
                     .addComponent(editBtn))
@@ -187,31 +202,36 @@ public class UserProfileDialog extends javax.swing.JDialog {
 
         if (editBtn.getText().equalsIgnoreCase("edit")) {
             inputName.setEnabled(true);
+            inputEmail.setEnabled(true);
             inputConfirmPassword.setEnabled(true);
             inputPassword.setEnabled(true);
             editBtn.setText("Save");
         } else if (editBtn.getText().equalsIgnoreCase("save")) {
             String name = inputName.getText();
+            String email = inputEmail.getText();
             String password = new String(inputPassword.getText()).trim();
             String cPassword = new String(inputConfirmPassword.getText()).trim();
 
             boolean isValid = Validate.validateFormProfile(
                     this,
                     name,
+                    email,
                     password,
                     cPassword
             );
 
             if (isValid) {
                 user.setFullName(name);
+                user.setEmail(email);
                 user.setPassword(password);
                 try {
-                    userController.updateUser(name, password, cPassword);
+                    userController.updateUser(user);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "There was an error, try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 inputName.setEnabled(false);
+                inputEmail.setEnabled(false);
                 inputConfirmPassword.setEnabled(false);
                 inputPassword.setEnabled(false);
                 editBtn.setText("Edit");
@@ -232,7 +252,9 @@ public class UserProfileDialog extends javax.swing.JDialog {
     private javax.swing.JButton closeBtn;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JButton editBtn;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JPasswordField inputConfirmPassword;
+    private javax.swing.JTextField inputEmail;
     private javax.swing.JTextField inputName;
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JPanel jPanel1;
