@@ -36,9 +36,6 @@ public class UserDAOImpl implements UserDAO {
             ps.setBoolean(3, user.isActive());
             ps.setString(4, user.getEmail());
             int rowsAffected = ps.executeUpdate();
-            if (rowsAffected == 0) {
-                System.out.println("No se encontró un usuario con ese correo.");
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
