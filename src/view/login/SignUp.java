@@ -146,9 +146,9 @@ public class SignUp extends javax.swing.JPanel {
         String email = inputEmail.getText().trim();
         String password = new String(inputPassword.getText()).trim();
 
-        boolean isValidate = Validate.validateForm(fullName, email, password);
+        boolean isValid = Validate.validateForm(fullName, email, password);
 
-        if (isValidate) {
+        if (isValid) {
             user = userController.findUser(email);
             if (user == null) {
                 userController.registerUser(fullName, email, password);
