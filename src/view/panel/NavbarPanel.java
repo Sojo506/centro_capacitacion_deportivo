@@ -6,16 +6,16 @@ import view.MainFrame;
 import view.user.UserProfileDialog;
 
 public class NavbarPanel extends javax.swing.JPanel {
-
+    
     private MainFrame mainFrame;
     private User user;
-
+    
     public NavbarPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
         user = mainFrame.getUser();
         userLabel.setText(user.getFullName());
-
+        
         LocalDate now = LocalDate.now();
         int year = now.getYear();
         int day = now.getDayOfMonth();
@@ -24,7 +24,7 @@ public class NavbarPanel extends javax.swing.JPanel {
             "October", "November", "December"};
         dateLabel.setText(+day + "/" + months[month - 1] + "/" + year);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,6 +63,7 @@ public class NavbarPanel extends javax.swing.JPanel {
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
         UserProfileDialog profile = new UserProfileDialog(mainFrame, true, user);
         profile.setVisible(true);
+        userLabel.setText(user.getFullName());
     }//GEN-LAST:event_userLabelMouseClicked
 
 
