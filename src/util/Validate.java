@@ -44,43 +44,57 @@ public class Validate {
             String confirmPassword
     ) {
 
-        if (fullName.isEmpty()) {
-            JOptionPane.showMessageDialog(parent, "Full name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "All fields must be filled out.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         if (fullName.length() < 3) {
-            JOptionPane.showMessageDialog(parent, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parent, "Full name must be 3 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (email.isEmpty() || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
             JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (password.isEmpty()) {
-            JOptionPane.showMessageDialog(parent, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
         if (password.length() < 8) {
-            JOptionPane.showMessageDialog(parent, "Password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (confirmPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(parent, "Confirm password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parent, "Password must be 8 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         if (confirmPassword.length() < 8) {
-            JOptionPane.showMessageDialog(parent, "Confirm password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parent, "Confirm password must be 8 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(parent, "Passwords must be the same.", "Incorrect passwords", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateAthleteForm(
+            Component parent,
+            int athleteId,
+            String name,
+            String lastName,
+            String city,
+            String address,
+            String phone,
+            String email
+    ) {
+        if (name.isEmpty() || lastName.isEmpty() || city.isEmpty()
+                || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "All fields must be filled out.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (email.isEmpty() || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
