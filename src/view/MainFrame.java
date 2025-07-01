@@ -18,7 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.user = user;
         initPanels();
         setLocationRelativeTo(null);
-        showPanel(new AthletePanel());
+        showPanel(new AthletePanel(this));
 
     }
 
