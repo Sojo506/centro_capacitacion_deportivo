@@ -5,12 +5,12 @@ import javax.swing.JOptionPane;
 import model.User;
 import util.Validate;
 
-public class UserProfileDialog extends javax.swing.JDialog {
+public class UserDialog extends javax.swing.JDialog {
 
     private UserController userController;
     User user;
 
-    public UserProfileDialog(java.awt.Frame parent, boolean modal, User user) {
+    public UserDialog(java.awt.Frame parent, boolean modal, User user) {
         super(parent, modal);
         this.user = user;
         userController = new UserController();
@@ -57,7 +57,7 @@ public class UserProfileDialog extends javax.swing.JDialog {
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
         titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        titleLabel.setText("User Profile");
+        titleLabel.setText("User Data");
 
         closeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         closeBtn.setBorderPainted(false);

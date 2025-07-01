@@ -3,7 +3,7 @@ package view.panel;
 import java.time.LocalDate;
 import model.User;
 import view.MainFrame;
-import view.user.UserProfileDialog;
+import view.user.UserDialog;
 
 public class NavbarPanel extends javax.swing.JPanel {
     
@@ -61,7 +61,7 @@ public class NavbarPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void userLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLabelMouseClicked
-        UserProfileDialog profile = new UserProfileDialog(mainFrame, true, user);
+        UserDialog profile = new UserDialog(mainFrame, true, user);
         profile.setVisible(true);
         userLabel.setText(user.getFullName());
     }//GEN-LAST:event_userLabelMouseClicked
