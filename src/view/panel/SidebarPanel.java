@@ -1,5 +1,9 @@
 package view.panel;
 
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JButton;
+import util.Colors;
 import view.MainFrame;
 import view.athlete.AthletePanel;
 import view.invoice.InvoicePanel;
@@ -12,10 +16,23 @@ public class SidebarPanel extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
     private LoginFrame loginFrame;
+    private List<JButton> sectionBtns;
 
     public SidebarPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+        sectionBtns = Arrays.asList(athletesBtn, parentsBtn, sportsBtn, routinesBtn, invoicesBtn);
+        setActiveButton(athletesBtn);
+    }
+
+    private void setActiveButton(JButton activeBtn) {
+        for (JButton btn : sectionBtns) {
+            if (btn == activeBtn) {
+                btn.setBackground(Colors.GUNMETAL);
+            } else {
+                btn.setBackground(Colors.BACKGROUND_PRIMARY);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -211,22 +228,27 @@ public class SidebarPanel extends javax.swing.JPanel {
 
     private void athletesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_athletesBtnActionPerformed
         mainFrame.showPanel(new AthletePanel());
+        setActiveButton(athletesBtn);
     }//GEN-LAST:event_athletesBtnActionPerformed
 
     private void parentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentsBtnActionPerformed
         mainFrame.showPanel(new ParentPanel());
+        setActiveButton(parentsBtn);
     }//GEN-LAST:event_parentsBtnActionPerformed
 
     private void sportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sportsBtnActionPerformed
         mainFrame.showPanel(new SportPanel());
+        setActiveButton(sportsBtn);
     }//GEN-LAST:event_sportsBtnActionPerformed
 
     private void routinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routinesBtnActionPerformed
         mainFrame.showPanel(new RoutinePanel());
+        setActiveButton(routinesBtn);
     }//GEN-LAST:event_routinesBtnActionPerformed
 
     private void invoicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicesBtnActionPerformed
         mainFrame.showPanel(new InvoicePanel());
+        setActiveButton(invoicesBtn);
     }//GEN-LAST:event_invoicesBtnActionPerformed
 
 
