@@ -8,11 +8,11 @@ import view.panel.SidebarPanel;
 import view.user.UserPanel;
 
 public class MainFrame extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private User user;
     private int xMouse, yMouse;
-    
+
     public MainFrame(User user) {
         setUndecorated(true);
         initComponents();
@@ -20,13 +20,13 @@ public class MainFrame extends javax.swing.JFrame {
         initPanels();
         setLocationRelativeTo(null);
         showPanel(new UserPanel());
-        
+
     }
-    
+
     public User getUser() {
         return user;
     }
-    
+
     public void showPanel(JPanel newPanel) {
         contentPanel.removeAll();
         contentPanel.setLayout(new BorderLayout());
@@ -34,22 +34,22 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.revalidate();
         contentPanel.repaint();
     }
-    
+
     public void initPanels() {
         sideBar.removeAll();
         sideBar.setLayout(new BorderLayout());
         sideBar.add(new SidebarPanel(this), BorderLayout.CENTER);
         sideBar.revalidate();
         sideBar.repaint();
-        
+
         navBar.removeAll();
         navBar.setLayout(new BorderLayout());
         navBar.add(new NavbarPanel(this), BorderLayout.CENTER);
         navBar.revalidate();
         navBar.repaint();
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -139,29 +139,6 @@ public class MainFrame extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_dragBtnMouseMoved
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        User user = new User("Rick Sánchez", "rick@gmail.com", "rick1234", true);
-        java.awt.EventQueue.invokeLater(() -> new MainFrame(user).setVisible(true));
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
