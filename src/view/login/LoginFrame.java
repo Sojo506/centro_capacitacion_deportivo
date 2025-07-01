@@ -1,6 +1,7 @@
 package view.login;
 
 import java.awt.BorderLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import util.Colors;
 
@@ -24,6 +25,18 @@ public class LoginFrame extends javax.swing.JFrame {
         panelContentRight.add(newPanel, BorderLayout.CENTER);
         panelContentRight.revalidate();
         panelContentRight.repaint();
+    }
+
+    public void setSignIn() {
+        haveAccountLabel.setText("I do not have an account");
+        signBtn.setText("Sign Up");
+        showPanel(new SignIn());
+    }
+
+    public void setSignUp() {
+        haveAccountLabel.setText("I do have an account");
+        signBtn.setText("Sign In");
+        showPanel(new SignUp());
     }
 
     @SuppressWarnings("unchecked")
@@ -200,13 +213,9 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
         if (haveAccountLabel.getText().equals("I do not have an account")) {
-            haveAccountLabel.setText("I do have an account");
-            signBtn.setText("Sign In");
-            showPanel(new SignUp());
+            setSignUp();
         } else {
-            haveAccountLabel.setText("I do not have an account");
-            signBtn.setText("Sign Up");
-            showPanel(new SignIn());
+            setSignIn();
         }
     }//GEN-LAST:event_signBtnActionPerformed
 
