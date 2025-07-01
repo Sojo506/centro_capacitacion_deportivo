@@ -141,6 +141,19 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public int countUsers() {
+        String sql = "SELECT COUNT(*) FROM users WHERE active = true";
+        try (Connection conn = ConnectionDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
     public boolean deactivate(String nickName) {
         String sql = "UPDATE users SET active = false WHERE email = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {

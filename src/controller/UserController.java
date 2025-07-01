@@ -29,11 +29,16 @@ public class UserController {
         return dao.getAll();
     }
 
+    public User findUser(String email) {
+        return dao.findByEmail(email);
+    }
+
+    public int countUsers() {
+        return dao.countUsers();
+    }
+
     public boolean deactivateUser(String email) {
         return dao.deactivate(email);
     }
 
-    public User findUser(String email) {
-        return dao.findByEmail(email);
-    }
 }

@@ -17,5 +17,7 @@ public interface UserDAO {
 
     User findById(int id);
 
+    int countUsers();
+
     boolean deactivate(String nickname);
 }
