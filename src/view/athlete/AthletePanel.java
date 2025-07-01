@@ -3,11 +3,9 @@ package view.athlete;
 import controller.AthleteController;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Athlete;
-import util.Validate;
 import view.MainFrame;
 
 public class AthletePanel extends javax.swing.JPanel {
@@ -62,6 +60,10 @@ public class AthletePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "There was an error.", "404", JOptionPane.ERROR_MESSAGE);
         }
 
+        disableEditDeleteBtn();
+    }
+
+    public void disableEditDeleteBtn() {
         editBtn.setEnabled(false);
         deleteBtn.setEnabled(false);
     }
@@ -130,6 +132,11 @@ public class AthletePanel extends javax.swing.JPanel {
         addBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addBtn.setFocusPainted(false);
         addBtn.setFocusable(false);
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-data.png"))); // NOI18N
         refreshBtn.setBorderPainted(false);
@@ -209,11 +216,16 @@ public class AthletePanel extends javax.swing.JPanel {
         if (row != -1) {
             int id = (int) athletesTable.getValueAt(row, 0);
             Athlete athlete = athleteController.getAthleteById(id);
-            AthleteCardDialog athleteCardDialog = new AthleteCardDialog(mainFrame, true, athlete);
+            AthleteCardDialog athleteCardDialog = new AthleteCardDialog(mainFrame, this, true, athlete);
             athleteCardDialog.setVisible(true);
-            loadTable();
+            disableEditDeleteBtn();
         }
     }//GEN-LAST:event_editBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        AthleteCardDialog athleteCardDialog = new AthleteCardDialog(mainFrame, this, true, null);
+        athleteCardDialog.setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
