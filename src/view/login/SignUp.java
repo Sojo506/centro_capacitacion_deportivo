@@ -149,13 +149,21 @@ public class SignUp extends javax.swing.JPanel {
         boolean isValid = Validate.validateForm(fullName, email, password);
 
         if (isValid) {
-            user = userController.findUser(email);
-            if (user == null) {
-                userController.registerUser(fullName, email, password);
-                JOptionPane.showMessageDialog(this, "User created.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                loginFrame.showPanel(new SignIn());
+            int maxUsers = userController.countUsers();
+
+            if (maxUsers < 3) {
+
+                user = userController.findUser(email);
+                if (user == null) {
+                    userController.registerUser(fullName, email, password);
+                    JOptionPane.showMessageDialog(this, "User created.", "202", JOptionPane.INFORMATION_MESSAGE);
+                    loginFrame.setSignIn();
+                } else {
+                    JOptionPane.showMessageDialog(this, "User already exist.", "404", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "User already exist.", "404", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You can't create more than 3 users.", "405", JOptionPane.ERROR_MESSAGE);
+
             }
         }
 
