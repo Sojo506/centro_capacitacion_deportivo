@@ -82,7 +82,7 @@ public class AthleteDAOImpl implements AthleteDAO {
 
     @Override
     public Athlete findByEmail(String email) {
-        String sql = "SELECT * FROM parents WHERE email = ?";
+        String sql = "SELECT * FROM athletes WHERE email = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
