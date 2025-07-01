@@ -15,6 +15,14 @@ public class Invoice {
     public Invoice() {
     }
 
+    public Invoice(LocalDateTime date, int athleteId, double totalAmount, boolean active, List<Routine> routines) {
+        this.date = date;
+        this.athleteId = athleteId;
+        this.totalAmount = totalAmount;
+        this.active = active;
+        this.routines = routines;
+    }
+
     public Invoice(int id, LocalDateTime date, int athleteId, double totalAmount, boolean active, List<Routine> routines) {
         this.id = id;
         this.date = date;

@@ -7,6 +7,10 @@ public class Athlete extends Person {
     public Athlete() {
     }
 
+    public Athlete(String name, String lastName, String city, String address, String phone, String email, boolean active) {
+        super(name, lastName, city, address, phone, email, active);
+    }
+
     public Athlete(int id, String name, String lastName, String city, String address,
             String phone, String email, boolean active) {
         super(name, lastName, city, address, phone, email, active);

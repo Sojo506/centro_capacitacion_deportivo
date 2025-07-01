@@ -11,6 +11,13 @@ public class Routine {
     public Routine() {
     }
 
+    public Routine(String description, int sportId, int durationMinutes, boolean active) {
+        this.description = description;
+        this.sportId = sportId;
+        this.durationMinutes = durationMinutes;
+        this.active = active;
+    }
+
     public Routine(int id, String description, int sportId, int durationMinutes, boolean active) {
         this.id = id;
         this.description = description;

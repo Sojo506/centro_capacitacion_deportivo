@@ -10,6 +10,12 @@ public class Sport {
     public Sport() {
     }
 
+    public Sport(String name, String characteristics, boolean active) {
+        this.name = name;
+        this.characteristics = characteristics;
+        this.active = active;
+    }
+
     public Sport(int id, String name, String characteristics, boolean active) {
         this.id = id;
         this.name = name;
