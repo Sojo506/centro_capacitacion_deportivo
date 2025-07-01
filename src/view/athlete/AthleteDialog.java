@@ -5,13 +5,13 @@ import javax.swing.JOptionPane;
 import model.Athlete;
 import util.Validate;
 
-public class AthleteCardDialog extends javax.swing.JDialog {
+public class AthleteDialog extends javax.swing.JDialog {
 
     private AthletePanel athletePanel;
     private AthleteController athleteController;
     Athlete athlete;
 
-    public AthleteCardDialog(java.awt.Frame parent, AthletePanel athletePanel, boolean modal, Athlete athlete) {
+    public AthleteDialog(java.awt.Frame parent, AthletePanel athletePanel, boolean modal, Athlete athlete) {
         super(parent, modal);
 
         this.athletePanel = athletePanel;

@@ -217,14 +217,14 @@ public class AthletePanel extends javax.swing.JPanel {
         if (row != -1) {
             int id = (int) athletesTable.getValueAt(row, 0);
             Athlete athlete = athleteController.getAthleteById(id);
-            AthleteCardDialog athleteCardDialog = new AthleteCardDialog(mainFrame, this, true, athlete);
+            AthleteDialog athleteCardDialog = new AthleteDialog(mainFrame, this, true, athlete);
             athleteCardDialog.setVisible(true);
             disableEditDeleteBtn();
         }
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        AthleteCardDialog athleteCardDialog = new AthleteCardDialog(mainFrame, this, true, null);
+        AthleteDialog athleteCardDialog = new AthleteDialog(mainFrame, this, true, null);
         athleteCardDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
