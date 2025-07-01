@@ -91,7 +91,7 @@ public class SportDAOImpl implements SportDAO {
     @Override
     public List<Sport> getAll() {
         List<Sport> list = new ArrayList<>();
-        String sql = "SELECT * FROM sports";
+        String sql = "SELECT * FROM sports WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 Sport s = new Sport(

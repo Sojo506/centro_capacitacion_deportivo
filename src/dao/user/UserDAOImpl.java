@@ -80,7 +80,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT * FROM users WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 User u = new User(

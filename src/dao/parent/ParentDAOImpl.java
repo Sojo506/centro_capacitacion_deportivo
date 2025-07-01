@@ -113,7 +113,7 @@ public class ParentDAOImpl implements ParentDAO {
     @Override
     public List<Parent> getAll() {
         List<Parent> list = new ArrayList<>();
-        String sql = "SELECT * FROM parents";
+        String sql = "SELECT * FROM parents WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new Parent(

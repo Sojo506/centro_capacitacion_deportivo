@@ -96,7 +96,7 @@ public class RoutineDAOImpl implements RoutineDAO {
     @Override
     public List<Routine> getAll() {
         List<Routine> list = new ArrayList<>();
-        String sql = "SELECT * FROM routines";
+        String sql = "SELECT * FROM routines WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new Routine(
