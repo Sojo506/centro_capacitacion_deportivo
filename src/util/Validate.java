@@ -68,13 +68,13 @@ public class Validate {
             return false;
         }
 
-        if (password.length() < 8 || password.length() > 20) {
-            JOptionPane.showMessageDialog(parent, "Password must be between 8 and 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (password.length() < 8 || password.length() > 64) {
+            JOptionPane.showMessageDialog(parent, "Password must be between 8 and 64 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (confirmPassword.length() < 8 || confirmPassword.length() > 20) {
-            JOptionPane.showMessageDialog(parent, "Confirm password must be between 8 and 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (confirmPassword.length() < 8 || confirmPassword.length() > 64) {
+            JOptionPane.showMessageDialog(parent, "Confirm password must be between 8 and 64 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -106,7 +106,7 @@ public class Validate {
             return false;
         }
 
-        if (city.length() > 20 || address.length() > 20) {
+        if (city.length() > 30 || address.length() > 30) {
             JOptionPane.showMessageDialog(parent, "City or address too long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
