@@ -1,7 +1,6 @@
 package util;
 
 import java.awt.Component;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Validate {
@@ -13,8 +12,8 @@ public class Validate {
             return false;
         }
 
-        if (fullName.length() < 3) {
-            JOptionPane.showMessageDialog(null, "Full name must be 3 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (fullName.length() < 3 || fullName.length() > 20) {
+            JOptionPane.showMessageDialog(null, "Full name must be between 3 and 15 characters.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -23,13 +22,18 @@ public class Validate {
             return false;
         }
 
+        if (email.length() > 20) {
+            JOptionPane.showMessageDialog(null, "Email must not exceed 20 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(null, "Password must be 8 characters or more.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (password.length() < 8 || password.length() > 20) {
+            JOptionPane.showMessageDialog(null, "Password must be between 8 and 20 characters.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -49,23 +53,28 @@ public class Validate {
             return false;
         }
 
-        if (fullName.length() < 3) {
-            JOptionPane.showMessageDialog(parent, "Full name must be 3 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (fullName.length() < 3 || fullName.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Full name must be between 3 and 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parent, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(parent, "Password must be 8 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (email.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Email must not exceed 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (confirmPassword.length() < 8) {
-            JOptionPane.showMessageDialog(parent, "Confirm password must be 8 characters or more.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        if (password.length() < 8 || password.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Password must be between 8 and 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (confirmPassword.length() < 8 || confirmPassword.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Confirm password must be between 8 and 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -93,8 +102,28 @@ public class Validate {
             return false;
         }
 
-        if (email.isEmpty() || !email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (name.length() > 15 || lastName.length() > 15) {
+            JOptionPane.showMessageDialog(parent, "Name and last name must not exceed 15 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (city.length() > 20 || address.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "City or address too long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (phone.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Phone number is too long.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(parent, "Please enter a valid email.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (email.length() > 20) {
+            JOptionPane.showMessageDialog(parent, "Email must not exceed 20 characters.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
