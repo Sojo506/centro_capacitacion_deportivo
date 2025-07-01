@@ -107,7 +107,7 @@ public class AthleteDAOImpl implements AthleteDAO {
     @Override
     public List<Athlete> getAll() {
         List<Athlete> list = new ArrayList<>();
-        String sql = "SELECT * FROM athletes";
+        String sql = "SELECT * FROM athletes WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 Athlete athlete = new Athlete(
