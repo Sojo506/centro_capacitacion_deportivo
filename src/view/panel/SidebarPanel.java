@@ -227,27 +227,27 @@ public class SidebarPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void athletesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_athletesBtnActionPerformed
-        mainFrame.showPanel(new AthletePanel());
+        mainFrame.showPanel(new AthletePanel(mainFrame));
         setActiveButton(athletesBtn);
     }//GEN-LAST:event_athletesBtnActionPerformed
 
     private void parentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentsBtnActionPerformed
-        mainFrame.showPanel(new ParentPanel());
+        mainFrame.showPanel(new ParentPanel(mainFrame));
         setActiveButton(parentsBtn);
     }//GEN-LAST:event_parentsBtnActionPerformed
 
     private void sportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sportsBtnActionPerformed
-        mainFrame.showPanel(new SportPanel());
+        mainFrame.showPanel(new SportPanel(mainFrame));
         setActiveButton(sportsBtn);
     }//GEN-LAST:event_sportsBtnActionPerformed
 
     private void routinesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_routinesBtnActionPerformed
-        mainFrame.showPanel(new RoutinePanel());
+        mainFrame.showPanel(new RoutinePanel(mainFrame));
         setActiveButton(routinesBtn);
     }//GEN-LAST:event_routinesBtnActionPerformed
 
     private void invoicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicesBtnActionPerformed
-        mainFrame.showPanel(new InvoicePanel());
+        mainFrame.showPanel(new InvoicePanel(mainFrame));
         setActiveButton(invoicesBtn);
     }//GEN-LAST:event_invoicesBtnActionPerformed
 
