@@ -18,7 +18,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Mostrar ventana
         java.awt.EventQueue.invokeLater(() -> {
             new LoginFrame().setVisible(true);
         });
