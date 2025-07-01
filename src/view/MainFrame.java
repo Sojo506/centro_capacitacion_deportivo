@@ -3,13 +3,12 @@ package view;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import model.User;
+import view.athlete.AthletePanel;
 import view.panel.NavbarPanel;
 import view.panel.SidebarPanel;
-import view.user.UserPanel;
 
 public class MainFrame extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private User user;
     private int xMouse, yMouse;
 
@@ -19,7 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.user = user;
         initPanels();
         setLocationRelativeTo(null);
-        showPanel(new UserPanel());
+        showPanel(new AthletePanel());
 
     }
 
