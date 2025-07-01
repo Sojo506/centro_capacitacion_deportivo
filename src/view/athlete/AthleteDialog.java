@@ -149,7 +149,7 @@ public class AthleteDialog extends javax.swing.JDialog {
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
         titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        titleLabel.setText("Athlete Profile");
+        titleLabel.setText("Athlete Data");
 
         closeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         closeBtn.setBorderPainted(false);
