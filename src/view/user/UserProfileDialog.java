@@ -230,23 +230,18 @@ public class UserProfileDialog extends javax.swing.JDialog {
                 }
 
                 if (canUpdate) {
-                    try {
-                        user.setFullName(name);
-                        user.setEmail(email);
-                        user.setPassword(password);
-                        userController.updateUser(user);
+                    user.setFullName(name);
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    userController.updateUser(user);
 
-                        inputName.setEnabled(false);
-                        inputEmail.setEnabled(false);
-                        inputConfirmPassword.setEnabled(false);
-                        inputPassword.setEnabled(false);
-                        editBtn.setText("Edit");
+                    inputName.setEnabled(false);
+                    inputEmail.setEnabled(false);
+                    inputConfirmPassword.setEnabled(false);
+                    inputPassword.setEnabled(false);
+                    editBtn.setText("Edit");
 
-                        JOptionPane.showMessageDialog(this, "User updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(this, "There was an error, try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+                    JOptionPane.showMessageDialog(this, "User updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
