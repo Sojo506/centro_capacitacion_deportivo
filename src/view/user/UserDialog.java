@@ -211,7 +211,7 @@ public class UserDialog extends javax.swing.JDialog {
             String password = new String(inputPassword.getPassword()).trim();
             String cPassword = new String(inputConfirmPassword.getPassword()).trim();
 
-            boolean isValid = Validate.validateFormProfile(
+            boolean isValid = Validate.validateUserData(
                     this,
                     name,
                     email,
