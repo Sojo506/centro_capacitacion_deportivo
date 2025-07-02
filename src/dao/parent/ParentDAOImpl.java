@@ -10,10 +10,13 @@ import java.util.List;
 public class ParentDAOImpl implements ParentDAO {
 
     @Override
-    public void add(Parent parent) {
+    public int add(Parent parent) {
         String sql = "INSERT INTO parents (name, last_name, city, address, phone, email, active) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        int generatedId = -1;
+
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
             ps.setString(1, parent.getName());
             ps.setString(2, parent.getLastName());
             ps.setString(3, parent.getCity());
@@ -21,10 +24,22 @@ public class ParentDAOImpl implements ParentDAO {
             ps.setString(5, parent.getPhone());
             ps.setString(6, parent.getEmail());
             ps.setBoolean(7, parent.isActive());
-            ps.executeUpdate();
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        generatedId = rs.getInt(1);
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return generatedId;
     }
 
     @Override

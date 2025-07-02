@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ParentDAO {
 
-    void add(Parent parent);
+    int add(Parent parent);
 
     void update(Parent parent);
 

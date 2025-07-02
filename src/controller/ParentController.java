@@ -14,8 +14,8 @@ public class ParentController {
     private ParentDAO parentDAO = new ParentDAOImpl();
     private AthleteDAO athleteDAO = new AthleteDAOImpl();
 
-    public void registerParent(Parent parent) {
-        parentDAO.add(parent);
+    public int registerParent(Parent parent) {
+        return parentDAO.add(parent);
     }
 
     public void updateParent(Parent parent) {
