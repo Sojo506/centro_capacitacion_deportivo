@@ -105,7 +105,7 @@ public class AthleteDialog extends javax.swing.JDialog {
 
                     athleteController.updateAthlete(athlete);
                     athletePanel.loadTable();
-                    JOptionPane.showMessageDialog(this, "User updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Athlete updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
