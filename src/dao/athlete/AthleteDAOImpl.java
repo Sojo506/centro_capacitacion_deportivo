@@ -38,7 +38,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             ps.setString(5, athlete.getPhone());
             ps.setString(6, athlete.getEmail());
             ps.setBoolean(7, athlete.isActive());
-            ps.setInt(8, athlete.getParentId());
+            ps.setObject(8, athlete.getParentId());
             ps.setInt(9, athlete.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -58,7 +58,6 @@ public class AthleteDAOImpl implements AthleteDAO {
         }
     }
 
-    // Dentro de AthleteDAOImpl...
     @Override
     public Athlete findById(int id) {
         String sql = "SELECT * FROM athletes WHERE id = ?";
