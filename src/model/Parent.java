@@ -3,7 +3,6 @@ package model;
 public class Parent extends Person {
 
     private int id;
-    private int athleteId;
 
     public Parent() {
     }
@@ -13,18 +12,12 @@ public class Parent extends Person {
     }
 
     public Parent(int id, String name, String lastName, String city, String address,
-            String phone, String email, boolean active, int athleteId) {
+            String phone, String email, boolean active) {
         super(name, lastName, city, address, phone, email, active);
         this.id = id;
-        this.athleteId = athleteId;
     }
 
     public int getId() {
         return id;
     }
-
-    public int getAthleteId() {
-        return athleteId;
-    }
-
 }
