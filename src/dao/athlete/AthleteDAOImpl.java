@@ -67,7 +67,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             if (rs.next()) {
                 return new Athlete(
                         rs.getInt("id"),
-                        (Integer) rs.getObject("parent_id"),
+                        rs.getInt("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -92,7 +92,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             if (rs.next()) {
                 return new Athlete(
                         rs.getInt("id"),
-                        (Integer) rs.getObject("parent_id"),
+                        rs.getInt("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -116,7 +116,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             while (rs.next()) {
                 Athlete athlete = new Athlete(
                         rs.getInt("id"),
-                        (Integer) rs.getObject("parent_id"),
+                        rs.getInt("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -143,7 +143,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             while (rs.next()) {
                 Athlete athlete = new Athlete(
                         rs.getInt("id"),
-                        (Integer) rs.getObject("parent_id"),
+                        rs.getInt("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -168,7 +168,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             while (rs.next()) {
                 Athlete athlete = new Athlete(
                         rs.getInt("id"),
-                        (Integer) rs.getObject("parent_id"),
+                        rs.getInt("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
