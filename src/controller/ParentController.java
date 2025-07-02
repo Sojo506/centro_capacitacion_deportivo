@@ -14,13 +14,8 @@ public class ParentController {
     private ParentDAO parentDAO = new ParentDAOImpl();
     private AthleteDAO athleteDAO = new AthleteDAOImpl();
 
-    public boolean registerParent(Parent parent) {
-        Athlete a = athleteDAO.findById(parent.getAthleteId());
-        if (a == null) {
-            return false;
-        }
+    public void registerParent(Parent parent) {
         parentDAO.add(parent);
-        return true;
     }
 
     public void updateParent(Parent parent) {
