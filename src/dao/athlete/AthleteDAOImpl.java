@@ -11,7 +11,7 @@ public class AthleteDAOImpl implements AthleteDAO {
 
     @Override
     public void add(Athlete athlete) {
-        String sql = "INSERT INTO athletes (name, last_name, city, address, phone, email, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO athletes (name, last_name, city, address, phone, email, parent_id, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, athlete.getName());
             ps.setString(2, athlete.getLastName());
@@ -19,7 +19,8 @@ public class AthleteDAOImpl implements AthleteDAO {
             ps.setString(4, athlete.getAddress());
             ps.setString(5, athlete.getPhone());
             ps.setString(6, athlete.getEmail());
-            ps.setBoolean(7, athlete.isActive());
+            ps.setObject(7, athlete.getParentId()); // puede ser null
+            ps.setBoolean(8, athlete.isActive());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,6 +57,7 @@ public class AthleteDAOImpl implements AthleteDAO {
         }
     }
 
+    // Dentro de AthleteDAOImpl...
     @Override
     public Athlete findById(int id) {
         String sql = "SELECT * FROM athletes WHERE id = ?";
@@ -65,6 +67,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             if (rs.next()) {
                 return new Athlete(
                         rs.getInt("id"),
+                        (Integer) rs.getObject("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -89,6 +92,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             if (rs.next()) {
                 return new Athlete(
                         rs.getInt("id"),
+                        (Integer) rs.getObject("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -112,6 +116,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             while (rs.next()) {
                 Athlete athlete = new Athlete(
                         rs.getInt("id"),
+                        (Integer) rs.getObject("parent_id"),
                         rs.getString("name"),
                         rs.getString("last_name"),
                         rs.getString("city"),
@@ -127,4 +132,57 @@ public class AthleteDAOImpl implements AthleteDAO {
         }
         return list;
     }
+
+    @Override
+    public List<Athlete> getByParentId(int parentId) {
+        List<Athlete> list = new ArrayList<>();
+        String sql = "SELECT * FROM athletes WHERE parent_id = ? AND active = true";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, parentId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Athlete athlete = new Athlete(
+                        rs.getInt("id"),
+                        (Integer) rs.getObject("parent_id"),
+                        rs.getString("name"),
+                        rs.getString("last_name"),
+                        rs.getString("city"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getBoolean("active")
+                );
+                list.add(athlete);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Athlete> getAvailableAthletes() {
+        List<Athlete> list = new ArrayList<>();
+        String sql = "SELECT * FROM athletes WHERE parent_id IS NULL AND active = true";
+        try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                Athlete athlete = new Athlete(
+                        rs.getInt("id"),
+                        (Integer) rs.getObject("parent_id"),
+                        rs.getString("name"),
+                        rs.getString("last_name"),
+                        rs.getString("city"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getBoolean("active")
+                );
+                list.add(athlete);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

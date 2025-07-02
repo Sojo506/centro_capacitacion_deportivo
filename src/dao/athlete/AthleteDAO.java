@@ -12,8 +12,12 @@ public interface AthleteDAO {
     boolean deactivate(int id);
 
     Athlete findById(int id);
-    
+
     Athlete findByEmail(String email);
+
+    List<Athlete> getByParentId(int parentId);
+
+    List<Athlete> getAvailableAthletes();
 
     List<Athlete> getAll();
 }
