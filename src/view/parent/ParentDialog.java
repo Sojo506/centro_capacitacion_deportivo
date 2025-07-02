@@ -76,16 +76,8 @@ public class ParentDialog extends javax.swing.JDialog {
             } else {
                 Parent p = new Parent(name, lastName, city, address, phone, email, true);
                 int id = parentController.registerParent(p);
-                
 
-                if (selectedAthletes.size() > 0) {
-                    for (int i = 0; i < selectedAthletes.size(); i++) {
-                        Athlete a = selectedAthletes.get(i);
-                        a.setParentId(id);
-
-                        athleteController.updateAthlete(a);
-                    }
-                }
+                linkParentIdAthletes(id);
 
                 parentPanel.loadTable();
                 JOptionPane.showMessageDialog(this, "Parent created.", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -95,6 +87,59 @@ public class ParentDialog extends javax.swing.JDialog {
     }
 
     private void updateParent() {
+        String name = inputName.getText();
+        String lastName = inputLastname.getText();
+        String city = inputCity.getText();
+        String address = inputAddress.getText();
+        String phone = inputPhone.getText();
+        String email = inputEmail.getText();
+
+        boolean isValid = Validate.validateAthleteForm(
+                this,
+                name,
+                lastName,
+                city,
+                address,
+                phone,
+                email
+        );
+
+        if (isValid) {
+
+            boolean canUpdate = true;
+
+            if (!parent.getEmail().equalsIgnoreCase(email)) {
+                if ((parentController.getParentByEmail(email)) != null) {
+                    JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                    canUpdate = false;
+                }
+            }
+
+            if (canUpdate) {
+                int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to update this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    parent.setName(name);
+                    parent.setLastName(lastName);
+                    parent.setCity(city);
+                    parent.setAddress(address);
+                    parent.setPhone(phone);
+                    parent.setEmail(email);
+
+                    parentController.updateParent(parent);
+
+                    unlinkDeselectedAthletes(parent.getId());
+
+                    linkParentIdAthletes(parent.getId());
+
+                    parentPanel.loadTable();
+                    JOptionPane.showMessageDialog(this, "Parent updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+
+        }
 
     }
 
@@ -130,7 +175,6 @@ public class ParentDialog extends javax.swing.JDialog {
             if (parentAthletes.size() > 0) {
 
                 for (int i = 0; i < parentAthletes.size(); i++) {
-                    System.out.println(parentAthletes.get(i).getName());
                     athletes.add(parentAthletes.get(i));
                     selectedAthletes.add(parentAthletes.get(i));
                 }
@@ -149,7 +193,7 @@ public class ParentDialog extends javax.swing.JDialog {
     }
 
     private void initSettings() {
-        setSize(755, 440);
+        setSize(776, 440);
         setLocationRelativeTo(null);
         athletesTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
@@ -212,6 +256,34 @@ public class ParentDialog extends javax.swing.JDialog {
         }
 
         athletesTable.repaint();
+    }
+
+    public void linkParentIdAthletes(int id) {
+        if (selectedAthletes.size() > 0) {
+            for (int i = 0; i < selectedAthletes.size(); i++) {
+                Athlete a = selectedAthletes.get(i);
+                a.setParentId(id);
+
+                athleteController.updateAthlete(a);
+            }
+        }
+    }
+
+    private void unlinkDeselectedAthletes(int parentId) {
+
+        List<Integer> selectedIds = new ArrayList<>();
+        for (Athlete a : selectedAthletes) {
+            selectedIds.add(a.getId());
+        }
+
+        List<Athlete> currentAssigned = athleteController.getByParentId(parentId);
+
+        for (Athlete a : currentAssigned) {
+            if (!selectedIds.contains(a.getId())) {
+                a.setParentId(null);
+                athleteController.updateAthlete(a);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -279,6 +351,12 @@ public class ParentDialog extends javax.swing.JDialog {
 
         lastnameLabel.setText("Last name:");
 
+        inputLastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputLastnameActionPerformed(evt);
+            }
+        });
+
         inputName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNameActionPerformed(evt);
@@ -329,26 +407,32 @@ public class ParentDialog extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressLabel)
-                            .addComponent(emailLabel)
-                            .addComponent(phoneLabel)
-                            .addComponent(cityLabel)
-                            .addComponent(nameLabel)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cancelBtn)
-                                    .addGap(129, 129, 129)
-                                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputCity, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cancelBtn)
+                                .addGap(129, 129, 129)
+                                .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addressLabel)
+                                    .addComponent(emailLabel)
+                                    .addComponent(phoneLabel)
+                                    .addComponent(cityLabel)
+                                    .addComponent(nameLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lastnameLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
+                                .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputCity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(24, 24, 24)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -442,6 +526,10 @@ public class ParentDialog extends javax.swing.JDialog {
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
+
+    private void inputLastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputLastnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputLastnameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
