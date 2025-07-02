@@ -11,8 +11,8 @@ public class ParentDAOImpl implements ParentDAO {
 
     @Override
     public void add(Parent parent) {
-        String sql = "INSERT INTO parents (name, last_name, city, address, phone, email, athlete_id, active) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO parents (name, last_name, city, address, phone, email, active) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, parent.getName());
             ps.setString(2, parent.getLastName());
@@ -20,8 +20,7 @@ public class ParentDAOImpl implements ParentDAO {
             ps.setString(4, parent.getAddress());
             ps.setString(5, parent.getPhone());
             ps.setString(6, parent.getEmail());
-            ps.setInt(7, parent.getAthleteId());
-            ps.setBoolean(8, parent.isActive());
+            ps.setBoolean(7, parent.isActive());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,7 +29,7 @@ public class ParentDAOImpl implements ParentDAO {
 
     @Override
     public void update(Parent parent) {
-        String sql = "UPDATE parents SET name=?, last_name=?, city=?, address=?, phone=?, email=?, athlete_id=?, active=? "
+        String sql = "UPDATE parents SET name=?, last_name=?, city=?, address=?, phone=?, email=?, active=? "
                 + "WHERE id=?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, parent.getName());
@@ -39,9 +38,8 @@ public class ParentDAOImpl implements ParentDAO {
             ps.setString(4, parent.getAddress());
             ps.setString(5, parent.getPhone());
             ps.setString(6, parent.getEmail());
-            ps.setInt(7, parent.getAthleteId());
-            ps.setBoolean(8, parent.isActive());
-            ps.setInt(9, parent.getId());
+            ps.setBoolean(7, parent.isActive());
+            ps.setInt(8, parent.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,8 +73,7 @@ public class ParentDAOImpl implements ParentDAO {
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getString("email"),
-                        rs.getBoolean("active"),
-                        rs.getInt("athlete_id")
+                        rs.getBoolean("active")
                 );
             }
         } catch (SQLException e) {
@@ -100,8 +97,7 @@ public class ParentDAOImpl implements ParentDAO {
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getString("email"),
-                        rs.getBoolean("active"),
-                        rs.getInt("athlete_id")
+                        rs.getBoolean("active")
                 );
             }
         } catch (SQLException e) {
@@ -124,8 +120,7 @@ public class ParentDAOImpl implements ParentDAO {
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getString("email"),
-                        rs.getBoolean("active"),
-                        rs.getInt("athlete_id")
+                        rs.getBoolean("active")
                 ));
             }
         } catch (SQLException e) {
