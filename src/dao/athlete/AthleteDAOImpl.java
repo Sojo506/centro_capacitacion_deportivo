@@ -29,7 +29,7 @@ public class AthleteDAOImpl implements AthleteDAO {
 
     @Override
     public void update(Athlete athlete) {
-        String sql = "UPDATE athletes SET name=?, last_name=?, city=?, address=?, phone=?, email=?, active=? WHERE id=?";
+        String sql = "UPDATE athletes SET name=?, last_name=?, city=?, address=?, phone=?, email=?, active=?, parent_id=? WHERE id=?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, athlete.getName());
             ps.setString(2, athlete.getLastName());
@@ -38,7 +38,8 @@ public class AthleteDAOImpl implements AthleteDAO {
             ps.setString(5, athlete.getPhone());
             ps.setString(6, athlete.getEmail());
             ps.setBoolean(7, athlete.isActive());
-            ps.setInt(8, athlete.getId());
+            ps.setInt(8, athlete.getParentId());
+            ps.setInt(9, athlete.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
