@@ -7,6 +7,8 @@ public class Colors {
     // Colors
     public static final Color RED = new Color(191, 26, 47);  // #BF1A2F
     public static final Color GUNMETAL = new Color(45, 49, 66);  // #2D3142
+    public static final Color WHITE = new Color(255, 255, 255);  // #ffffff
+    public static final Color BLACK = new Color(0, 0, 0);  // #000000
 
     // Backgrounds
     public static final Color BACKGROUND_PRIMARY = new Color(38, 103, 255);  // #2667FF
