@@ -10,7 +10,8 @@ CREATE TABLE users (
     active TINYINT(1) DEFAULT 1
 );
 
-CREATE TABLE athletes (
+
+CREATE TABLE parents (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -21,7 +22,7 @@ CREATE TABLE athletes (
     active TINYINT(1) DEFAULT 1
 );
 
-CREATE TABLE parents (
+CREATE TABLE athletes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -29,9 +30,11 @@ CREATE TABLE parents (
     address VARCHAR(100),
     phone VARCHAR(20),
     email VARCHAR(100) NOT NULL UNIQUE,
-    athlete_id INT NOT NULL,
+    parent_id INT NULL,
     active TINYINT(1) DEFAULT 1,
-    FOREIGN KEY (athlete_id) REFERENCES athletes(id)
+    FOREIGN KEY (parent_id) REFERENCES parents(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE sports (
