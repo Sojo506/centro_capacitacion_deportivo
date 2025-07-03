@@ -1,10 +1,12 @@
 package view.parent;
 
+import controller.AthleteController;
 import controller.ParentController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Athlete;
 import model.Parent;
 import view.MainFrame;
 
@@ -13,6 +15,7 @@ public class ParentPanel extends javax.swing.JPanel {
     private MainFrame mainFrame;
     private List<Parent> parents;
     private ParentController parentController = new ParentController();
+    private AthleteController athleteController = new AthleteController();
 
     public ParentPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -213,8 +216,16 @@ public class ParentPanel extends javax.swing.JPanel {
             int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 int id = (int) parentsTable.getValueAt(row, 0);
-                parentController.deactivateParent(id);
-                loadTable();
+                List<Athlete> parentAthletes = athleteController.getByParentId(id);
+
+                if (parentAthletes.size() > 0) {
+                    JOptionPane.showMessageDialog(this, "You can't delete this parent because has athletes.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    parentController.deactivateParent(id);
+                    JOptionPane.showMessageDialog(this, "Athlete deleted.", "Success", JOptionPane.ERROR_MESSAGE);
+                    loadTable();
+                }
+
             }
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
