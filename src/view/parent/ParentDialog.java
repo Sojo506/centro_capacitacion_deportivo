@@ -58,7 +58,7 @@ public class ParentDialog extends javax.swing.JDialog {
         String phone = inputPhone.getText();
         String email = inputEmail.getText();
 
-        boolean isValid = Validate.validateAthleteForm(
+        boolean isValid = Validate.validateAthleteParentForm(
                 this,
                 name,
                 lastName,
@@ -94,7 +94,7 @@ public class ParentDialog extends javax.swing.JDialog {
         String phone = inputPhone.getText();
         String email = inputEmail.getText();
 
-        boolean isValid = Validate.validateAthleteForm(
+        boolean isValid = Validate.validateAthleteParentForm(
                 this,
                 name,
                 lastName,
@@ -411,19 +411,6 @@ public class ParentDialog extends javax.swing.JDialog {
                                 .addComponent(cancelBtn)
                                 .addGap(129, 129, 129)
                                 .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addressLabel)
-                                    .addComponent(emailLabel)
-                                    .addComponent(phoneLabel)
-                                    .addComponent(cityLabel)
-                                    .addComponent(nameLabel))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lastnameLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,7 +418,19 @@ public class ParentDialog extends javax.swing.JDialog {
                                     .addComponent(inputCity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(inputAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(inputPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addressLabel)
+                                    .addComponent(emailLabel)
+                                    .addComponent(phoneLabel)
+                                    .addComponent(cityLabel)
+                                    .addComponent(nameLabel)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lastnameLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(24, 24, 24)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -86,7 +86,7 @@ public class Validate {
         return true;
     }
 
-    public static boolean validateAthleteForm(
+    public static boolean validateAthleteParentForm(
             Component parent,
             String name,
             String lastName,

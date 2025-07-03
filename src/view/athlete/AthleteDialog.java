@@ -40,7 +40,7 @@ public class AthleteDialog extends javax.swing.JDialog {
         String phone = inputPhone.getText();
         String email = inputEmail.getText();
 
-        boolean isValid = Validate.validateAthleteForm(
+        boolean isValid = Validate.validateAthleteParentForm(
                 this,
                 name,
                 lastName,
@@ -73,7 +73,7 @@ public class AthleteDialog extends javax.swing.JDialog {
         String phone = inputPhone.getText();
         String email = inputEmail.getText();
 
-        boolean isValid = Validate.validateAthleteForm(
+        boolean isValid = Validate.validateAthleteParentForm(
                 this,
                 name,
                 lastName,
