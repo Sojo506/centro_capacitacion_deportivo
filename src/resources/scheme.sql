@@ -45,7 +45,7 @@ CREATE TABLE routines (
 
 CREATE TABLE sports (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
     characteristics TEXT,
     routine_id INT NULL,
     active TINYINT(1) DEFAULT 1,
