@@ -52,7 +52,7 @@ public class ParentDialog extends javax.swing.JDialog {
 
     private void createParent() {
         String name = inputName.getText();
-        String lastName = inputLastname.getText();
+        String lastName = inputLastName.getText();
         String city = inputCity.getText();
         String address = inputAddress.getText();
         String phone = inputPhone.getText();
@@ -88,7 +88,7 @@ public class ParentDialog extends javax.swing.JDialog {
 
     private void updateParent() {
         String name = inputName.getText();
-        String lastName = inputLastname.getText();
+        String lastName = inputLastName.getText();
         String city = inputCity.getText();
         String address = inputAddress.getText();
         String phone = inputPhone.getText();
@@ -145,7 +145,7 @@ public class ParentDialog extends javax.swing.JDialog {
 
     private void fillInputs() {
         inputName.setText(parent.getName());
-        inputLastname.setText(parent.getLastName());
+        inputLastName.setText(parent.getLastName());
         inputCity.setText(parent.getCity());
         inputAddress.setText(parent.getAddress());
         inputPhone.setText(parent.getPhone());
@@ -303,13 +303,13 @@ public class ParentDialog extends javax.swing.JDialog {
         inputCity = new javax.swing.JTextField();
         cityLabel = new javax.swing.JLabel();
         lastnameLabel = new javax.swing.JLabel();
-        inputLastname = new javax.swing.JTextField();
         inputName = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
         closeBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         athletesTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        titleLabel2 = new javax.swing.JLabel();
+        inputLastName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -351,12 +351,6 @@ public class ParentDialog extends javax.swing.JDialog {
 
         lastnameLabel.setText("Last name:");
 
-        inputLastname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputLastnameActionPerformed(evt);
-            }
-        });
-
         inputName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputNameActionPerformed(evt);
@@ -391,9 +385,9 @@ public class ParentDialog extends javax.swing.JDialog {
         athletesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(athletesTable);
 
-        jLabel1.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/triathlon.png"))); // NOI18N
-        jLabel1.setText("Select Athlete");
+        titleLabel2.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
+        titleLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/triathlon.png"))); // NOI18N
+        titleLabel2.setText("Select Athlete");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -410,32 +404,31 @@ public class ParentDialog extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(cancelBtn)
                                 .addGap(129, 129, 129)
-                                .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputCity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addressLabel)
                                     .addComponent(emailLabel)
                                     .addComponent(phoneLabel)
                                     .addComponent(cityLabel)
-                                    .addComponent(nameLabel)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lastnameLabel)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(24, 24, 24)))
+                                    .addComponent(nameLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lastnameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(inputLastName)
+                                    .addComponent(inputName, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(inputCity, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(inputAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(inputPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                                .addGap(19, 19, 19)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(titleLabel2)
                         .addGap(87, 87, 87)
                         .addComponent(closeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -447,7 +440,7 @@ public class ParentDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(titleLabel)
-                        .addComponent(jLabel1))
+                        .addComponent(titleLabel2))
                     .addComponent(closeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -458,7 +451,7 @@ public class ParentDialog extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lastnameLabel)
-                            .addComponent(inputLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cityLabel)
@@ -500,7 +493,7 @@ public class ParentDialog extends javax.swing.JDialog {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         if (parent == null) {
             inputName.setText("");
-            inputLastname.setText("");
+            inputLastName.setText("");
             inputCity.setText("");
             inputAddress.setText("");
             inputPhone.setText("");
@@ -526,10 +519,6 @@ public class ParentDialog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
-    private void inputLastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputLastnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputLastnameActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLabel;
@@ -541,10 +530,9 @@ public class ParentDialog extends javax.swing.JDialog {
     private javax.swing.JTextField inputAddress;
     private javax.swing.JTextField inputCity;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputLastname;
+    private javax.swing.JTextField inputLastName;
     private javax.swing.JTextField inputName;
     private javax.swing.JTextField inputPhone;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lastnameLabel;
@@ -552,5 +540,6 @@ public class ParentDialog extends javax.swing.JDialog {
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JButton saveBtn;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel titleLabel2;
     // End of variables declaration//GEN-END:variables
 }
