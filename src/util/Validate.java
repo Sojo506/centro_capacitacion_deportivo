@@ -128,4 +128,29 @@ public class Validate {
 
         return true;
     }
+
+    public static boolean validateSport(String name, String characteristics) {
+
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (name.length() < 3 || name.length() > 20) {
+            JOptionPane.showMessageDialog(null, "Full name must be between 3 and 20 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (characteristics.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Characteristics cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (characteristics.length() < 10 || characteristics.length() > 100) {
+            JOptionPane.showMessageDialog(null, "Characteristics must be between 10 and 100 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 }
