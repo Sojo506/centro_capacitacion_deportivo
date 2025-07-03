@@ -15,5 +15,9 @@ public interface SportDAO {
 
     Sport findByName(String name);
 
+    List<Sport> getByRoutineId(int routineId);
+
+    List<Sport> getAvailableSports();
+
     List<Sport> getAll();
 }
