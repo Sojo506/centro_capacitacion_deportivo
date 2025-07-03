@@ -90,6 +90,7 @@ public class AthletePanel extends javax.swing.JPanel {
 
             }
         ));
+        athletesTable.getTableHeader().setReorderingAllowed(false);
         athletesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 athletesTableMouseClicked(evt);
