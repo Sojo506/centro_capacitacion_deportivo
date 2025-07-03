@@ -14,6 +14,7 @@ public class Sport {
     public Sport(String name, String characteristics, boolean active) {
         this.name = name;
         this.characteristics = characteristics;
+        routineId = null;
         this.active = active;
     }
 
