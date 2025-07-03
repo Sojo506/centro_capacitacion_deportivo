@@ -129,7 +129,7 @@ public class Validate {
         return true;
     }
 
-    public static boolean validateSport(String name, String characteristics) {
+    public static boolean validateSport(Component parent, String name, String characteristics) {
 
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
