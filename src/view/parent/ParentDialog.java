@@ -194,7 +194,7 @@ public class ParentDialog extends javax.swing.JDialog {
 
     private void initSettings() {
         setSize(776, 440);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parentPanel);
         athletesTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 

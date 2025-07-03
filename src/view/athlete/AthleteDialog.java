@@ -21,7 +21,7 @@ public class AthleteDialog extends javax.swing.JDialog {
         initComponents();
 
         setSize(300, 400);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(athletePanel);
 
         if (athlete == null) {
             saveBtn.setText("Create");
