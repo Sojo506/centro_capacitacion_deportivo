@@ -57,11 +57,15 @@ public class SportDAOImpl implements SportDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                Integer routineId = rs.getInt("routine_id");
+                if (rs.wasNull()) {
+                    routineId = null;
+                }
                 return new Sport(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("characteristics"),
-                        rs.getInt("routine_id"),
+                        routineId,
                         rs.getBoolean("active")
                 );
             }
@@ -78,11 +82,15 @@ public class SportDAOImpl implements SportDAO {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                Integer routineId = rs.getInt("routine_id");
+                if (rs.wasNull()) {
+                    routineId = null;
+                }
                 return new Sport(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("characteristics"),
-                        rs.getInt("routine_id"),
+                        routineId,
                         rs.getBoolean("active")
                 );
             }
@@ -98,11 +106,15 @@ public class SportDAOImpl implements SportDAO {
         String sql = "SELECT * FROM sports WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
+                Integer routineId = rs.getInt("routine_id");
+                if (rs.wasNull()) {
+                    routineId = null;
+                }
                 Sport s = new Sport(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("characteristics"),
-                        rs.getInt("routine_id"),
+                        routineId,
                         rs.getBoolean("active")
                 );
                 list.add(s);
@@ -121,11 +133,15 @@ public class SportDAOImpl implements SportDAO {
             ps.setInt(1, routineId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Integer routineIdAux = rs.getInt("routine_id");
+                if (rs.wasNull()) {
+                    routineIdAux = null;
+                }
                 Sport athlete = new Sport(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("characteristics"),
-                        rs.getInt("routine_id"),
+                        routineIdAux,
                         rs.getBoolean("active")
                 );
                 list.add(athlete);
@@ -142,11 +158,15 @@ public class SportDAOImpl implements SportDAO {
         String sql = "SELECT * FROM sports WHERE routine_id IS NULL AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
+                Integer routineId = rs.getInt("routine_id");
+                if (rs.wasNull()) {
+                    routineId = null;
+                }
                 Sport sport = new Sport(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("characteristics"),
-                        rs.getInt("routine_id"),
+                        routineId,
                         rs.getBoolean("active")
                 );
                 list.add(sport);
