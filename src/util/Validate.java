@@ -146,8 +146,8 @@ public class Validate {
             return false;
         }
 
-        if (characteristics.length() < 10 || characteristics.length() > 100) {
-            JOptionPane.showMessageDialog(null, "Characteristics must be between 10 and 100 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (characteristics.length() < 10 || characteristics.length() > 300) {
+            JOptionPane.showMessageDialog(null, "Characteristics must be between 10 and 300 characters.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
