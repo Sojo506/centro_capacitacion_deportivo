@@ -19,7 +19,7 @@ public class Athlete extends Person {
         parentId = null;
     }
 
-    public Athlete(int id, int parentId, String name, String lastName, String city, String address, String phone, String email, boolean active) {
+    public Athlete(int id, Integer parentId, String name, String lastName, String city, String address, String phone, String email, boolean active) {
         super(name, lastName, city, address, phone, email, active);
         this.id = id;
         this.parentId = parentId;
