@@ -209,7 +209,7 @@ public class AthletePanel extends javax.swing.JPanel {
                 Athlete a = athleteController.getAthleteById(id);
                 boolean canDelete = true;
 
-                if (a.getParentId() != null) { 
+                if (a.getParentId() != 0) { 
                     canDelete = false;
                 }
 
