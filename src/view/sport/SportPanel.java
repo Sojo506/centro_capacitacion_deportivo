@@ -4,6 +4,7 @@ import controller.SportController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Sport;
 import view.MainFrame;
@@ -50,6 +51,8 @@ public class SportPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "There was an error.", "404", JOptionPane.ERROR_MESSAGE);
         }
+
+        sportsTable.getColumnModel().getColumn(2).setPreferredWidth(600);
 
         disableEditDeleteBtn();
     }
