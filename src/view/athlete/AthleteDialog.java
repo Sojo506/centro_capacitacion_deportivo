@@ -33,12 +33,12 @@ public class AthleteDialog extends javax.swing.JDialog {
     }
 
     private void createAthlete() {
-        String name = inputName.getText();
-        String lastName = inputLastname.getText();
-        String city = inputCity.getText();
-        String address = inputAddress.getText();
-        String phone = inputPhone.getText();
-        String email = inputEmail.getText();
+        String name = inputName.getText().trim();
+        String lastName = inputLastname.getText().trim();
+        String city = inputCity.getText().trim();
+        String address = inputAddress.getText().trim();
+        String phone = inputPhone.getText().trim();
+        String email = inputEmail.getText().trim();
 
         boolean isValid = Validate.validateAthleteParentForm(
                 this,
@@ -66,12 +66,12 @@ public class AthleteDialog extends javax.swing.JDialog {
     }
 
     private void updateAthlete() {
-        String name = inputName.getText();
-        String lastName = inputLastname.getText();
-        String city = inputCity.getText();
-        String address = inputAddress.getText();
-        String phone = inputPhone.getText();
-        String email = inputEmail.getText();
+        String name = inputName.getText().trim();
+        String lastName = inputLastname.getText().trim();
+        String city = inputCity.getText().trim();
+        String address = inputAddress.getText().trim();
+        String phone = inputPhone.getText().trim();
+        String email = inputEmail.getText().trim();
 
         boolean isValid = Validate.validateAthleteParentForm(
                 this,
