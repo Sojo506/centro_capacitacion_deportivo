@@ -20,8 +20,7 @@ public class AthletePanel extends javax.swing.JPanel {
         athletes = new ArrayList<>();
 
         loadTable();
-        editBtn.setEnabled(false);
-        deleteBtn.setEnabled(false);
+        disableEditDeleteBtn();
     }
 
     public void loadTable() {
