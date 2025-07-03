@@ -5,14 +5,12 @@ import dao.parent.ParentDAOImpl;
 import dao.athlete.AthleteDAO;
 import dao.athlete.AthleteDAOImpl;
 import model.Parent;
-import model.Athlete;
 
 import java.util.List;
 
 public class ParentController {
 
     private ParentDAO parentDAO = new ParentDAOImpl();
-    private AthleteDAO athleteDAO = new AthleteDAOImpl();
 
     public int registerParent(Parent parent) {
         return parentDAO.add(parent);
