@@ -213,10 +213,9 @@ public class SportPanel extends javax.swing.JPanel {
             if (confirmacion == JOptionPane.YES_OPTION) {
                 int id = (int) sportsTable.getValueAt(row, 0);
                 Sport a = sportController.getSportById(id);
-                System.out.println(a.getRoutineId());
                 boolean canDelete = true;
 
-                if (a.getRoutineId() != 0) {
+                if (a.getRoutineId() != null) {
                     canDelete = false;
                 }
 
