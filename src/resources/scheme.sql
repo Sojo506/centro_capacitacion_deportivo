@@ -10,7 +10,6 @@ CREATE TABLE users (
     active TINYINT(1) DEFAULT 1
 );
 
-
 CREATE TABLE parents (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -37,20 +36,22 @@ CREATE TABLE athletes (
         ON UPDATE CASCADE
 );
 
+CREATE TABLE routines (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(200) NOT NULL,
+    duration_minutes INT,
+    active TINYINT(1) DEFAULT 1
+);
+
 CREATE TABLE sports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
     characteristics TEXT,
-    active TINYINT(1) DEFAULT 1
-);
-
-CREATE TABLE routines (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(200) NOT NULL,
-    sport_id INT NOT NULL,
-    duration_minutes INT,
+    routine_id INT NULL,
     active TINYINT(1) DEFAULT 1,
-    FOREIGN KEY (sport_id) REFERENCES sports(id)
+    FOREIGN KEY (routine_id) REFERENCES routines(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE invoices (
