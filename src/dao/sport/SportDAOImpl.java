@@ -52,7 +52,7 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public Sport findById(int id) {
-        String sql = "SELECT * FROM sports WHERE id = ?";
+        String sql = "SELECT * FROM sports WHERE id = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -73,7 +73,7 @@ public class SportDAOImpl implements SportDAO {
 
     @Override
     public Sport findByName(String name) {
-        String sql = "SELECT * FROM sports WHERE name = ?";
+        String sql = "SELECT * FROM sports WHERE name = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
