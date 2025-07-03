@@ -29,6 +29,10 @@ public class SportController {
     public Sport getSportById(int id) {
         return dao.findById(id);
     }
+    
+    public Sport getSportByName(String name) {
+        return dao.findByName(name);
+    }
 
     public List<Sport> getByRoutineId(int parentId) {
         return dao.getByRoutineId(parentId);
