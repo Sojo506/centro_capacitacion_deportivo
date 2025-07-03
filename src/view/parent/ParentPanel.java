@@ -234,8 +234,8 @@ public class ParentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        ParentDialog athleteCardDialog = new ParentDialog(mainFrame, this, true, null);
-        athleteCardDialog.setVisible(true);
+        ParentDialog parentDialog = new ParentDialog(mainFrame, this, true, null);
+        parentDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed

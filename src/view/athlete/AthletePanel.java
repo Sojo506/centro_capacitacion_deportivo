@@ -232,8 +232,8 @@ public class AthletePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        AthleteDialog athleteCardDialog = new AthleteDialog(mainFrame, this, true, null);
-        athleteCardDialog.setVisible(true);
+        AthleteDialog athleteDialog = new AthleteDialog(mainFrame, this, true, null);
+        athleteDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
 
