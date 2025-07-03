@@ -206,15 +206,19 @@ public class AthletePanel extends javax.swing.JPanel {
             int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 int id = (int) athletesTable.getValueAt(row, 0);
+                Athlete a = athleteController.getAthleteById(id);
+                boolean canDelete = true;
 
-                List<Athlete> parentAthletes = athleteController.getByParentId(id);
+                if (a.getParentId() != null) { 
+                    canDelete = false;
+                }
 
-                if (parentAthletes.size() > 0) {
-                    JOptionPane.showMessageDialog(this, "You can't delete this athlete because has a parent.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                if (canDelete) {
                     athleteController.deactivateAthlete(id);
                     JOptionPane.showMessageDialog(this, "Athlete deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "You can't delete this athlete because is associated with a parent.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
