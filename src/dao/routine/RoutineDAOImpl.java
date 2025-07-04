@@ -11,7 +11,7 @@ public class RoutineDAOImpl implements RoutineDAO {
 
     @Override
     public int add(Routine routine) {
-        String sql = "INSERT INTO routines (description, sport_id, duration_minutes, active) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO routines (description, duration_minutes, active) VALUES (?, ?, ?)";
         int generatedId = -1;
         
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -39,14 +39,13 @@ public class RoutineDAOImpl implements RoutineDAO {
 
     @Override
     public void update(Routine routine) {
-        String sql = "UPDATE routines SET description=?, sport_id=?, duration_minutes=?, active=? WHERE id=?";
+        String sql = "UPDATE routines SET description=?, duration_minutes=?, active=? WHERE id=?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, routine.getDescription());
             ps.setInt(2, routine.getDurationMinutes());
             ps.setBoolean(3, routine.isActive());
             ps.setInt(4, routine.getId());
             ps.executeUpdate();
-            System.out.println("Rutina updateada: " + routine.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
