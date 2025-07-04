@@ -76,6 +76,8 @@ public class RoutinePanel extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(74, 74, 72));
+
         routinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
