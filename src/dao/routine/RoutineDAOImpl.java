@@ -10,17 +10,31 @@ import java.util.List;
 public class RoutineDAOImpl implements RoutineDAO {
 
     @Override
-    public void add(Routine routine) {
-        String sql = "INSERT INTO routines (description, sport_id, duration_minutes, active) VALUES (?, ?, ?, ?)";
+    public int add(Routine routine) {
+        String sql = "INSERT INTO routines (description, sport_id, duration_minutes, active) VALUES (?, ?, ?)";
+        int generatedId = -1;
+        
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, routine.getDescription());
-            ps.setInt(2, routine.getSportId());
-            ps.setInt(3, routine.getDurationMinutes());
-            ps.setBoolean(4, routine.isActive());
+            ps.setInt(2, routine.getDurationMinutes());
+            ps.setBoolean(3, routine.isActive());
             ps.executeUpdate();
+            
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        generatedId = rs.getInt(1);
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        return generatedId;
     }
 
     @Override
@@ -28,10 +42,9 @@ public class RoutineDAOImpl implements RoutineDAO {
         String sql = "UPDATE routines SET description=?, sport_id=?, duration_minutes=?, active=? WHERE id=?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, routine.getDescription());
-            ps.setInt(2, routine.getSportId());
-            ps.setInt(3, routine.getDurationMinutes());
-            ps.setBoolean(4, routine.isActive());
-            ps.setInt(5, routine.getId());
+            ps.setInt(2, routine.getDurationMinutes());
+            ps.setBoolean(3, routine.isActive());
+            ps.setInt(4, routine.getId());
             ps.executeUpdate();
             System.out.println("Rutina updateada: " + routine.getId());
         } catch (SQLException e) {
@@ -61,7 +74,6 @@ public class RoutineDAOImpl implements RoutineDAO {
                 return new Routine(
                         rs.getInt("id"),
                         rs.getString("description"),
-                        rs.getInt("sport_id"),
                         rs.getInt("duration_minutes"),
                         rs.getBoolean("active")
                 );
@@ -82,7 +94,6 @@ public class RoutineDAOImpl implements RoutineDAO {
                 return new Routine(
                         rs.getInt("id"),
                         description,
-                        rs.getInt("sport_id"),
                         rs.getInt("duration_minutes"),
                         rs.getBoolean("active")
                 );
@@ -102,29 +113,6 @@ public class RoutineDAOImpl implements RoutineDAO {
                 list.add(new Routine(
                         rs.getInt("id"),
                         rs.getString("description"),
-                        rs.getInt("sport_id"),
-                        rs.getInt("duration_minutes"),
-                        rs.getBoolean("active")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    @Override
-    public List<Routine> getBySportId(int sportId) {
-        List<Routine> list = new ArrayList<>();
-        String sql = "SELECT * FROM routines WHERE sport_id = ? AND active = true";
-        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, sportId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Routine(
-                        rs.getInt("id"),
-                        rs.getString("description"),
-                        sportId,
                         rs.getInt("duration_minutes"),
                         rs.getBoolean("active")
                 ));

@@ -2,32 +2,16 @@ package controller;
 
 import dao.routine.RoutineDAO;
 import dao.routine.RoutineDAOImpl;
-import dao.sport.SportDAO;
-import dao.sport.SportDAOImpl;
 import model.Routine;
-import model.Sport;
 
 import java.util.List;
 
 public class RoutineController {
 
     private RoutineDAO routineDAO = new RoutineDAOImpl();
-    private SportDAO sportDAO = new SportDAOImpl();
 
-    public boolean registerRoutine(Routine r) {
-        // Validar si el deporte existe
-        Sport s = sportDAO.findById(r.getSportId());
-        if (s == null) {
-            return false;
-        }
-
-        // Validar que no exista una rutina con la misma descripción
-        if (routineDAO.findByDescription(r.getDescription()) != null) {
-            return false;
-        }
-
-        routineDAO.add(r);
-        return true;
+    public int registerRoutine(Routine r) {
+        return routineDAO.add(r);
     }
 
     public void updateRoutine(Routine r) {
@@ -41,12 +25,14 @@ public class RoutineController {
     public Routine getRoutineById(int id) {
         return routineDAO.findById(id);
     }
+    
+     public Routine getRoutineByDescription(String description) {
+        return routineDAO.findByDescription(description);
+    }
+
 
     public List<Routine> listRoutines() {
         return routineDAO.getAll();
     }
 
-    public List<Routine> getRoutinesBySportId(int sportId) {
-        return routineDAO.getBySportId(sportId);
-    }
 }

@@ -4,24 +4,21 @@ public class Routine {
 
     private int id;
     private String description;
-    private int sportId;
     private int durationMinutes;
     private boolean active;
 
     public Routine() {
     }
 
-    public Routine(String description, int sportId, int durationMinutes, boolean active) {
+    public Routine(String description, int durationMinutes, boolean active) {
         this.description = description;
-        this.sportId = sportId;
         this.durationMinutes = durationMinutes;
         this.active = active;
     }
 
-    public Routine(int id, String description, int sportId, int durationMinutes, boolean active) {
+    public Routine(int id, String description, int durationMinutes, boolean active) {
         this.id = id;
         this.description = description;
-        this.sportId = sportId;
         this.durationMinutes = durationMinutes;
         this.active = active;
     }
@@ -36,14 +33,6 @@ public class Routine {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getSportId() {
-        return sportId;
-    }
-
-    public void setSportId(int sportId) {
-        this.sportId = sportId;
     }
 
     public int getDurationMinutes() {

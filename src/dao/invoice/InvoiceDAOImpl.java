@@ -85,7 +85,6 @@ public class InvoiceDAOImpl implements InvoiceDAO {
                 routines.add(new Routine(
                         rs.getInt("id"),
                         rs.getString("description"),
-                        rs.getInt("sport_id"),
                         rs.getInt("duration_minutes"),
                         rs.getBoolean("active")
                 ));

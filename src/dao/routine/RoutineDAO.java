@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface RoutineDAO {
 
-    void add(Routine routine);
+    int add(Routine routine);
 
     void update(Routine routine);
 
@@ -16,6 +16,4 @@ public interface RoutineDAO {
     Routine findByDescription(String description);
 
     List<Routine> getAll();
-
-    List<Routine> getBySportId(int sportId);
 }
