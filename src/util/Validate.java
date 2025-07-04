@@ -146,11 +146,43 @@ public class Validate {
             return false;
         }
 
-        if (characteristics.length() < 10 || characteristics.length() > 300) {
-            JOptionPane.showMessageDialog(null, "Characteristics must be between 10 and 300 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (characteristics.length() < 10 || characteristics.length() > 200) {
+            JOptionPane.showMessageDialog(null, "Characteristics must be between 10 and 200 characters.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         return true;
     }
+
+    public static boolean validateRoutine(Component parent, String description, String duration) {
+
+        if (description.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "Description cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (description.length() < 3 || description.length() > 300) {
+            JOptionPane.showMessageDialog(parent, "Description must be between 3 and 300 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (duration.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "Duration cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        try {
+            int dur = Integer.parseInt(duration);
+            if (dur <= 0) {
+                JOptionPane.showMessageDialog(parent, "Duration must be a positive number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(parent, "Duration must be a valid number (e.g., 120, 60, 30).", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
 }
