@@ -1,15 +1,19 @@
 package dao.invoice;
 
-import model.Invoice;
 import java.util.List;
+import model.Invoice;
 
 public interface InvoiceDAO {
 
-    void create(Invoice invoice);
+    int add(Invoice invoice);
+
+    void update(Invoice invoice);
+
+    boolean deactivate(int id);
 
     Invoice findById(int id);
 
-    List<Invoice> getAll();
+    List<Invoice> getDesc();
 
-    boolean deactivate(int id);
+    List<Invoice> getAsc();
 }
