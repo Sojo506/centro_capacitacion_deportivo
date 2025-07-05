@@ -47,7 +47,6 @@ CREATE TABLE sports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     characteristics TEXT,
-    routine_id INT NULL,
     active TINYINT(1) DEFAULT 1
 );
 
@@ -56,22 +55,25 @@ CREATE TABLE routine_sports (
     routine_id INT NOT NULL,
     sport_id INT NOT NULL,
     FOREIGN KEY (routine_id) REFERENCES routines(id) ON DELETE CASCADE,
-    FOREIGN KEY (sport_id) REFERENCES sports(id) ON DELETE CASCADE
+    FOREIGN KEY (sport_id) REFERENCES sports(id)
 );
 
 CREATE TABLE invoices (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    athlete_id INT NOT NULL,
-    total_amount DECIMAL(10,2),
+    parent_id INT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    status ENUM('PENDING', 'PAID') DEFAULT 'PENDING',
     active BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (athlete_id) REFERENCES athletes(id)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (parent_id) REFERENCES parents(id)
+        ON DELETE RESTRICT
 );
 
-CREATE TABLE invoice_routine (
+CREATE TABLE invoice_routines (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     invoice_id INT NOT NULL,
     routine_id INT NOT NULL,
-    PRIMARY KEY (invoice_id, routine_id),
-    FOREIGN KEY (invoice_id) REFERENCES invoices(id),
+    FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE,
     FOREIGN KEY (routine_id) REFERENCES routines(id)
 );
+
