@@ -2,6 +2,8 @@ package view.routine;
 
 import controller.RoutineController;
 import controller.SportController;
+import dao.routineSport.RoutineSportDAO;
+import dao.routineSport.RoutineSportDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,10 +19,11 @@ public class RoutineDialog extends javax.swing.JDialog {
 
     RoutinePanel routinePanel;
     RoutineController routineController;
+    SportController sportController;
     Routine routine;
     private List<Sport> sports;
     private List<Sport> selectedSports;
-    private SportController sportController;
+    private RoutineSportDAO routineSportDAO;
 
     public RoutineDialog(java.awt.Frame parent, RoutinePanel routinePanel, boolean modal, Routine routine) {
         super(parent, modal);
@@ -28,6 +31,7 @@ public class RoutineDialog extends javax.swing.JDialog {
         this.routine = routine;
         routineController = new RoutineController();
         sportController = new SportController();
+        routineSportDAO = new RoutineSportDAOImpl();
         sports = new ArrayList<>();
         selectedSports = new ArrayList<>();
 
@@ -64,11 +68,11 @@ public class RoutineDialog extends javax.swing.JDialog {
 
         sportsTable.setModel(model);
 
-        sports = sportController.getAvailableSports();
+        sports = sportController.listSports();
 
         if (routine != null) {
 
-            List<Sport> routineSports = sportController.getByRoutineId(routine.getId());
+            List<Sport> routineSports = routineSportDAO.getSportsByRoutineId(routine.getId());
 
             if (routineSports.size() > 0) {
 
@@ -114,7 +118,7 @@ public class RoutineDialog extends javax.swing.JDialog {
                 Routine r = new Routine(description, Integer.parseInt(duration), true);
                 int id = routineController.registerRoutine(r);
 
-                linkParentIdAthletes(id);
+                linkRoutineToSports(id);
 
                 routinePanel.loadTable();
                 JOptionPane.showMessageDialog(this, "Routine created.", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -152,9 +156,7 @@ public class RoutineDialog extends javax.swing.JDialog {
 
                     routineController.updateRoutine(routine);
 
-                    unlinkDeselectedAthletes(routine.getId());
-
-                    linkParentIdAthletes(routine.getId());
+                    updateRoutineSports(routine.getId());
 
                     routinePanel.loadTable();
                     JOptionPane.showMessageDialog(this, "Routine updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -233,32 +235,15 @@ public class RoutineDialog extends javax.swing.JDialog {
         sportsTable.repaint();
     }
 
-    public void linkParentIdAthletes(int id) {
-        if (selectedSports.size() > 0) {
-            for (int i = 0; i < selectedSports.size(); i++) {
-                Sport s = selectedSports.get(i);
-                s.setRoutineId(id);
-
-                sportController.updateSport(s);
-            }
+    public void linkRoutineToSports(int id) {
+        if (!selectedSports.isEmpty()) {
+            routineSportDAO.linkRoutineToSports(id, selectedSports);
         }
     }
 
-    private void unlinkDeselectedAthletes(int parentId) {
-
-        List<Integer> selectedIds = new ArrayList<>();
-        for (Sport a : selectedSports) {
-            selectedIds.add(a.getId());
-        }
-
-        List<Sport> currentAssigned = sportController.getByRoutineId(parentId);
-
-        for (Sport s : currentAssigned) {
-            if (!selectedIds.contains(s.getId())) {
-                s.setRoutineId(null);
-                sportController.updateSport(s);
-            }
-        }
+    private void updateRoutineSports(int routineId) {
+        routineSportDAO.unlinkAllByRoutine(routineId);
+        routineSportDAO.linkRoutineToSports(routineId, selectedSports);
     }
 
     @SuppressWarnings("unchecked")
