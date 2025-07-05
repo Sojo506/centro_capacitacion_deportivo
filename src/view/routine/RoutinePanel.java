@@ -228,24 +228,28 @@ public class RoutinePanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int row = routinesTable.getSelectedRow();
-        if (row >= 0) {
-            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this routine?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                int id = (int) routinesTable.getValueAt(row, 0);
-                List<Sport> sports = routineSportDAO.getSportsByRoutineId(id);
 
-                if (sports.size() > 0) {
-                    routineSportDAO.unlinkAllByRoutine(id);
-                } else {
-                    System.out.println("no tiene conexiones");
-                }
-
-                routineController.deactivateRoutine(id);
-                JOptionPane.showMessageDialog(this, "Routine deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                loadTable();
-
-            }
+        if (row < 0) {
+            return;
         }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this routine?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            int id = (int) routinesTable.getValueAt(row, 0);
+            List<Sport> sports = routineSportDAO.getSportsByRoutineId(id);
+
+            if (sports.size() > 0) {
+                routineSportDAO.unlinkAllByRoutine(id);
+            } else {
+                System.out.println("no tiene conexiones");
+            }
+
+            routineController.deactivateRoutine(id);
+            JOptionPane.showMessageDialog(this, "Routine deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            loadTable();
+
+        }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
 
