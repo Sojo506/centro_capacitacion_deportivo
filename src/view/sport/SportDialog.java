@@ -83,7 +83,6 @@ public class SportDialog extends javax.swing.JDialog {
                     sport.setName(name);
                     sport.setCharacteristics(characteristics);
 
-                    System.out.println(sport.getRoutineId());
                     sportController.updateSport(sport);
                     sportPanel.loadTable();
                     JOptionPane.showMessageDialog(this, "Sport updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
