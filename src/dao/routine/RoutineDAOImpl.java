@@ -13,14 +13,14 @@ public class RoutineDAOImpl implements RoutineDAO {
     public int add(Routine routine) {
         String sql = "INSERT INTO routines (description, duration_minutes, active) VALUES (?, ?, ?)";
         int generatedId = -1;
-        
-        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
             ps.setString(1, routine.getDescription());
             ps.setInt(2, routine.getDurationMinutes());
             ps.setBoolean(3, routine.isActive());
-            ps.executeUpdate();
-            
-            int affectedRows = ps.executeUpdate();
+
+            int affectedRows = ps.executeUpdate(); 
 
             if (affectedRows > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -33,7 +33,7 @@ public class RoutineDAOImpl implements RoutineDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return generatedId;
     }
 
