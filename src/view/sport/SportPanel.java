@@ -1,10 +1,11 @@
 package view.sport;
 
 import controller.SportController;
+import dao.routineSport.RoutineSportDAO;
+import dao.routineSport.RoutineSportDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Sport;
 import view.MainFrame;
@@ -14,11 +15,13 @@ public class SportPanel extends javax.swing.JPanel {
     private MainFrame mainFrame;
     private List<Sport> sports;
     private SportController sportController;
+    private RoutineSportDAO routineSportDAO;
 
     public SportPanel(MainFrame mainFrame) {
         initComponents();
         sportController = new SportController();
         sports = new ArrayList<>();
+        routineSportDAO = new RoutineSportDAOImpl();
 
         loadTable();
         editBtn.setEnabled(false);
@@ -208,26 +211,38 @@ public class SportPanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int row = sportsTable.getSelectedRow();
-        if (row >= 0) {
-            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this sport?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                int id = (int) sportsTable.getValueAt(row, 0);
-                Sport a = sportController.getSportById(id);
-                boolean canDelete = true;
-
-                if (a.getRoutineId() != null) {
-                    canDelete = false;
-                }
-
-                if (canDelete) {
-                    sportController.deactivateSport(id);
-                    JOptionPane.showMessageDialog(this, "Sport deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    loadTable();
-                } else {
-                    JOptionPane.showMessageDialog(this, "You can't delete this sport because is associated with a routine.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+        if (row < 0) {
+            return;
         }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this, "Do you wish to delete this sport?", "Confirm",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int id = (int) sportsTable.getValueAt(row, 0);
+
+        boolean linked = routineSportDAO.isSportInAnyRoutine(id);
+
+        if (linked) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "You can't delete this sport because it is associated with a routine.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        sportController.deactivateSport(id);
+        JOptionPane.showMessageDialog(
+                this,
+                "Sport deleted.",
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE);
+        loadTable();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void sportsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sportsTableMouseClicked
