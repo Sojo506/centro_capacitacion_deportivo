@@ -2,51 +2,56 @@ package controller;
 
 import dao.invoice.InvoiceDAO;
 import dao.invoice.InvoiceDAOImpl;
-import dao.athlete.AthleteDAO;
-import dao.athlete.AthleteDAOImpl;
-import dao.routine.RoutineDAO;
-import dao.routine.RoutineDAOImpl;
-
+import dao.invoiceRoutine.InvoiceRoutineDAO;
+import dao.invoiceRoutine.InvoiceRoutineDAOImpl;
 import model.Invoice;
-import model.Athlete;
-import model.Routine;
+import model.InvoiceRoutine;
 
 import java.util.List;
 
 public class InvoiceController {
 
-    private InvoiceDAO dao = new InvoiceDAOImpl();
-    private AthleteDAO athleteDAO = new AthleteDAOImpl();
-    private RoutineDAO routineDAO = new RoutineDAOImpl();
+    private InvoiceDAO invoiceDAO;
+    private InvoiceRoutineDAO invoiceRoutineDAO;
 
-    public boolean registerInvoice(Invoice invoice) {
-        // Validar atleta
-        Athlete a = athleteDAO.findById(invoice.getAthleteId());
-        if (a == null || !a.isActive()) {
-            return false;
-        }
+    public InvoiceController() {
+        invoiceDAO = new InvoiceDAOImpl();
+        invoiceRoutineDAO = new InvoiceRoutineDAOImpl();
+    }
 
-        // Validar rutinas
-        for (Routine r : invoice.getRoutines()) {
-            Routine routineDB = routineDAO.findById(r.getId());
-            if (routineDB == null || !routineDB.isActive()) {
-                return false;
+    public int registerInvoice(Invoice invoice, List<Integer> routineIds) {
+        int invoiceId = invoiceDAO.add(invoice);
+
+        if (invoiceId != -1 && routineIds != null && !routineIds.isEmpty()) {
+            for (int routineId : routineIds) {
+                invoiceRoutineDAO.add(new InvoiceRoutine(invoiceId, routineId));
             }
         }
 
-        dao.create(invoice);
-        return true;
+        return invoiceId;
     }
 
-    public List<Invoice> listInvoices() {
-        return dao.getAll();
+    public List<Invoice> listInvoicesAsc() {
+        return invoiceDAO.getAsc();
+    }
+
+    public List<Invoice> listInvoicesDesc() {
+        return invoiceDAO.getDesc();
     }
 
     public Invoice getInvoiceById(int id) {
-        return dao.findById(id);
+        return invoiceDAO.findById(id);
     }
 
     public boolean deactivateInvoice(int id) {
-        return dao.deactivate(id);
+        return invoiceDAO.deactivate(id);
+    }
+
+    public void updateInvoice(Invoice invoice) {
+        invoiceDAO.update(invoice);
+    }
+
+    public List<InvoiceRoutine> getRoutinesByInvoiceId(int invoiceId) {
+        return invoiceRoutineDAO.getByInvoiceId(invoiceId);
     }
 }
