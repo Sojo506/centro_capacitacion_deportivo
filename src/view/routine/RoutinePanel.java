@@ -1,7 +1,8 @@
 package view.routine;
 
 import controller.RoutineController;
-import controller.SportController;
+import dao.routineSport.RoutineSportDAO;
+import dao.routineSport.RoutineSportDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,12 +16,13 @@ public class RoutinePanel extends javax.swing.JPanel {
     private MainFrame mainFrame;
     private List<Routine> routines;
     private RoutineController routineController = new RoutineController();
-    private SportController sportController = new SportController();
+    private RoutineSportDAO routineSportDAO;
 
     public RoutinePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
         routines = new ArrayList<>();
+        routineSportDAO = new RoutineSportDAOImpl();
 
         loadTable();
         disableEditDeleteBtn();
@@ -37,6 +39,7 @@ public class RoutinePanel extends javax.swing.JPanel {
         model.addColumn("ID");
         model.addColumn("Description");
         model.addColumn("Duration in minutes");
+        model.addColumn("Sports");
 
         routinesTable.setModel(model);
 
@@ -44,17 +47,25 @@ public class RoutinePanel extends javax.swing.JPanel {
             routines = routineController.listRoutines();
 
             for (Routine r : routines) {
+                List<Sport> sports = routineSportDAO.getSportsByRoutineId(r.getId());
+
+                String sportNames = sports.stream()
+                        .map(Sport::getName)
+                        .reduce((a, b) -> a + " | " + b)
+                        .orElse("None");
+
                 model.addRow(new Object[]{
                     r.getId(),
                     r.getDescription(),
-                    r.getDurationMinutes()
+                    r.getDurationMinutes(),
+                    sportNames
                 });
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "There was an error.", "404", JOptionPane.ERROR_MESSAGE);
         }
 
-        routinesTable.getColumnModel().getColumn(1).setPreferredWidth(500);
+        routinesTable.getColumnModel().getColumn(1).setPreferredWidth(400);
 
         disableEditDeleteBtn();
     }
@@ -221,13 +232,12 @@ public class RoutinePanel extends javax.swing.JPanel {
             int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this routine?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 int id = (int) routinesTable.getValueAt(row, 0);
-                List<Sport> sports = sportController.getByRoutineId(id);
+                List<Sport> sports = routineSportDAO.getSportsByRoutineId(id);
 
                 if (sports.size() > 0) {
-                    for (Sport s : sports) {
-                        s.setRoutineId(null);
-                        sportController.updateSport(s);
-                    }
+                    routineSportDAO.unlinkAllByRoutine(id);
+                } else {
+                    System.out.println("no tiene conexiones");
                 }
 
                 routineController.deactivateRoutine(id);
