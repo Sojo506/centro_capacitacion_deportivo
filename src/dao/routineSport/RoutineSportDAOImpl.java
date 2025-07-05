@@ -10,7 +10,7 @@ import java.util.List;
 public class RoutineSportDAOImpl implements RoutineSportDAO {
 
     @Override
-    public void linkRoutineToSports(int routineId, List<Sport> sports) {
+    public void add(int routineId, List<Sport> sports) {
         String sql = "INSERT INTO routine_sports (routine_id, sport_id) VALUES (?, ?)";
 
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -26,7 +26,7 @@ public class RoutineSportDAOImpl implements RoutineSportDAO {
     }
 
     @Override
-    public void unlinkAllByRoutine(int routineId) {
+    public void deleteByRoutineId(int routineId) {
         String sql = "DELETE FROM routine_sports WHERE routine_id = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, routineId);
@@ -50,7 +50,7 @@ public class RoutineSportDAOImpl implements RoutineSportDAO {
     }
 
     @Override
-    public List<Sport> getSportsByRoutineId(int routineId) {
+    public List<Sport> getByRoutineId(int routineId) {
         List<Sport> list = new ArrayList<>();
         String sql = """
                 SELECT s.* FROM sports s

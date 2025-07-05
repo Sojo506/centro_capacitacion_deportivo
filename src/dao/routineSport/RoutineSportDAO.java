@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface RoutineSportDAO {
 
-    void linkRoutineToSports(int routineId, List<Sport> sports);
+    void add(int routineId, List<Sport> sports);
 
-    void unlinkAllByRoutine(int routineId);
+    void deleteByRoutineId(int routineId);
     
     boolean isSportInAnyRoutine(int sportId);
 
-    List<Sport> getSportsByRoutineId(int routineId);
+    List<Sport> getByRoutineId(int routineId);
 }

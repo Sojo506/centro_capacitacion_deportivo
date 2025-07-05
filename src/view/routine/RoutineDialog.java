@@ -72,7 +72,7 @@ public class RoutineDialog extends javax.swing.JDialog {
 
         if (routine != null) {
 
-            List<Sport> routineSports = routineSportDAO.getSportsByRoutineId(routine.getId());
+            List<Sport> routineSports = routineSportDAO.getByRoutineId(routine.getId());
 
             if (routineSports.size() > 0) {
 
@@ -237,13 +237,13 @@ public class RoutineDialog extends javax.swing.JDialog {
 
     public void linkRoutineToSports(int id) {
         if (!selectedSports.isEmpty()) {
-            routineSportDAO.linkRoutineToSports(id, selectedSports);
+            routineSportDAO.add(id, selectedSports);
         }
     }
 
     private void updateRoutineSports(int routineId) {
-        routineSportDAO.unlinkAllByRoutine(routineId);
-        routineSportDAO.linkRoutineToSports(routineId, selectedSports);
+        routineSportDAO.deleteByRoutineId(routineId);
+        routineSportDAO.add(routineId, selectedSports);
     }
 
     @SuppressWarnings("unchecked")

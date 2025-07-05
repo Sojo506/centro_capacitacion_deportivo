@@ -47,7 +47,7 @@ public class RoutinePanel extends javax.swing.JPanel {
             routines = routineController.listRoutines();
 
             for (Routine r : routines) {
-                List<Sport> sports = routineSportDAO.getSportsByRoutineId(r.getId());
+                List<Sport> sports = routineSportDAO.getByRoutineId(r.getId());
 
                 String sportNames = sports.stream()
                         .map(Sport::getName)
@@ -236,10 +236,10 @@ public class RoutinePanel extends javax.swing.JPanel {
         int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this routine?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirmacion == JOptionPane.YES_OPTION) {
             int id = (int) routinesTable.getValueAt(row, 0);
-            List<Sport> sports = routineSportDAO.getSportsByRoutineId(id);
+            List<Sport> sports = routineSportDAO.getByRoutineId(id);
 
             if (sports.size() > 0) {
-                routineSportDAO.unlinkAllByRoutine(id);
+                routineSportDAO.deleteByRoutineId(id);
             } else {
                 System.out.println("no tiene conexiones");
             }
