@@ -48,10 +48,15 @@ CREATE TABLE sports (
     name VARCHAR(100) NOT NULL,
     characteristics TEXT,
     routine_id INT NULL,
-    active TINYINT(1) DEFAULT 1,
-    FOREIGN KEY (routine_id) REFERENCES routines(id)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
+    active TINYINT(1) DEFAULT 1
+);
+
+CREATE TABLE routine_sports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    routine_id INT NOT NULL,
+    sport_id INT NOT NULL,
+    FOREIGN KEY (routine_id) REFERENCES routines(id) ON DELETE CASCADE,
+    FOREIGN KEY (sport_id) REFERENCES sports(id) ON DELETE CASCADE
 );
 
 CREATE TABLE invoices (
