@@ -34,14 +34,6 @@ public class SportController {
         return dao.findByName(name);
     }
 
-    public List<Sport> getByRoutineId(int parentId) {
-        return dao.getByRoutineId(parentId);
-    }
-
-    public List<Sport> getAvailableSports() {
-        return dao.getAvailableSports();
-    }
-
     public List<Sport> listSports() {
         return dao.getAll();
     }
