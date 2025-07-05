@@ -1,63 +1,63 @@
 package model;
 
-import java.util.List;
 import java.time.LocalDateTime;
+import util.InvoiceEnum;
 
 public class Invoice {
 
     private int id;
-    private LocalDateTime date;
-    private int athleteId;
-    private double totalAmount;
+    private int parentId;
+    private double total;
+    private InvoiceEnum status;
     private boolean active;
-    private List<Routine> routines;
+    private LocalDateTime createdAt;
 
     public Invoice() {
     }
 
-    public Invoice(LocalDateTime date, int athleteId, double totalAmount, boolean active, List<Routine> routines) {
-        this.date = date;
-        this.athleteId = athleteId;
-        this.totalAmount = totalAmount;
+    public Invoice(int id, int parentId, double total, InvoiceEnum status, boolean active, LocalDateTime createdAt) {
+        this.id = id;
+        this.parentId = parentId;
+        this.total = total;
+        this.status = status;
         this.active = active;
-        this.routines = routines;
+        this.createdAt = createdAt;
     }
 
-    public Invoice(int id, LocalDateTime date, int athleteId, double totalAmount, boolean active, List<Routine> routines) {
-        this.id = id;
-        this.date = date;
-        this.athleteId = athleteId;
-        this.totalAmount = totalAmount;
+    public Invoice(int parentId, double total, InvoiceEnum status, boolean active, LocalDateTime createdAt) {
+        this.parentId = parentId;
+        this.total = total;
+        this.status = status;
         this.active = active;
-        this.routines = routines;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
         return id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
-    public int getAthleteId() {
-        return athleteId;
+    public double getTotal() {
+        return total;
     }
 
-    public void setAthleteId(int athleteId) {
-        this.athleteId = athleteId;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public InvoiceEnum getStatus() {
+        return status;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setStatus(InvoiceEnum status) {
+        this.status = status;
     }
 
     public boolean isActive() {
@@ -68,12 +68,8 @@ public class Invoice {
         this.active = active;
     }
 
-    public List<Routine> getRoutines() {
-        return routines;
-    }
-
-    public void setRoutines(List<Routine> routines) {
-        this.routines = routines;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
 }
