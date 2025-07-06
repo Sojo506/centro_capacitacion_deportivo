@@ -51,4 +51,20 @@ public class Sport {
         this.active = active;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Sport other = (Sport) obj;
+        return this.getId() == other.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(getId());
+    }
 }
