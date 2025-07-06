@@ -325,7 +325,7 @@ public class RoutineDialog extends javax.swing.JDialog {
         jScrollPane2.setViewportView(inputDescription);
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
-        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/data.png"))); // NOI18N
         titleLabel.setText("Routine Data");
 
         titleLabel2.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N

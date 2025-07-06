@@ -314,7 +314,7 @@ public class ParentDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
-        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/data.png"))); // NOI18N
         titleLabel.setText("Parent Data");
 
         cancelBtn.setBackground(new java.awt.Color(191, 26, 47));
@@ -398,7 +398,7 @@ public class ParentDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(titleLabel)
-                        .addGap(0, 133, Short.MAX_VALUE))
+                        .addGap(0, 141, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()

@@ -118,7 +118,7 @@ public class SportDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleLabel.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
-        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sports24.png"))); // NOI18N
+        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/data.png"))); // NOI18N
         titleLabel.setText("Sport Data");
 
         closeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N

@@ -217,7 +217,7 @@
               <Font name="Adwaita Sans" size="24" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/user.png"/>
+              <Image iconType="3" name="/images/data.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Routine Data"/>
           </Properties>
