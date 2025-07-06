@@ -113,8 +113,8 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         }
         return list;
     }
-    
-     @Override
+
+    @Override
     public List<Invoice> getAsc() {
         List<Invoice> list = new ArrayList<>();
         String sql = "SELECT * FROM invoices WHERE active = true ORDER BY created_at ASC";
