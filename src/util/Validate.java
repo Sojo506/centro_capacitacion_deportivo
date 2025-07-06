@@ -1,7 +1,10 @@
 package util;
 
 import java.awt.Component;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Parent;
+import model.Routine;
 
 public class Validate {
 
@@ -182,6 +185,30 @@ public class Validate {
             return false;
         }
 
+        return true;
+    }
+
+    public static boolean validateInvoice(Component parent, Parent selectedParent, List<Routine> selectedRoutines, String total) {
+        if (selectedParent == null) {
+            JOptionPane.showMessageDialog(parent, "You must select a parent.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (selectedRoutines.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "You must select at least one routine.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        try {
+            double t = Double.parseDouble(total);
+            if (t <= 0) {
+                JOptionPane.showMessageDialog(parent, "Total must be a positive number.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(parent, "Total must be a valid number (e.g., 13.800, 9000, 22.000).", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return true;
     }
 
