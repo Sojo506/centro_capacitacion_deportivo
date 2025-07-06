@@ -23,20 +23,29 @@ public class InvoiceDialog extends javax.swing.JDialog {
 
     private InvoicePanel invoicePanel;
     private Invoice invoice;
-    private ParentController parentController = new ParentController();
-    private RoutineController routineController = new RoutineController();
-    private InvoiceController invoiceController = new InvoiceController();
-    private InvoiceRoutineDAO invoiceRoutineDAO = new InvoiceRoutineDAOImpl();
+    private ParentController parentController;
+    private RoutineController routineController;
+    private InvoiceController invoiceController;
+    private InvoiceRoutineDAO invoiceRoutineDAO;
 
-    private List<Parent> parents = new ArrayList<>();
-    private List<Routine> routines = new ArrayList<>();
-    private List<Routine> selectedRoutines = new ArrayList<>();
+    private List<Parent> parents;
+    private List<Routine> routines;
+    private List<Routine> selectedRoutines;
     private Parent selectedParent;
 
     public InvoiceDialog(java.awt.Frame parent, InvoicePanel invoicePanel, boolean modal, Invoice invoice) {
         super(parent, modal);
         this.invoicePanel = invoicePanel;
         this.invoice = invoice;
+        invoiceRoutineDAO = new InvoiceRoutineDAOImpl();
+
+        parentController = new ParentController();
+        routineController = new RoutineController();
+        invoiceController = new InvoiceController();
+
+        parents = new ArrayList<>();
+        routines = new ArrayList<>();
+        selectedRoutines = new ArrayList<>();
 
         setUndecorated(true);
         initComponents();
@@ -57,6 +66,7 @@ public class InvoiceDialog extends javax.swing.JDialog {
             saveBtn.setText("Edit");
             fillInputs();
         }
+
     }
 
     private void loadParentTable() {
@@ -90,6 +100,12 @@ public class InvoiceDialog extends javax.swing.JDialog {
         model.addColumn("Description");
 
         routines = routineController.listRoutines();
+
+        if (invoice != null) {
+            selectedRoutines = invoiceRoutineDAO.getByInvoiceId(invoice.getId());
+            selectedParent = parentController.getParentById(invoice.getParentId());
+        }
+
         for (Routine r : routines) {
             model.addRow(new Object[]{r.getId(), r.getDescription()});
         }
@@ -97,7 +113,6 @@ public class InvoiceDialog extends javax.swing.JDialog {
         routinesTable.setModel(model);
         routinesTable.getColumnModel().getColumn(1).setPreferredWidth(400);
         routinesTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
     }
 
     private void setupParentClickListener() {
@@ -233,11 +248,45 @@ public class InvoiceDialog extends javax.swing.JDialog {
     }
 
     private void updateInvoice() {
+        String total = inputTotal.getText().trim();
 
+        boolean isValid = Validate.validateInvoice(
+                this,
+                selectedParent,
+                selectedRoutines,
+                total
+        );
+
+        if (isValid) {
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to update this invoice?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+
+                invoice.setTotal(Double.parseDouble(inputTotal.getText()));
+                invoice.setParentId(selectedParent.getId());
+
+                List<Integer> routinesIds = new ArrayList<>();
+
+                for (int i = 0; i < selectedRoutines.size(); i++) {
+                    routinesIds.add(selectedRoutines.get(i).getId());
+                }
+
+                invoiceController.updateInvoice(invoice, routinesIds);
+
+                invoicePanel.loadTable();
+                JOptionPane.showMessageDialog(this, "Invoice updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        }
     }
 
     private void fillInputs() {
         inputTotal.setText(String.valueOf(invoice.getTotal()));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -419,14 +468,16 @@ public class InvoiceDialog extends javax.swing.JDialog {
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         if (invoice == null) {
-            //inputDescription.setText("");
-            //inputDuration.setText("");
+            inputTotal.setText("");
         } else {
-            //fillInputs();
+            loadParentTable();
+            loadRoutineTable();
+            fillInputs();
         }
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        invoicePanel.disableEditDeleteBtn();
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
