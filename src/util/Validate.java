@@ -189,16 +189,6 @@ public class Validate {
     }
 
     public static boolean validateInvoice(Component parent, Parent selectedParent, List<Routine> selectedRoutines, String total) {
-        if (selectedParent == null) {
-            JOptionPane.showMessageDialog(parent, "You must select a parent.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
-        if (selectedRoutines.isEmpty()) {
-            JOptionPane.showMessageDialog(parent, "You must select at least one routine.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
         try {
             double t = Double.parseDouble(total);
             if (t <= 0) {
@@ -209,6 +199,17 @@ public class Validate {
             JOptionPane.showMessageDialog(parent, "Total must be a valid number (e.g., 13.800, 9000, 22.000).", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        
+        if (selectedParent == null) {
+            JOptionPane.showMessageDialog(parent, "You must select a parent.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (selectedRoutines.isEmpty()) {
+            JOptionPane.showMessageDialog(parent, "You must select at least one routine.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
         return true;
     }
 
