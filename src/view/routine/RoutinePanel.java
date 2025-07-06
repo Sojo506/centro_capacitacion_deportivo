@@ -220,8 +220,8 @@ public class RoutinePanel extends javax.swing.JPanel {
         if (row != -1) {
             int id = (int) routinesTable.getValueAt(row, 0);
             Routine athlete = routineController.getRoutineById(id);
-            RoutineDialog athleteDialog = new RoutineDialog(mainFrame, this, true, athlete);
-            athleteDialog.setVisible(true);
+            RoutineDialog routineDialog = new RoutineDialog(mainFrame, this, true, athlete);
+            routineDialog.setVisible(true);
             disableEditDeleteBtn();
         }
     }//GEN-LAST:event_editBtnActionPerformed

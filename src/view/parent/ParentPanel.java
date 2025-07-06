@@ -204,8 +204,8 @@ public class ParentPanel extends javax.swing.JPanel {
         if (row != -1) {
             int id = (int) parentsTable.getValueAt(row, 0);
             Parent athlete = parentController.getParentById(id);
-            ParentDialog athleteDialog = new ParentDialog(mainFrame, this, true, athlete);
-            athleteDialog.setVisible(true);
+            ParentDialog parentDialog = new ParentDialog(mainFrame, this, true, athlete);
+            parentDialog.setVisible(true);
             disableEditDeleteBtn();
         }
     }//GEN-LAST:event_editBtnActionPerformed
