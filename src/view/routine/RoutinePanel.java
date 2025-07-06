@@ -240,8 +240,6 @@ public class RoutinePanel extends javax.swing.JPanel {
 
             if (sports.size() > 0) {
                 routineSportDAO.deleteByRoutineId(id);
-            } else {
-                System.out.println("no tiene conexiones");
             }
 
             routineController.deactivateRoutine(id);
