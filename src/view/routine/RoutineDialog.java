@@ -51,7 +51,6 @@ public class RoutineDialog extends javax.swing.JDialog {
         }
 
         loadTable();
-        restoreSelectionState();
     }
 
     public void loadTable() {
@@ -71,17 +70,7 @@ public class RoutineDialog extends javax.swing.JDialog {
         sports = sportController.listSports();
 
         if (routine != null) {
-
-            List<Sport> routineSports = routineSportDAO.getByRoutineId(routine.getId());
-
-            if (routineSports.size() > 0) {
-
-                for (int i = 0; i < routineSports.size(); i++) {
-                    sports.add(routineSports.get(i));
-                    selectedSports.add(routineSports.get(i));
-                }
-            }
-
+            selectedSports = routineSportDAO.getByRoutineId(routine.getId());
         }
 
         for (Sport s : sports) {
@@ -207,32 +196,19 @@ public class RoutineDialog extends javax.swing.JDialog {
                 }
 
                 int modelRow = sportsTable.convertRowIndexToModel(viewRow);
-                Sport a = sports.get(modelRow);
+                Sport s = sports.get(modelRow);
 
-                if (selectedSports.contains(a)) {
-                    selectedSports.remove(a);
+                if (selectedSports.contains(s)) {
+                    selectedSports.remove(s);
                     sportsTable.removeRowSelectionInterval(viewRow, viewRow);
                 } else {
-                    selectedSports.add(a);
+                    selectedSports.add(s);
                     sportsTable.addRowSelectionInterval(viewRow, viewRow);
                 }
 
                 sportsTable.repaint();
             }
         });
-    }
-
-    private void restoreSelectionState() {
-        for (int i = 0; i < sports.size(); i++) {
-            for (Sport a : selectedSports) {
-                if (sports.get(i).getId() == a.getId()) {
-                    sportsTable.addRowSelectionInterval(i, i);
-                    break;
-                }
-            }
-        }
-
-        sportsTable.repaint();
     }
 
     public void linkRoutineToSports(int id) {
@@ -410,6 +386,7 @@ public class RoutineDialog extends javax.swing.JDialog {
             inputDescription.setText("");
             inputDuration.setText("");
         } else {
+            loadTable();
             fillInputs();
         }
     }//GEN-LAST:event_cancelBtnActionPerformed
@@ -423,6 +400,7 @@ public class RoutineDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        routinePanel.disableEditDeleteBtn();
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
