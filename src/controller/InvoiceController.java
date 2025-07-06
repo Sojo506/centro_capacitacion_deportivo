@@ -8,6 +8,7 @@ import model.Invoice;
 import model.InvoiceRoutine;
 
 import java.util.List;
+import model.Routine;
 
 public class InvoiceController {
 
@@ -51,7 +52,7 @@ public class InvoiceController {
         invoiceDAO.update(invoice);
     }
 
-    public List<InvoiceRoutine> getRoutinesByInvoiceId(int invoiceId) {
+    public List<Routine> getRoutinesByInvoiceId(int invoiceId) {
         return invoiceRoutineDAO.getByInvoiceId(invoiceId);
     }
 }
