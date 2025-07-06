@@ -497,6 +497,7 @@ public class ParentDialog extends javax.swing.JDialog {
             inputPhone.setText("");
             inputEmail.setText("");
         } else {
+            loadTable();
             fillInputs();
         }
     }//GEN-LAST:event_cancelBtnActionPerformed
@@ -514,6 +515,7 @@ public class ParentDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_inputNameActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        parentPanel.disableEditDeleteBtn();
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
