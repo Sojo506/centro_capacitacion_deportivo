@@ -48,8 +48,17 @@ public class InvoiceController {
         return invoiceDAO.deactivate(id);
     }
 
-    public void updateInvoice(Invoice invoice) {
-        invoiceDAO.update(invoice);
+    public void updateInvoice(Invoice invoice, List<Integer> routineIds) {
+        if (invoice != null && routineIds != null && !routineIds.isEmpty()) {
+            int invoiceId = invoice.getId();
+            
+            invoiceDAO.update(invoice);
+            invoiceRoutineDAO.deleteByInvoiceId(invoiceId);
+
+            for (int routineId : routineIds) {
+                invoiceRoutineDAO.add(new InvoiceRoutine(invoiceId, routineId));
+            }
+        }
     }
 
     public List<Routine> getRoutinesByInvoiceId(int invoiceId) {
