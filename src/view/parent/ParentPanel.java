@@ -42,23 +42,35 @@ public class ParentPanel extends javax.swing.JPanel {
         model.addColumn("Address");
         model.addColumn("Phone");
         model.addColumn("Email");
+        model.addColumn("Athletes");
 
         parentsTable.setModel(model);
 
         try {
             parents = parentController.listParents();
 
-            for (Parent a : parents) {
+            for (Parent p : parents) {
+
+                List<Athlete> athletes = athleteController.getByParentId(p.getId());
+
+                String athletesName = athletes.stream()
+                        .map(a -> a.getName())
+                        .reduce((a, b) -> a + " | " + b)
+                        .orElse("None");
+
                 model.addRow(new Object[]{
-                    a.getId(),
-                    a.getName(),
-                    a.getLastName(),
-                    a.getCity(),
-                    a.getAddress(),
-                    a.getPhone(),
-                    a.getEmail()
+                    p.getId(),
+                    p.getName(),
+                    p.getLastName(),
+                    p.getCity(),
+                    p.getAddress(),
+                    p.getPhone(),
+                    p.getEmail(),
+                    athletesName
                 });
             }
+
+            parentsTable.getColumnModel().getColumn(7).setPreferredWidth(175);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "There was an error.", "404", JOptionPane.ERROR_MESSAGE);
         }
