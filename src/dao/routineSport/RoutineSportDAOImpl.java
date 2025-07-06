@@ -42,7 +42,7 @@ public class RoutineSportDAOImpl implements RoutineSportDAO {
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, sportId);
             ResultSet rs = ps.executeQuery();
-            return rs.next();          // true → está en alguna rutina
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
