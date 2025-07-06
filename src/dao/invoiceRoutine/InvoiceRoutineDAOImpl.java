@@ -6,6 +6,7 @@ import model.InvoiceRoutine;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.Routine;
 
 public class InvoiceRoutineDAOImpl implements InvoiceRoutineDAO {
 
@@ -22,23 +23,32 @@ public class InvoiceRoutineDAOImpl implements InvoiceRoutineDAO {
     }
 
     @Override
-    public List<InvoiceRoutine> getByInvoiceId(int invoiceId) {
-        List<InvoiceRoutine> list = new ArrayList<>();
-        String sql = "SELECT * FROM invoice_routines WHERE invoice_id = ?";
+    public List<Routine> getByInvoiceId(int invoiceId) {
+        List<Routine> list = new ArrayList<>();
+        String sql = """
+            SELECT r.* FROM routines r
+            JOIN invoice_routines ir ON r.id = ir.routine_id
+            WHERE ir.invoice_id = ? AND r.active = true
+            """;
+
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, invoiceId);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
-                InvoiceRoutine ir = new InvoiceRoutine(
+                Routine routine = new Routine(
                         rs.getInt("id"),
-                        rs.getInt("invoice_id"),
-                        rs.getInt("routine_id")
+                        rs.getString("description"),
+                        rs.getInt("duration_minutes"),
+                        rs.getBoolean("active")
                 );
-                list.add(ir);
+                list.add(routine);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return list;
     }
 

@@ -2,6 +2,7 @@ package dao.invoiceRoutine;
 
 import java.util.List;
 import model.InvoiceRoutine;
+import model.Routine;
 
 public interface InvoiceRoutineDAO {
 
@@ -11,6 +12,6 @@ public interface InvoiceRoutineDAO {
 
     boolean isRoutineInAnyInvoice(int sportId);
 
-    List<InvoiceRoutine> getByInvoiceId(int invoiceId);
+    List<Routine> getByInvoiceId(int invoiceId);
 
 }
