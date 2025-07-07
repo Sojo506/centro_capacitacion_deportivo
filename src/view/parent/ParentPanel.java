@@ -1,12 +1,14 @@
 package view.parent;
 
 import controller.AthleteController;
+import controller.InvoiceController;
 import controller.ParentController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Athlete;
+import model.Invoice;
 import model.Parent;
 import view.MainFrame;
 
@@ -14,11 +16,15 @@ public class ParentPanel extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
     private List<Parent> parents;
-    private ParentController parentController = new ParentController();
-    private AthleteController athleteController = new AthleteController();
+    private ParentController parentController;
+    private AthleteController athleteController;
+    private InvoiceController invoiceController;
 
     public ParentPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        parentController = new ParentController();
+        athleteController = new AthleteController();
+        invoiceController = new InvoiceController();
         initComponents();
         parents = new ArrayList<>();
 
@@ -224,25 +230,42 @@ public class ParentPanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int row = parentsTable.getSelectedRow();
-        if (row >= 0) {
-            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                int id = (int) parentsTable.getValueAt(row, 0);
-                List<Athlete> athletes = athleteController.getByParentId(id);
 
-                if (athletes.size() > 0) {
-                    for (Athlete a : athletes) {
-                        a.setParentId(null);
-                        athleteController.updateAthlete(a);
+        if (row < 1) {
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Do you wish to delete this parent?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            int id = (int) parentsTable.getValueAt(row, 0);
+            List<Athlete> athletes = athleteController.getByParentId(id);
+            List<Invoice> invoices = invoiceController.listInvoicesAsc();
+
+            if (!invoices.isEmpty()) {
+                for (Invoice i : invoices) {
+                    if (i.getParentId() == id) {
+                        JOptionPane.showMessageDialog(this,
+                                "You cannot delete this parent because is associated with an invoice.", "404",
+                                JOptionPane.ERROR_MESSAGE);
+
+                        return;
                     }
                 }
-
-                parentController.deactivateParent(id);
-                JOptionPane.showMessageDialog(this, "Parent deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                loadTable();
-
             }
+
+            if (athletes.size() > 0) {
+                for (Athlete a : athletes) {
+                    a.setParentId(null);
+                    athleteController.updateAthlete(a);
+                }
+            }
+
+            parentController.deactivateParent(id);
+            JOptionPane.showMessageDialog(this, "Parent deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            loadTable();
+
         }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed

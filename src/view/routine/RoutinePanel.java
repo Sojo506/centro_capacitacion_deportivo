@@ -1,6 +1,8 @@
 package view.routine;
 
 import controller.RoutineController;
+import dao.invoiceRoutine.InvoiceRoutineDAO;
+import dao.invoiceRoutine.InvoiceRoutineDAOImpl;
 import dao.routineSport.RoutineSportDAO;
 import dao.routineSport.RoutineSportDAOImpl;
 import java.util.ArrayList;
@@ -15,14 +17,17 @@ public class RoutinePanel extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
     private List<Routine> routines;
-    private RoutineController routineController = new RoutineController();
+    private RoutineController routineController;
     private RoutineSportDAO routineSportDAO;
+    private InvoiceRoutineDAO invoiceRoutineDAO;
 
     public RoutinePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        initComponents();
+        routineController = new RoutineController();
         routines = new ArrayList<>();
         routineSportDAO = new RoutineSportDAOImpl();
+        invoiceRoutineDAO = new InvoiceRoutineDAOImpl();
+        initComponents();
 
         loadTable();
         disableEditDeleteBtn();
@@ -237,6 +242,13 @@ public class RoutinePanel extends javax.swing.JPanel {
         if (confirmacion == JOptionPane.YES_OPTION) {
             int id = (int) routinesTable.getValueAt(row, 0);
             List<Sport> sports = routineSportDAO.getByRoutineId(id);
+
+            if (invoiceRoutineDAO.isRoutineInAnyInvoice(id)) {
+                JOptionPane.showMessageDialog(this,
+                        "You cannot delete this routine because is associated with an invoice.", "404",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             if (sports.size() > 0) {
                 routineSportDAO.deleteByRoutineId(id);
