@@ -10,7 +10,7 @@ public interface InvoiceRoutineDAO {
 
     void deleteByInvoiceId(int invoiceId);
 
-    boolean isRoutineInAnyInvoice(int sportId);
+    boolean isRoutineInAnyInvoice(int routineId);
 
     List<Routine> getByInvoiceId(int invoiceId);
 
