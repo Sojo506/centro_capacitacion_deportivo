@@ -18,13 +18,13 @@ public class SportDAOImpl implements SportDAO {
             ps.setBoolean(3, sport.isActive());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while creating a sport", e);
         }
     }
 
     @Override
     public void update(Sport sport) {
-        String sql = "UPDATE sports SET name=?, characteristics=?, active=? WHERE id=?";
+        String sql = "UPDATE sports SET name = ?, characteristics = ?, active = ? WHERE id = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, sport.getName());
             ps.setString(2, sport.getCharacteristics());
@@ -32,7 +32,7 @@ public class SportDAOImpl implements SportDAO {
             ps.setInt(4, sport.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while updating the sport with ID " + sport.getId(), e);
         }
     }
 
@@ -43,8 +43,7 @@ public class SportDAOImpl implements SportDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException("Error while deactivating the sport with ID " + id, e);
         }
     }
 
@@ -53,17 +52,13 @@ public class SportDAOImpl implements SportDAO {
         String sql = "SELECT * FROM sports WHERE id = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Sport(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("characteristics"),
-                        rs.getBoolean("active")
-                );
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return buildSport(rs);
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while finding sport by ID " + id, e);
         }
         return null;
     }
@@ -73,17 +68,13 @@ public class SportDAOImpl implements SportDAO {
         String sql = "SELECT * FROM sports WHERE name = ? AND active = true";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Sport(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("characteristics"),
-                        rs.getBoolean("active")
-                );
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return buildSport(rs);
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while finding sport by name: " + name, e);
         }
         return null;
     }
@@ -94,17 +85,20 @@ public class SportDAOImpl implements SportDAO {
         String sql = "SELECT * FROM sports WHERE active = true";
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
-                Sport s = new Sport(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("characteristics"),
-                        rs.getBoolean("active")
-                );
-                list.add(s);
+                list.add(buildSport(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while retrieving all active sports", e);
         }
         return list;
+    }
+
+    private Sport buildSport(ResultSet rs) throws SQLException {
+        return new Sport(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("characteristics"),
+                rs.getBoolean("active")
+        );
     }
 }
