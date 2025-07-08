@@ -72,7 +72,7 @@ public class ParentDAOImpl implements ParentDAO {
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error while deactivating parent: " + e.getMessage(), e);
+            throw new RuntimeException("Error while deleting parent: " + e.getMessage(), e);
         }
     }
 

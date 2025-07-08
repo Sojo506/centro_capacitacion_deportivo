@@ -58,7 +58,7 @@ public class RoutineDAOImpl implements RoutineDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Error while deactivating routine: " + e.getMessage(), e);
+            throw new RuntimeException("Error while deleting routine: " + e.getMessage(), e);
         }
     }
 

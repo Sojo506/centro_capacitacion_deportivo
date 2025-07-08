@@ -103,7 +103,7 @@ public class UserDAOImpl implements UserDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error while retrieving users", e);
+            throw new RuntimeException("Error while getting all users", e);
         }
 
         return users;
@@ -188,7 +188,7 @@ public class UserDAOImpl implements UserDAO {
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error while deactivating user", e);
+            throw new RuntimeException("Error while deleting user", e);
         }
     }
 }

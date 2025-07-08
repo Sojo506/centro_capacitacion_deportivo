@@ -43,7 +43,7 @@ public class SportDAOImpl implements SportDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Error while deactivating the sport with ID " + id, e);
+            throw new RuntimeException("Error while deleting the sport with ID " + id, e);
         }
     }
 
@@ -88,7 +88,7 @@ public class SportDAOImpl implements SportDAO {
                 list.add(buildSport(rs));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error while retrieving all active sports", e);
+            throw new RuntimeException("Error while getting all sports", e);
         }
         return list;
     }

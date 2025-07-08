@@ -59,7 +59,7 @@ public class AthleteDAOImpl implements AthleteDAO {
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Error deactivating athlete with id " + id, e);
+            throw new RuntimeException("Error deleting athlete with id " + id, e);
         }
     }
 
