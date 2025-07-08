@@ -3,6 +3,7 @@ package view.invoice;
 import controller.InvoiceController;
 import dao.invoiceRoutine.InvoiceRoutineDAO;
 import dao.invoiceRoutine.InvoiceRoutineDAOImpl;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -11,9 +12,6 @@ import model.Invoice;
 import model.Routine;
 import view.MainFrame;
 
-/*
- - no se puede eliminar un parent si la factura no ha sido pagadar
- */
 public class InvoicePanel extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
@@ -45,11 +43,20 @@ public class InvoicePanel extends javax.swing.JPanel {
         model.addColumn("Routines");
         model.addColumn("Total $");
         model.addColumn("Status");
+        model.addColumn("Created At");
 
         invoicesTable.setModel(model);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d HH:mm");
+
         try {
-            invoices = invoiceController.listInvoicesDesc();
+            var orderType = orderBtn.getText();
+
+            if (orderType.equals("Order by Desc")) {
+                invoices = invoiceController.listInvoicesDesc();
+            } else {
+                invoices = invoiceController.listInvoicesAsc();
+            }
 
             for (Invoice i : invoices) {
                 List<Routine> routines = invoiceRoutineDAO.getByInvoiceId(i.getId());
@@ -59,12 +66,16 @@ public class InvoicePanel extends javax.swing.JPanel {
                         .reduce((a, b) -> a + " | " + b)
                         .orElse("None");
 
+                String dateFormatted = i.getCreatedAt().format(formatter);
+
                 model.addRow(new Object[]{
                     i.getId(),
                     i.getParentId(),
                     routineIds,
                     i.getTotal(),
-                    i.getStatus(),});
+                    i.getStatus(),
+                    dateFormatted
+                });
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "There was an error.", "404", JOptionPane.ERROR_MESSAGE);
@@ -89,6 +100,7 @@ public class InvoicePanel extends javax.swing.JPanel {
         addBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
+        orderBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(74, 74, 72));
 
@@ -160,15 +172,34 @@ public class InvoicePanel extends javax.swing.JPanel {
             }
         });
 
+        orderBtn.setBackground(new java.awt.Color(45, 49, 66));
+        orderBtn.setForeground(new java.awt.Color(255, 255, 255));
+        orderBtn.setText("Order by Desc");
+        orderBtn.setBorderPainted(false);
+        orderBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        orderBtn.setFocusPainted(false);
+        orderBtn.setFocusable(false);
+        orderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(171, 171, 171)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(219, 219, 219))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(orderBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(refreshBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addBtn)
@@ -183,17 +214,18 @@ public class InvoicePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(editBtn)
                             .addComponent(deleteBtn)
                             .addComponent(addBtn)
-                            .addComponent(refreshBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)))
+                            .addComponent(refreshBtn)
+                            .addComponent(orderBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -250,6 +282,18 @@ public class InvoicePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
+        var orderType = orderBtn.getText();
+
+        if (orderType.equals("Order by Desc")) {
+            orderBtn.setText("Order by Asc");
+        } else {
+            orderBtn.setText("Order by Desc");
+        }
+
+        loadTable();
+    }//GEN-LAST:event_orderBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
@@ -258,6 +302,7 @@ public class InvoicePanel extends javax.swing.JPanel {
     private javax.swing.JTable invoicesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton orderBtn;
     private javax.swing.JButton refreshBtn;
     // End of variables declaration//GEN-END:variables
 }
