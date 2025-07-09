@@ -202,26 +202,30 @@ public class AthletePanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int row = athletesTable.getSelectedRow();
-        if (row >= 0) {
-            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                int id = (int) athletesTable.getValueAt(row, 0);
-                Athlete a = athleteController.getAthleteById(id);
-                boolean canDelete = true;
-
-                if (a.getParentId() != null) { 
-                    canDelete = false;
-                }
-
-                if (canDelete) {
-                    athleteController.deactivateAthlete(id);
-                    JOptionPane.showMessageDialog(this, "Athlete deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    loadTable();
-                } else {
-                    JOptionPane.showMessageDialog(this, "You can't delete this athlete because is associated with a parent.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+        if (row < 0) {
+            return;
         }
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirmacion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int id = (int) athletesTable.getValueAt(row, 0);
+
+        try {
+            boolean success = athleteController.deactivateAthlete(id);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Athlete deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "You can't delete this athlete because is associated with a parent.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed

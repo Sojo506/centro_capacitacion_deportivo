@@ -9,7 +9,7 @@ public class AthleteController {
 
     private AthleteDAO dao = new AthleteDAOImpl();
 
-    public void registerAthlete(Athlete a) {
+    public void createAthlete(Athlete a) {
         dao.add(a);
     }
 
@@ -18,6 +18,10 @@ public class AthleteController {
     }
 
     public boolean deactivateAthlete(int id) {
+        Athlete a = getAthleteById(id);
+        if (a.getParentId() != null) {
+            return false;
+        }
         return dao.deactivate(id);
     }
 
@@ -40,4 +44,16 @@ public class AthleteController {
     public List<Athlete> listAthletes() {
         return dao.getAll();
     }
+
+    public boolean canCreateAthlete(String email) {
+        return getAthleteByEmail(email) == null;
+    }
+
+    public boolean canUpdateAthlete(Athlete athlete, String newEmail) {
+        if (athlete.getEmail().equalsIgnoreCase(newEmail)) {
+            return true;
+        }
+        return getAthleteByEmail(newEmail) == null;
+    }
+
 }

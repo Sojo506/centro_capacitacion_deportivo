@@ -32,88 +32,6 @@ public class AthleteDialog extends javax.swing.JDialog {
         }
     }
 
-    private void createAthlete() {
-        String name = inputName.getText().trim();
-        String lastName = inputLastname.getText().trim();
-        String city = inputCity.getText().trim();
-        String address = inputAddress.getText().trim();
-        String phone = inputPhone.getText().trim();
-        String email = inputEmail.getText().trim();
-
-        boolean isValid = Validate.validateAthleteParentForm(
-                this,
-                name,
-                lastName,
-                city,
-                address,
-                phone,
-                email
-        );
-
-        if (isValid) {
-            Athlete verifyAthlete = athleteController.getAthleteByEmail(email);
-
-            if (verifyAthlete != null) {
-                JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                Athlete a = new Athlete(name, lastName, city, address, phone, email, true);
-                athleteController.registerAthlete(a);
-                athletePanel.loadTable();
-                JOptionPane.showMessageDialog(this, "Athlete created.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            }
-        }
-    }
-
-    private void updateAthlete() {
-        String name = inputName.getText().trim();
-        String lastName = inputLastname.getText().trim();
-        String city = inputCity.getText().trim();
-        String address = inputAddress.getText().trim();
-        String phone = inputPhone.getText().trim();
-        String email = inputEmail.getText().trim();
-
-        boolean isValid = Validate.validateAthleteParentForm(
-                this,
-                name,
-                lastName,
-                city,
-                address,
-                phone,
-                email
-        );
-
-        if (isValid) {
-            boolean canUpdate = true;
-
-            if (!athlete.getEmail().equalsIgnoreCase(email)) {
-                if ((athleteController.getAthleteByEmail(email)) != null) {
-                    JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
-                    canUpdate = false;
-                }
-            }
-
-            if (canUpdate) {
-                int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to update this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
-                if (confirmacion == JOptionPane.YES_OPTION) {
-                    athlete.setName(name);
-                    athlete.setLastName(lastName);
-                    athlete.setCity(city);
-                    athlete.setAddress(address);
-                    athlete.setPhone(phone);
-                    athlete.setEmail(email);
-
-                    athleteController.updateAthlete(athlete);
-                    athletePanel.loadTable();
-                    JOptionPane.showMessageDialog(this, "Athlete updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }
-    }
-
     private void fillInputs() {
         inputName.setText(athlete.getName());
         inputLastname.setText(athlete.getLastName());
@@ -308,10 +226,56 @@ public class AthleteDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        String name = inputName.getText().trim();
+        String lastName = inputLastname.getText().trim();
+        String city = inputCity.getText().trim();
+        String address = inputAddress.getText().trim();
+        String phone = inputPhone.getText().trim();
+        String email = inputEmail.getText().trim();
+
+        boolean isValid = Validate.validateAthleteParentForm(
+                this, name, lastName, city, address, phone, email
+        );
+
+        if (!isValid) {
+            return;
+        }
+
         if (athlete == null) {
-            createAthlete();
+            // create
+            if (!athleteController.canCreateAthlete(email)) {
+                JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Athlete a = new Athlete(name, lastName, city, address, phone, email, true);
+            athleteController.createAthlete(a);
+            athletePanel.loadTable();
+            
+            JOptionPane.showMessageDialog(this, "Athlete created.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
-            updateAthlete();
+            // update
+            if (!athleteController.canUpdateAthlete(athlete, email)) {
+                JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to update this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
+            if (confirmacion != JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            athlete.setName(name);
+            athlete.setLastName(lastName);
+            athlete.setCity(city);
+            athlete.setAddress(address);
+            athlete.setPhone(phone);
+            athlete.setEmail(email);
+
+            athleteController.updateAthlete(athlete);
+            athletePanel.loadTable();
+            JOptionPane.showMessageDialog(this, "Athlete updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
     }//GEN-LAST:event_saveBtnActionPerformed
 
