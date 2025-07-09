@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface AthleteDAO {
 
-    void add(Athlete athlete);
+    boolean add(Athlete athlete);
 
-    void update(Athlete athlete);
+    boolean update(Athlete athlete);
 
     boolean deactivate(int id);
 

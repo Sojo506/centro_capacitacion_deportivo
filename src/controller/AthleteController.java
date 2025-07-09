@@ -9,12 +9,12 @@ public class AthleteController {
 
     private AthleteDAO dao = new AthleteDAOImpl();
 
-    public void createAthlete(Athlete a) {
-        dao.add(a);
+    public boolean createAthlete(Athlete a) {
+        return dao.add(a);
     }
 
-    public void updateAthlete(Athlete a) {
-        dao.update(a);
+    public boolean updateAthlete(Athlete a) {
+        return dao.update(a);
     }
 
     public boolean deactivateAthlete(int id) {

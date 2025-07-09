@@ -10,7 +10,7 @@ import java.util.List;
 public class AthleteDAOImpl implements AthleteDAO {
 
     @Override
-    public void add(Athlete athlete) {
+    public boolean add(Athlete athlete) {
         String sql = "INSERT INTO athletes (name, last_name, city, address, phone, email, parent_id, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -23,14 +23,14 @@ public class AthleteDAOImpl implements AthleteDAO {
             ps.setObject(7, athlete.getParentId());
             ps.setBoolean(8, athlete.isActive());
 
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error adding athlete", e);
         }
     }
 
     @Override
-    public void update(Athlete athlete) {
+    public boolean update(Athlete athlete) {
         String sql = "UPDATE athletes SET name=?, last_name=?, city=?, address=?, phone=?, email=?, active=?, parent_id=? WHERE id=?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -44,7 +44,7 @@ public class AthleteDAOImpl implements AthleteDAO {
             ps.setObject(8, athlete.getParentId());
             ps.setInt(9, athlete.getId());
 
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Error updating athlete", e);
         }

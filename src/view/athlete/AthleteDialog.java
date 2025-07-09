@@ -247,18 +247,26 @@ public class AthleteDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             Athlete a = new Athlete(name, lastName, city, address, phone, email, true);
-            athleteController.createAthlete(a);
+            boolean success = athleteController.createAthlete(a);
+
+            if (!success) {
+                JOptionPane.showMessageDialog(this, "There was an error creating the athlete. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             athletePanel.loadTable();
-            
             JOptionPane.showMessageDialog(this, "Athlete created.", "Success", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
+
         } else {
             // update
             if (!athleteController.canUpdateAthlete(athlete, email)) {
                 JOptionPane.showMessageDialog(this, "That email already exists.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to update this athlete?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (confirmacion != JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, "Canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
@@ -272,7 +280,13 @@ public class AthleteDialog extends javax.swing.JDialog {
             athlete.setPhone(phone);
             athlete.setEmail(email);
 
-            athleteController.updateAthlete(athlete);
+            boolean success = athleteController.updateAthlete(athlete);
+
+            if (!success) {
+                JOptionPane.showMessageDialog(this, "There was an error updating the athlete. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             athletePanel.loadTable();
             JOptionPane.showMessageDialog(this, "Athlete updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
