@@ -250,13 +250,16 @@ public class InvoicePanel extends javax.swing.JPanel {
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         int row = invoicesTable.getSelectedRow();
-        if (row != -1) {
-            int id = (int) invoicesTable.getValueAt(row, 0);
-            Invoice athlete = invoiceController.getInvoiceById(id);
-            InvoiceDialog invoiceDialog = new InvoiceDialog(mainFrame, this, true, athlete);
-            invoiceDialog.setVisible(true);
-            disableEditDeleteBtn();
+        if (row < 0) {
+            return;
         }
+
+        int id = (int) invoicesTable.getValueAt(row, 0);
+        Invoice athlete = invoiceController.getInvoiceById(id);
+        InvoiceDialog invoiceDialog = new InvoiceDialog(mainFrame, this, true, athlete);
+        invoiceDialog.setVisible(true);
+        disableEditDeleteBtn();
+
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -266,19 +269,30 @@ public class InvoicePanel extends javax.swing.JPanel {
             return;
         }
 
-        int confirmacion = JOptionPane.showConfirmDialog(this, "Do you wish to delete this routine?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            int id = (int) invoicesTable.getValueAt(row, 0);
-            List<Routine> routines = invoiceRoutineDAO.getByInvoiceId(id);
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "Do you wish to delete this invoice?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION
+        );
 
-            if (routines.size() > 0) {
-                invoiceRoutineDAO.deleteByInvoiceId(id);
+        if (confirmacion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int id = (int) invoicesTable.getValueAt(row, 0);
+
+        try {
+            boolean success = invoiceController.deactivateInvoice(id);
+
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Invoice deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                loadTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "Could not delete the invoice.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            invoiceController.deactivateInvoice(id);
-            JOptionPane.showMessageDialog(this, "Invoice deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
-            loadTable();
-
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
