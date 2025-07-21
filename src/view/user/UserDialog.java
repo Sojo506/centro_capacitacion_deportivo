@@ -20,7 +20,7 @@ public class UserDialog extends javax.swing.JDialog {
         fillInputs();
 
         setSize(300, 300);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
     }
 
     private void fillInputs() {
