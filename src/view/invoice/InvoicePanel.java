@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Invoice;
 import model.Routine;
-import view.MainFrame;
+import view.MainView;
 
 public class InvoicePanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private List<Invoice> invoices;
     private InvoiceController invoiceController;
     private InvoiceRoutineDAO invoiceRoutineDAO;
 
-    public InvoicePanel(MainFrame mainFrame) {
+    public InvoicePanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
         invoices = new ArrayList<>();

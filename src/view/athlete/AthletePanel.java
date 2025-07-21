@@ -6,15 +6,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Athlete;
-import view.MainFrame;
+import view.MainView;
 
 public class AthletePanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private List<Athlete> athletes;
     private AthleteController athleteController = new AthleteController();
 
-    public AthletePanel(MainFrame mainFrame) {
+    public AthletePanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
         athletes = new ArrayList<>();

@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import model.User;
 import util.Colors;
-import view.MainFrame;
+import view.MainView;
 
 public class SignIn extends javax.swing.JPanel {
 
@@ -160,7 +160,7 @@ public class SignIn extends javax.swing.JPanel {
             if (user != null) {
                 JOptionPane.showMessageDialog(this, "Welcome back " + user.getFullName() + "!", "Welcome", JOptionPane.PLAIN_MESSAGE);
                 loginFrame.dispose();
-                java.awt.EventQueue.invokeLater(() -> new MainFrame(user).setVisible(true));
+                java.awt.EventQueue.invokeLater(() -> new MainView(user).setVisible(true));
             } else {
                 JOptionPane.showMessageDialog(this, "User not found.", "404", JOptionPane.ERROR_MESSAGE);
             }

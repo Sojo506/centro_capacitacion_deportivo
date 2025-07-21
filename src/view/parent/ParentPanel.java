@@ -10,17 +10,17 @@ import javax.swing.table.DefaultTableModel;
 import model.Athlete;
 import model.Invoice;
 import model.Parent;
-import view.MainFrame;
+import view.MainView;
 
 public class ParentPanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private List<Parent> parents;
     private ParentController parentController;
     private AthleteController athleteController;
     private InvoiceController invoiceController;
 
-    public ParentPanel(MainFrame mainFrame) {
+    public ParentPanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         parentController = new ParentController();
         athleteController = new AthleteController();

@@ -11,17 +11,17 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Routine;
 import model.Sport;
-import view.MainFrame;
+import view.MainView;
 
 public class RoutinePanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private List<Routine> routines;
     private RoutineController routineController;
     private RoutineSportDAO routineSportDAO;
     private InvoiceRoutineDAO invoiceRoutineDAO;
 
-    public RoutinePanel(MainFrame mainFrame) {
+    public RoutinePanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         routineController = new RoutineController();
         routines = new ArrayList<>();

@@ -8,16 +8,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Sport;
-import view.MainFrame;
+import view.MainView;
 
 public class SportPanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private List<Sport> sports;
     private SportController sportController;
     private RoutineSportDAO routineSportDAO;
 
-    public SportPanel(MainFrame mainFrame) {
+    public SportPanel(MainView mainFrame) {
         initComponents();
         sportController = new SportController();
         sports = new ArrayList<>();

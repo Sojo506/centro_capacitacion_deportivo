@@ -2,15 +2,15 @@ package view.panel;
 
 import java.time.LocalDate;
 import model.User;
-import view.MainFrame;
+import view.MainView;
 import view.user.UserDialog;
 
 public class NavbarPanel extends javax.swing.JPanel {
     
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private User user;
     
-    public NavbarPanel(MainFrame mainFrame) {
+    public NavbarPanel(MainView mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
         user = mainFrame.getUser();
