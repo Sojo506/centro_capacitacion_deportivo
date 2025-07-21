@@ -7,12 +7,12 @@ import view.athlete.AthletePanel;
 import view.panel.NavbarPanel;
 import view.panel.SidebarPanel;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame {
 
     private User user;
     private int xMouse, yMouse;
 
-    public MainFrame(User user) {
+    public MainView(User user) {
         setUndecorated(true);
         initComponents();
         this.user = user;
