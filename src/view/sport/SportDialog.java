@@ -238,7 +238,7 @@ public class SportDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
-        // TODO add your handling code here:
+        saveBtn.doClick();
     }//GEN-LAST:event_inputNameActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed

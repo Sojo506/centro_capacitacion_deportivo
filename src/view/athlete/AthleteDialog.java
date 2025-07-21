@@ -91,13 +91,43 @@ public class AthleteDialog extends javax.swing.JDialog {
 
         lastnameLabel.setText("Last name:");
 
+        inputLastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputLastnameActionPerformed(evt);
+            }
+        });
+
+        inputCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputCityActionPerformed(evt);
+            }
+        });
+
         cityLabel.setText("City:");
 
         addressLabel.setText("Address:");
 
+        inputAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputAddressActionPerformed(evt);
+            }
+        });
+
         phoneLabel.setText("Phone:");
 
+        inputPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPhoneActionPerformed(evt);
+            }
+        });
+
         emailLabel.setText("Email:");
+
+        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputEmailActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(191, 26, 47));
         cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,12 +324,32 @@ public class AthleteDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
-        // TODO add your handling code here:
+        saveBtn.doClick();
     }//GEN-LAST:event_inputNameActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
+
+    private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputEmailActionPerformed
+
+    private void inputPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPhoneActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputPhoneActionPerformed
+
+    private void inputAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputAddressActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputAddressActionPerformed
+
+    private void inputCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCityActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputCityActionPerformed
+
+    private void inputLastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputLastnameActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputLastnameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

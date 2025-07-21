@@ -195,6 +195,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="inputDuration">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputDurationActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>

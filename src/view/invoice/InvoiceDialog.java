@@ -387,6 +387,12 @@ public class InvoiceDialog extends javax.swing.JDialog {
 
         totalLabel.setText("Total $:");
 
+        inputTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTotalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -488,6 +494,10 @@ public class InvoiceDialog extends javax.swing.JDialog {
             updateInvoice();
         }
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void inputTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTotalActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputTotalActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

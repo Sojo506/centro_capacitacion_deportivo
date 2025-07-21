@@ -101,6 +101,11 @@ public class SignIn extends javax.swing.JPanel {
         });
 
         inputPassword.setPreferredSize(new java.awt.Dimension(150, 40));
+        inputPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -140,7 +145,7 @@ public class SignIn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
-        // TODO add your handling code here:
+        loginBtn.doClick();
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
@@ -170,6 +175,10 @@ public class SignIn extends javax.swing.JPanel {
     private void loginBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseExited
         loginBtn.setBackground(Colors.GUNMETAL);
     }//GEN-LAST:event_loginBtnMouseExited
+
+    private void inputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPasswordActionPerformed
+        loginBtn.doClick();
+    }//GEN-LAST:event_inputPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

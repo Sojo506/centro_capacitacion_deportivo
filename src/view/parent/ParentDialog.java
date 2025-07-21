@@ -341,11 +341,35 @@ public class ParentDialog extends javax.swing.JDialog {
             }
         });
 
+        inputEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputEmailActionPerformed(evt);
+            }
+        });
+
         emailLabel.setText("Email:");
 
         phoneLabel.setText("Phone:");
 
+        inputPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPhoneActionPerformed(evt);
+            }
+        });
+
+        inputAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputAddressActionPerformed(evt);
+            }
+        });
+
         addressLabel.setText("Address:");
+
+        inputCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputCityActionPerformed(evt);
+            }
+        });
 
         cityLabel.setText("City:");
 
@@ -388,6 +412,12 @@ public class ParentDialog extends javax.swing.JDialog {
         titleLabel2.setFont(new java.awt.Font("Adwaita Sans", 1, 24)); // NOI18N
         titleLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/triathlon.png"))); // NOI18N
         titleLabel2.setText("Select Athlete");
+
+        inputLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputLastNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -511,13 +541,33 @@ public class ParentDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
-        // TODO add your handling code here:
+        saveBtn.doClick();
     }//GEN-LAST:event_inputNameActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
         parentPanel.disableEditDeleteBtn();
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
+
+    private void inputLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputLastNameActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputLastNameActionPerformed
+
+    private void inputCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCityActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputCityActionPerformed
+
+    private void inputAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputAddressActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputAddressActionPerformed
+
+    private void inputPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPhoneActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputPhoneActionPerformed
+
+    private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputEmailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

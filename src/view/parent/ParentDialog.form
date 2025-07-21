@@ -193,6 +193,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="inputEmail">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputEmailActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="emailLabel">
           <Properties>
@@ -205,8 +208,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="inputPhone">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputPhoneActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="inputAddress">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputAddressActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="addressLabel">
           <Properties>
@@ -214,6 +223,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="inputCity">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputCityActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="cityLabel">
           <Properties>
@@ -286,6 +298,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="inputLastName">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputLastNameActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

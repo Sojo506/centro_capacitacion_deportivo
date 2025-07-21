@@ -93,6 +93,11 @@ public class SignUp extends javax.swing.JPanel {
         passwordLabel.setText("Password");
 
         inputPassword.setPreferredSize(new java.awt.Dimension(150, 40));
+        inputPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,7 +143,7 @@ public class SignUp extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEmailActionPerformed
-        // TODO add your handling code here:
+        registerBtn.doClick();
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
@@ -170,7 +175,7 @@ public class SignUp extends javax.swing.JPanel {
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void inputFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFullNameActionPerformed
-        // TODO add your handling code here:
+        registerBtn.doClick();
     }//GEN-LAST:event_inputFullNameActionPerformed
 
     private void registerBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseEntered
@@ -180,6 +185,10 @@ public class SignUp extends javax.swing.JPanel {
     private void registerBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseExited
         registerBtn.setBackground(Colors.GUNMETAL);
     }//GEN-LAST:event_registerBtnMouseExited
+
+    private void inputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPasswordActionPerformed
+        registerBtn.doClick();
+    }//GEN-LAST:event_inputPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

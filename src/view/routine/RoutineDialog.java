@@ -296,6 +296,12 @@ public class RoutineDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Duration in minutes:");
 
+        inputDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputDurationActionPerformed(evt);
+            }
+        });
+
         inputDescription.setColumns(20);
         inputDescription.setRows(5);
         jScrollPane2.setViewportView(inputDescription);
@@ -403,6 +409,10 @@ public class RoutineDialog extends javax.swing.JDialog {
         routinePanel.disableEditDeleteBtn();
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
+
+    private void inputDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDurationActionPerformed
+        saveBtn.doClick();
+    }//GEN-LAST:event_inputDurationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
