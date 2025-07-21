@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 import util.Colors;
-import view.MainFrame;
+import view.MainView;
 import view.athlete.AthletePanel;
+import view.checkout.CheckoutClientPanel;
 import view.invoice.InvoicePanel;
 import view.login.LoginFrame;
 import view.parent.ParentPanel;
@@ -14,11 +15,11 @@ import view.sport.SportPanel;
 
 public class SidebarPanel extends javax.swing.JPanel {
 
-    private MainFrame mainFrame;
+    private MainView mainFrame;
     private LoginFrame loginFrame;
     private List<JButton> sectionBtns;
 
-    public SidebarPanel(MainFrame mainFrame) {
+    public SidebarPanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
         sectionBtns = Arrays.asList(athletesBtn, parentsBtn, sportsBtn, routinesBtn, invoicesBtn);
@@ -49,6 +50,7 @@ public class SidebarPanel extends javax.swing.JPanel {
         invoicesBtn = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         settingsLabel = new javax.swing.JLabel();
+        checkoutBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(230, 230, 230));
         setPreferredSize(new java.awt.Dimension(200, 700));
@@ -159,12 +161,34 @@ public class SidebarPanel extends javax.swing.JPanel {
         settingsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
         settingsLabel.setText("Settings");
 
+        checkoutBtn.setBackground(new java.awt.Color(38, 103, 255));
+        checkoutBtn.setForeground(new java.awt.Color(255, 255, 255));
+        checkoutBtn.setText("Checkout");
+        checkoutBtn.setBorderPainted(false);
+        checkoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        checkoutBtn.setFocusPainted(false);
+        checkoutBtn.setFocusable(false);
+        checkoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(titulo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(manageLabel)))
+                        .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,16 +201,8 @@ public class SidebarPanel extends javax.swing.JPanel {
                             .addComponent(invoicesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(settingsLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(titulo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(manageLabel)))
-                        .addGap(0, 24, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(checkoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -194,9 +210,9 @@ public class SidebarPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(titulo)
-                .addGap(74, 74, 74)
+                .addGap(52, 52, 52)
                 .addComponent(manageLabel)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(athletesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(parentsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,7 +222,9 @@ public class SidebarPanel extends javax.swing.JPanel {
                 .addComponent(routinesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(invoicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(checkoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(settingsLabel)
                 .addGap(24, 24, 24)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,9 +269,15 @@ public class SidebarPanel extends javax.swing.JPanel {
         setActiveButton(invoicesBtn);
     }//GEN-LAST:event_invoicesBtnActionPerformed
 
+    private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtnActionPerformed
+        mainFrame.showPanel(new CheckoutClientPanel(mainFrame));
+        setActiveButton(checkoutBtn);
+    }//GEN-LAST:event_checkoutBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton athletesBtn;
+    private javax.swing.JButton checkoutBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton invoicesBtn;
     private javax.swing.JButton logoutBtn;
