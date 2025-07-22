@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import util.InvoiceEnum;
 
-public class Invoice {
+public class Invoice implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private int parentId;
