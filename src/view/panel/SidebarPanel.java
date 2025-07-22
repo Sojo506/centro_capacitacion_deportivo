@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import util.Colors;
 import view.MainView;
 import view.athlete.AthletePanel;
-import view.checkout.CheckoutClientPanel;
+import view.checkout.CheckoutPanel;
 import view.invoice.InvoicePanel;
 import view.login.LoginFrame;
 import view.parent.ParentPanel;
@@ -270,7 +270,7 @@ public class SidebarPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_invoicesBtnActionPerformed
 
     private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtnActionPerformed
-        mainFrame.showPanel(new CheckoutClientPanel(mainFrame));
+        mainFrame.showPanel(new CheckoutPanel(mainFrame));
         setActiveButton(checkoutBtn);
     }//GEN-LAST:event_checkoutBtnActionPerformed
 

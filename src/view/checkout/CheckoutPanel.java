@@ -14,14 +14,14 @@ import model.Routine;
 import util.InvoiceEnum;
 import view.MainView;
 
-public class CheckoutClientPanel extends javax.swing.JPanel {
+public class CheckoutPanel extends javax.swing.JPanel {
 
     private MainView mainFrame;
     private List<Invoice> invoices;
     private InvoiceController invoiceController;
     private ParentController parentController;
 
-    public CheckoutClientPanel(MainView mainFrame) {
+    public CheckoutPanel(MainView mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
         invoices = new ArrayList<>();
@@ -287,7 +287,7 @@ public class CheckoutClientPanel extends javax.swing.JPanel {
 
         if (row != -1) {
             int invoiceId = Integer.parseInt(checkoutTable.getValueAt(row, 0).toString());
-            int confirm = JOptionPane.showConfirmDialog(CheckoutClientPanel.this,
+            int confirm = JOptionPane.showConfirmDialog(CheckoutPanel.this,
                     "Do you want to mark this invoice as PAID?",
                     "Confirm Payment",
                     JOptionPane.YES_NO_OPTION);
@@ -296,11 +296,11 @@ public class CheckoutClientPanel extends javax.swing.JPanel {
                 boolean success = invoiceController.updateStatus(invoiceId, InvoiceEnum.PAID);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(CheckoutClientPanel.this, "Invoice marked as paid successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(CheckoutPanel.this, "Invoice marked as paid successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadTable();
                     paidBtn.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(CheckoutClientPanel.this, "Error updating invoice status.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(CheckoutPanel.this, "Error updating invoice status.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -311,7 +311,7 @@ public class CheckoutClientPanel extends javax.swing.JPanel {
 
         if (row != -1) {
             int invoiceId = Integer.parseInt(checkoutTable.getValueAt(row, 0).toString());
-            int confirm = JOptionPane.showConfirmDialog(CheckoutClientPanel.this,
+            int confirm = JOptionPane.showConfirmDialog(CheckoutPanel.this,
                     "Do you want to mark this invoice as PENDING?",
                     "Confirm Reversal",
                     JOptionPane.YES_NO_OPTION);
@@ -320,11 +320,11 @@ public class CheckoutClientPanel extends javax.swing.JPanel {
                 boolean success = invoiceController.updateStatus(invoiceId, InvoiceEnum.PENDING);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(CheckoutClientPanel.this, "Invoice marked as pending successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(CheckoutPanel.this, "Invoice marked as pending successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadTable();
                     pendingBtn.setEnabled(false);
                 } else {
-                    JOptionPane.showMessageDialog(CheckoutClientPanel.this, "Error updating invoice status.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(CheckoutPanel.this, "Error updating invoice status.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
