@@ -62,6 +62,19 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     }
 
     @Override
+    public boolean updateStatus(int invoiceId, InvoiceEnum status) {
+        String sql = "UPDATE invoices SET status = ? WHERE id = ?";
+        
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status.name());
+            ps.setInt(2, invoiceId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating status for invoice " + invoiceId, e);
+        }
+    }
+
+    @Override
     public boolean deactivate(int id) {
         String sql = "UPDATE invoices SET active = false WHERE id = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -109,12 +122,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
     @Override
     public List<Invoice> getPending() {
-        return getInvoicesStatus("PENDING");
+        return getInvoicesStatus(InvoiceEnum.PENDING);
     }
 
     @Override
     public List<Invoice> getPaid() {
-        return getInvoicesStatus("PAID");
+        return getInvoicesStatus(InvoiceEnum.PAID);
     }
 
     @Override
@@ -147,13 +160,13 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         return list;
     }
 
-    private List<Invoice> getInvoicesStatus(String status) {
+    private List<Invoice> getInvoicesStatus(InvoiceEnum status) {
         List<Invoice> list = new ArrayList<>();
         String sql = "SELECT * FROM invoices WHERE active = 1 AND status = ?";
 
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, status);
+            ps.setString(1, status.name());
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     list.add(buildInvoice(rs));

@@ -9,6 +9,7 @@ import model.InvoiceRoutine;
 
 import java.util.List;
 import model.Routine;
+import util.InvoiceEnum;
 
 public class InvoiceController {
 
@@ -77,6 +78,10 @@ public class InvoiceController {
                 invoiceRoutineDAO.add(new InvoiceRoutine(invoiceId, routineId));
             }
         }
+    }
+
+    public boolean updateStatus(int id, InvoiceEnum status) {
+        return invoiceDAO.updateStatus(id, status);
     }
 
     public List<Routine> getRoutinesByInvoiceId(int invoiceId) {
