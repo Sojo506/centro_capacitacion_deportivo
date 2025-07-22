@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Invoice;
 import model.Parent;
 import model.Routine;
+import socket.SocketClient;
 import util.InvoiceEnum;
 import view.MainView;
 
@@ -299,6 +300,9 @@ public class CheckoutPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(CheckoutPanel.this, "Invoice marked as paid successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadTable();
                     paidBtn.setEnabled(false);
+
+                    Invoice paidInvoice = invoiceController.getInvoiceById(invoiceId);
+                    SocketClient.sendPaidInvoice(paidInvoice);
                 } else {
                     JOptionPane.showMessageDialog(CheckoutPanel.this, "Error updating invoice status.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
