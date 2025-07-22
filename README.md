@@ -1,48 +1,168 @@
-# Depor&T
 
-A Java-based application for managing a sports training center, including athletes, routines, invoices, parents, sports, and users. The project uses SQL for data persistence and Ant for build automation.
+# Depor&T — Sports Training Center Management System
+
+A comprehensive Java desktop application to manage athletes, routines, invoices, parents, sports, and users for a sports training center. Built with modular OOP architecture, persistent storage in SQL, and client-server support via sockets.
+
+---
+
+## 📸 Preview
+
+![Login Screen](src/images/login_deport.png)
+
+![Login Screen](src/images/mainview_deport.png)
+
+---
 
 ## Features
 
-- Athlete, Parent, and User management
-- Routine and Sport tracking
-- Invoice generation and management
-- Secure password handling
-- Modular DAO architecture
+- **Athlete Management:** Register, update, and list athletes with associated routines and invoices.
+- **Parent & User Management:** Manage guardians and app users with role-based access.
+- **Routine & Sport Tracking:** Link sports and custom routines to athletes.
+- **Invoice Management:** Generate, store, and update invoices.
+- **Secure Password Handling:** User authentication and secure data access.
+- **Client-Server:** Socket-based communication for multi-user scenarios.
+- **DAO Layer:** Modular, maintainable data access architecture.
+- **NetBeans GUI Forms:** Visual UI editing and rapid prototyping.
 
-## Project Structure
+---
 
-- `app/` — Application entry point
-- `controller/` — Business logic controllers
-- `dao/` — Data access objects (DAOs) and implementations
-- `db/` — Database connection utilities
-- `model/` — Entity classes
-- `resources/` — SQL schema and resources
-- `util/` — Utility classes
-- `view/` — (Reserved for UI components)
+## 🗂️ Project Structure
 
-## Technologies
+```
+src/
+├── app/                # Application entry point (Main.java)
+├── controller/         # Business logic and coordination
+├── dao/                # Data Access Objects & implementations (by module)
+├── db/                 # DB connection utilities (ConnectionDB.java)
+├── images/             # UI icons and images
+├── model/              # Entity classes (Athlete, Parent, etc.)
+├── resources/          # SQL schema and resources (scheme.sql)
+├── socket/             # Socket client (future: server?)
+├── util/               # Utilities/helpers
+├── view/               # Swing UI forms, panels & windows
+└── ...                 # Other folders (login, invoice, etc.)
+```
 
-- Java
-- SQL (see `resources/scheme.sql`)
-- Apache Ant
+**Key files:**
+- `src/app/Main.java` — Main launcher class
+- `src/resources/scheme.sql` — Database schema (PostgreSQL/MySQL compatible)
+- `src/db/ConnectionDB.java` — Configure DB connection here
+- `src/view/MainView.java` — Main application window (Swing)
+- `src/socket/SocketClient.java` — Client socket logic
 
-## Setup
+---
 
-1. **Clone the repository:**
+## 🚀 Getting Started
 
-2. **Configure the database:**
-   - Set up your SQL database using the schema in `resources/scheme.sql`.
-   - Update database connection settings in `db/ConnectionDB.java` if needed.
+### 1. **Clone the Repository**
 
-3. **Build the project:**
-4. **Run the application:**
-  
+```sh
+git clone https://github.com/Sojo506/centro_capacitacion_deportivo.git
+cd centro_capacitacion_deportivo
+```
 
-## Contributing
+### 2. **Configure the Database**
 
-Pull requests are welcome. For major changes, please open an issue first.
+- Create a new database (PostgreSQL or MySQL recommended).
+- Import the schema:
 
-## License
+```sh
+# Example for MySQL
+mysql -u your_user -p your_database < src/resources/scheme.sql
+```
 
-This project is for educational purposes.
+- Edit `src/db/ConnectionDB.java` with your database credentials.
+
+### 3. **Build the Project**
+
+- Open the project with NetBeans (recommended for GUI forms).
+- Or use Ant:
+
+```sh
+ant clean
+ant build
+```
+
+### 4. **Run the Application**
+
+- Via NetBeans: Right-click `Main.java` → Run
+- Via terminal (if using Ant, see `/dist` folder):
+
+```sh
+java -jar dist/CentroCapacitacionDeportivo.jar
+```
+
+### 5. **Login Information**
+
+Default users can be found in the database after schema import. You may need to manually insert an admin/user or check initial values in `scheme.sql`.
+
+---
+
+## 🧩 Dependencies
+
+- Java 8+ (JDK)
+- SQL DBMS (MySQL/PostgreSQL)
+- NetBeans IDE (for GUI editing)
+- Apache Ant (for builds, optional)
+
+*No external libraries required. Pure Java SE.*
+
+---
+
+## 💻 Architecture Overview
+
+- **MVC-inspired**: Separation between `model/`, `controller/`, and `view/`
+- **DAO Layer**: For every entity, there's a DAO and an implementation class (e.g., `AthleteDAO`, `AthleteDAOImpl`)
+- **Client-Server (Sockets)**: Basic infrastructure for socket communication (`SocketClient.java`). Server side pending/under development.
+- **Extensible**: Easily add new entities, routines, or views.
+
+---
+
+## ⚙️ Folder Details
+
+| Folder          | Description                                                      |
+|-----------------|------------------------------------------------------------------|
+| `app/`          | Entry point, launches the main window.                           |
+| `controller/`   | Handles business logic, orchestrates DB and UI.                  |
+| `dao/`          | Data access interfaces & implementations (per module/entity).    |
+| `db/`           | Manages DB connections/settings.                                 |
+| `model/`        | POJO classes for domain entities.                                |
+| `resources/`    | SQL schema, static data.                                         |
+| `view/`         | Java Swing UI components, built with NetBeans Design Builder.    |
+| `images/`       | Application icons, logos, and UI graphics.                       |
+| `socket/`       | Networking (client socket).                                      |
+| `util/`         | Utility/helper classes.                                          |
+
+---
+
+## 🛠️ Customization
+
+- **Add More Users/Roles:** Use SQL or add new UI features.
+- **Change Images/UI:** Replace/add PNGs in `src/images/`.
+- **Extend Client-Server:** Expand socket logic in `src/socket/`.
+
+---
+
+## 🙋 FAQ
+
+**Q:** _How do I reset the database?_  
+**A:** Drop and re-import `scheme.sql` into your DB.
+
+**Q:** _Can I use another DBMS?_  
+**A:** Yes! Just ensure JDBC compatibility and update `ConnectionDB.java`.
+
+**Q:** _Can I customize the UI?_  
+**A:** Fully! All GUIs are NetBeans `.form` + `.java` pairs. Use NetBeans Design Builder for WYSIWYG editing.
+
+---
+
+## 👥 Credits
+
+Developed by Sojo506 & collaborators as a university project.
+
+---
+
+## 📄 License
+
+This project is for educational purposes.  
+For contributions or commercial use, contact me.
