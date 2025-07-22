@@ -9,7 +9,7 @@ A comprehensive Java desktop application to manage athletes, routines, invoices,
 
 ![Login Screen](src/images/login_deport.png)
 
-![Login Screen](src/images/mainview_deport.png)
+![Main Screen](src/images/mainview_deport.png)
 
 ---
 
