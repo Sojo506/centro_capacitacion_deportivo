@@ -32,6 +32,18 @@ public class InvoiceController {
         return invoiceId;
     }
 
+    public List<Invoice> listAllInvoices() {
+        return invoiceDAO.getAll();
+    }
+
+    public List<Invoice> listPendingInvoices() {
+        return invoiceDAO.getPending();
+    }
+
+    public List<Invoice> listPaidInvoices() {
+        return invoiceDAO.getPaid();
+    }
+
     public List<Invoice> listInvoicesAsc() {
         return invoiceDAO.getAsc();
     }
@@ -50,7 +62,7 @@ public class InvoiceController {
         if (routines.size() > 0) {
             invoiceRoutineDAO.deleteByInvoiceId(id);
         }
-        
+
         return invoiceDAO.deactivate(id);
     }
 

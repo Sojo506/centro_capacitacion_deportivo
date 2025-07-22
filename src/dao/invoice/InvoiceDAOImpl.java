@@ -92,6 +92,32 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     }
 
     @Override
+    public List<Invoice> getAll() {
+        List<Invoice> list = new ArrayList<>();
+        String sql = "SELECT * FROM invoices WHERE active = true";
+
+        try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                list.add(buildInvoice(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting all invoices", e);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Invoice> getPending() {
+        return getInvoicesStatus("PENDING");
+    }
+
+    @Override
+    public List<Invoice> getPaid() {
+        return getInvoicesStatus("PAID");
+    }
+
+    @Override
     public List<Invoice> getDesc() {
         return getInvoicesOrdered("DESC");
     }
@@ -103,6 +129,11 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
     private List<Invoice> getInvoicesOrdered(String order) {
         List<Invoice> list = new ArrayList<>();
+
+        if (!order.equalsIgnoreCase("ASC") && !order.equalsIgnoreCase("DESC")) {
+            throw new IllegalArgumentException("Invalid order parameter: " + order);
+        }
+
         String sql = "SELECT * FROM invoices WHERE active = true ORDER BY created_at " + order;
 
         try (Connection conn = ConnectionDB.getConnection(); Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
@@ -112,6 +143,24 @@ public class InvoiceDAOImpl implements InvoiceDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error getting invoices ordered " + order, e);
+        }
+        return list;
+    }
+
+    private List<Invoice> getInvoicesStatus(String status) {
+        List<Invoice> list = new ArrayList<>();
+        String sql = "SELECT * FROM invoices WHERE active = 1 AND status = ?";
+
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(buildInvoice(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting invoices ordered " + status, e);
         }
         return list;
     }
@@ -126,4 +175,5 @@ public class InvoiceDAOImpl implements InvoiceDAO {
                 rs.getTimestamp("created_at").toLocalDateTime()
         );
     }
+
 }

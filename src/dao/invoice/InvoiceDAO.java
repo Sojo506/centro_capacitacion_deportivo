@@ -13,6 +13,12 @@ public interface InvoiceDAO {
 
     Invoice findById(int id);
 
+    List<Invoice> getAll();
+
+    List<Invoice> getPending();
+
+    List<Invoice> getPaid();
+
     List<Invoice> getDesc();
 
     List<Invoice> getAsc();
