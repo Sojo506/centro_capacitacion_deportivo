@@ -26,6 +26,42 @@ A comprehensive Java desktop application to manage athletes, routines, invoices,
 
 ---
 
+## 🧾 Checkout Module
+
+The **Checkout** module manages the process of generating and handling invoices (bills) for athletes and their activities at the training center.
+
+**Features:**
+- Lists all pending invoices for athletes.
+- Allows marking invoices as paid.
+- Handles the registration of payments and updates athlete status accordingly.
+- Provides both a **client** (user) and **server** (admin/operator) UI for invoice processing.
+
+**Key files & structure:**
+```
+src/
+└── view/
+    └── checkout/
+        ├── CheckoutPanel.java           # Main checkout UI panel
+        ├── CheckoutPanel.form           # NetBeans UI form for checkout
+        ├── CheckoutServerPanel.java     # Server/operator side panel
+        └── CheckoutServerPanel.form     # NetBeans UI form for server checkout
+```
+
+**Integration:**
+- The `CheckoutPanel` is used in the main user interface for regular users to process payments.
+- The `CheckoutServerPanel` is for operators/admins to manage all checkouts from a central server view.
+- The logic interacts with the `InvoiceController`, `InvoiceDAO`, and uses the `ConnectionDB` for persistence.
+- Designed for easy extension—add more payment methods, validation, or export options as needed.
+
+**Example usage:**
+- To open the checkout panel, navigate through the main menu or select the "Checkout" option from the dashboard.
+- All unpaid invoices are listed; users or operators can select and process payment directly.
+- Payments are instantly reflected in the database and athlete/account status is updated.
+
+---
+
+---
+
 ## 🗂️ Project Structure
 
 ```
@@ -103,7 +139,7 @@ Default users can be found in the database after schema import. You may need to 
 - Java 8+ (JDK)
 - SQL DBMS (MySQL/PostgreSQL)
 - NetBeans IDE (for GUI editing)
-- Apache Ant (for builds, optional)
+- Java Mysql Connector
 
 *No external libraries required. Pure Java SE.*
 
