@@ -194,7 +194,7 @@ Default users can be found in the database after schema import. You may need to 
 
 ## 👥 Credits
 
-Developed by Sojo506 & collaborators as a university project.
+Developed by Sojo506.
 
 ---
 
